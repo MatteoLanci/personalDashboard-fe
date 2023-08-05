@@ -1,7 +1,17 @@
 import React from "react";
 
+//! Components Import
+import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
+
 const App = () => {
-  return <div>Hello World!</div>;
+  return (
+    <>
+      <Navbar />
+      <div>Hello World</div>
+      <Footer />
+    </>
+  );
 };
 
 export default App;

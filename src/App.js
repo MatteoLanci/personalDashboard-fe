@@ -4,12 +4,15 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 //! Components Import
-import Navbar from "./components/Navbar/Navbar";
+import Navbar from "./components/Navbar/NavigationBar";
 import Footer from "./components/Footer/Footer";
 
 //! Pages Import
 import Homepage from "./Pages/Home/Homepage";
 import Login from "./Pages/Login/Login";
+
+//! MiddleWares Import
+import ProtectedRoutes from "./middlewares/ProtectedRoutes";
 
 const App = () => {
   return (
@@ -17,7 +20,10 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route exact path="/" element={<Login />} />
-        <Route path="/homepage" element={<Homepage />} />
+
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/homepage" element={<Homepage />} />
+        </Route>
       </Routes>
       <Footer />
     </Router>

@@ -1,15 +1,42 @@
-import React from "react";
-import { Button } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Button, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
+//! external libraries import
+import jwtDecode from "jwt-decode";
+import axios from "axios";
+
 const Homepage = () => {
+  const token = JSON.parse(localStorage.getItem("userLogged"));
+  const tokenDecoded = jwtDecode(token);
+
   return (
-    <>
-      <h3>Hello World, this is the Homepage</h3>;
-      <Button as={Link} to={"/"}>
-        Logout
-      </Button>
-    </>
+    <Container
+      className="d-flex flex-column justify-content-center align-items-center"
+      style={{ minHeight: "80vh" }}
+    >
+      <h2 className="mb-5">Hello World, this is the Homepage</h2>
+      <h4>User Logged:</h4>
+      <img
+        src={tokenDecoded.avatar}
+        alt={tokenDecoded.email}
+        style={{ height: "200px", width: "200px", borderRadius: "50%", objectFit: "cover" }}
+      />
+      <p>full name: {`${tokenDecoded.firstName} ${tokenDecoded.lastName}`}</p>
+      <p>email: {tokenDecoded.email}</p>
+      <p>date of birth: {tokenDecoded.dob}</p>
+      <p>location: {tokenDecoded.location}</p>
+      <p>ID: {tokenDecoded.id}</p>
+      {tokenDecoded.todos ? (
+        tokenDecoded.todos.length === 0 ? (
+          <p>No Todos yet</p>
+        ) : (
+          <p>TODOs: {tokenDecoded.todos}</p>
+        )
+      ) : (
+        <p>No Todos yet</p>
+      )}
+    </Container>
   );
 };
 

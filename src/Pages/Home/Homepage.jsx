@@ -6,9 +6,13 @@ import { Link } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
 
+//! components import
+import Todo from "../../components/Todo/Todo";
+
 const Homepage = () => {
   const token = JSON.parse(localStorage.getItem("userLogged"));
   const tokenDecoded = jwtDecode(token);
+  // console.log(tokenDecoded);
 
   return (
     <Container
@@ -31,11 +35,12 @@ const Homepage = () => {
         tokenDecoded.todos.length === 0 ? (
           <p>No Todos yet</p>
         ) : (
-          <p>TODOs: {tokenDecoded.todos}</p>
+          <p>TODOs: {tokenDecoded.todos.length}</p>
         )
       ) : (
         <p>No Todos yet</p>
       )}
+      <Todo />
     </Container>
   );
 };

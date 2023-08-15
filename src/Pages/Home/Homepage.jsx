@@ -31,15 +31,7 @@ const Homepage = () => {
       <p>date of birth: {tokenDecoded.dob}</p>
       <p>location: {tokenDecoded.location}</p>
       <p>ID: {tokenDecoded.id}</p>
-      {tokenDecoded.todos ? (
-        tokenDecoded.todos.length === 0 ? (
-          <p>No Todos yet</p>
-        ) : (
-          <p>TODOs: {tokenDecoded.todos.length}</p>
-        )
-      ) : (
-        <p>No Todos yet</p>
-      )}
+
       <Todo />
     </Container>
   );

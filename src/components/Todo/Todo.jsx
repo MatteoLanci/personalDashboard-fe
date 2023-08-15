@@ -162,7 +162,11 @@ const Todo = () => {
                         checked={todo.completed}
                         onChange={() => handleCompleteTodo(todo._id)}
                       />
-                      <span style={todo.completed ? { textDecoration: "line-through" } : {}}>
+                      <span
+                        style={
+                          todo.completed ? { textDecoration: "line-through", color: "#28C773" } : {}
+                        }
+                      >
                         {todo.content}
                       </span>
 

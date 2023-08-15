@@ -1,0 +1,8 @@
+.todosWrapper {
+  border: 1px solid black;
+  padding: 1rem 2.5rem;
+  border-radius: 10px;
+  background: #283849;
+  color: #f0f0f0;
+  box-shadow: 0 0 10px #587ba0;
+}

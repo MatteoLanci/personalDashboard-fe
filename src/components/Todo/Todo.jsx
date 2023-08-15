@@ -8,11 +8,14 @@ import axios from "axios";
 import { nanoid } from "nanoid";
 
 //! icons import
-import { PiTrashSimple } from "react-icons/pi";
+import { PiTrashSimple, PiAlarm } from "react-icons/pi";
+
+//! CSS import
+import "./todo.css";
 
 const Todo = () => {
   const [todos, setTodos] = useState([]);
-  const [todoCompleted, setTodoCompleted] = useState(false);
+  // const [todoCompleted, setTodoCompleted] = useState(false);
 
   const token = JSON.parse(localStorage.getItem("userLogged"));
   const tokenDecoded = jwtDecode(token);
@@ -20,6 +23,7 @@ const Todo = () => {
   const [newTodoData, setNewTodoData] = useState({
     user: tokenDecoded.id,
     content: "",
+    completed: false,
   });
 
   const fetchTodo = async () => {
@@ -74,12 +78,54 @@ const Todo = () => {
     }
   };
 
-  const handleToggleTodo = (todoId) => {
+  const handleCompleteTodo = async (todoId) => {
     setTodos((prevTodos) =>
       prevTodos.map((todo) =>
         todo._id === todoId ? { ...todo, completed: !todo.completed } : todo
       )
     );
+    try {
+      const res = await axios.patch(
+        `${process.env.REACT_APP_SERVERBASE_URL}/users/${tokenDecoded.id}/todos/${todoId}/edit`,
+        { completed: !todos.find((todo) => todo._id === todoId).completed }
+      );
+      return res.data;
+    } catch (error) {
+      console.log("Error occurs editing todo in complete: ", error);
+    }
+  };
+
+  const sortedTodos = [...todos].sort((a, b) => {
+    if (a.completed === b.completed) {
+      return 0;
+    }
+    if (a.completed) {
+      return 1;
+    }
+    return -1;
+  });
+
+  const formatExpireDate = (isoDate) => {
+    const date = new Date(isoDate);
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    const month = monthNames[date.getMonth()];
+    const day = date.getDate().toString().padStart(2, "0");
+    const year = date.getFullYear();
+    return `${month} ${day} ${year}`;
   };
 
   useEffect(() => {
@@ -88,62 +134,75 @@ const Todo = () => {
 
   return (
     <>
-      <div className="my-4">{tokenDecoded.firstName} Todos</div>
-      {todos.length === 0 ? (
-        <>
-          <input
-            type="text"
-            placeholder="Add a new task..."
-            value={newTodoData.content}
-            onChange={(e) => setNewTodoData({ ...newTodoData, content: e.target.value })}
-          />
-          <Button variant="outline-primary" size="sm" onClick={handleNewTodo}>
-            Create
-          </Button>
-        </>
-      ) : (
-        <>
-          <ul key={nanoid()}>
-            {todos.map((todo) => (
-              <>
-                <li key={nanoid()} className="list-unstyled">
-                  <input
-                    key={nanoid()}
-                    type="checkbox"
-                    className="me-3"
-                    checked={todoCompleted}
-                    onChange={() => handleToggleTodo(todo._id)}
-                  />
-                  <span style={todo.completed ? { textDecoration: "line-through" } : {}}>
-                    {todo.content}
-                  </span>
-                  <PiTrashSimple
-                    key={nanoid()}
-                    className="ms-2"
-                    onClick={() => handleDeleteTodo(todo._id)}
-                  />
-                </li>
-              </>
-            ))}
-          </ul>
-          <input
-            type="text"
-            placeholder="Add a new task..."
-            value={newTodoData.content}
-            onChange={(e) => setNewTodoData({ ...newTodoData, content: e.target.value })}
-          />
-
-          <div className="d-flex gap-4 mt-3">
-            <Button key={nanoid()} variant="outline-primary" size="sm" onClick={handleNewTodo}>
+      <section className="todosWrapper">
+        <div className="mb-4">{tokenDecoded.firstName} Todos</div>
+        {todos.length === 0 ? (
+          <>
+            <input
+              type="text"
+              placeholder="Add a new task..."
+              value={newTodoData.content}
+              onChange={(e) => setNewTodoData({ ...newTodoData, content: e.target.value })}
+            />
+            <Button variant="outline-primary" size="sm" onClick={handleNewTodo}>
               Create
             </Button>
+          </>
+        ) : (
+          <>
+            <ul key={nanoid()} className="p-0">
+              {sortedTodos.map((todo) => (
+                <>
+                  <li key={nanoid()} className="list-unstyled mb-3">
+                    <div className="d-flex justify-content-start align-items-center">
+                      <input
+                        key={nanoid()}
+                        type="checkbox"
+                        className="me-3"
+                        checked={todo.completed}
+                        onChange={() => handleCompleteTodo(todo._id)}
+                      />
+                      <span style={todo.completed ? { textDecoration: "line-through" } : {}}>
+                        {todo.content}
+                      </span>
 
-            <Button key={nanoid()} variant="danger" size="sm" onClick={handleClearTodos}>
-              Clear List
-            </Button>
-          </div>
-        </>
-      )}
+                      <PiTrashSimple
+                        key={nanoid()}
+                        className="mx-4 text-danger"
+                        onClick={() => handleDeleteTodo(todo._id)}
+                      />
+                    </div>
+
+                    <div
+                      className="ms-4 d-flex align-items-center justify-content-start"
+                      style={{ fontSize: ".7rem" }}
+                    >
+                      <PiAlarm className="mx-1" />
+                      <span>{formatExpireDate(todo.expireDate)}</span>
+                    </div>
+                  </li>
+                </>
+              ))}
+            </ul>
+            <input
+              type="text"
+              placeholder="Add a new task..."
+              value={newTodoData.content}
+              onChange={(e) => setNewTodoData({ ...newTodoData, content: e.target.value })}
+            />
+
+            <div className="d-flex gap-4 mt-3">
+              <Button key={nanoid()} variant="primary" size="sm" onClick={handleNewTodo}>
+                Create
+              </Button>
+
+              <Button key={nanoid()} variant="danger" size="sm" onClick={handleClearTodos}>
+                Clear List
+              </Button>
+            </div>
+          </>
+        )}
+      </section>
     </>
   );
 };

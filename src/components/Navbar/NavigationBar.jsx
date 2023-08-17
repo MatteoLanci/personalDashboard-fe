@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import jwtDecode from "jwt-decode";
 
-import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Container, Nav, Navbar, NavDropdown, Offcanvas, ListGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import { FiLogOut } from "react-icons/fi";
@@ -9,7 +9,11 @@ import { FiLogOut } from "react-icons/fi";
 //! middlewares Import
 import { useSession } from "../../middlewares/ProtectedRoutes";
 
+//! css Import
+import "./Navbar.css";
+
 const NavigationBar = () => {
+  const [showMenu, setShowMenu] = useState(false);
   const session = useSession();
 
   const token = JSON.parse(localStorage.getItem("userLogged"));
@@ -17,16 +21,29 @@ const NavigationBar = () => {
 
   const handleLogOut = () => {
     localStorage.removeItem("userLogged");
+    setShowMenu(false);
+  };
+
+  //! functions to trigger side-menu (Offcanvas)
+  const handleShowMenu = () => {
+    setShowMenu(!showMenu);
+  };
+  const handleCloseMenu = () => {
+    setShowMenu(false);
   };
 
   return (
     <Navbar expand="lg" className="bg-dark" variant="dark">
       <Container className="d-flex justify-content-between align-items-center">
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand as={Link} to={`/homepage`}>
+          React-Bootstrap
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link as={Link} to={`/homepage`}>
+              Home
+            </Nav.Link>
             <Nav.Link href="#link">Link</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -45,11 +62,58 @@ const NavigationBar = () => {
               alt={tokenDecoded.email}
               style={{ width: "40px", height: "40px", borderRadius: "50%", objectFit: "cover" }}
               className="me-3"
+              onClick={handleShowMenu}
             />
 
             <Link to={"/"}>
               <FiLogOut onClick={handleLogOut} />
             </Link>
+
+            <Offcanvas
+              show={showMenu}
+              onHide={handleCloseMenu}
+              placement="end"
+              className="navbarMenu bg-light"
+            >
+              <Offcanvas.Header closeButton>
+                <Offcanvas.Title />
+              </Offcanvas.Header>
+
+              <Offcanvas.Body>
+                <div className="text-center mb-5">
+                  <img
+                    src={tokenDecoded.avatar}
+                    alt={tokenDecoded.firstName}
+                    className="menuPropic"
+                  />
+                  <h4 className="mt-3">
+                    {tokenDecoded.firstName} {tokenDecoded.lastName}
+                  </h4>
+                </div>
+
+                <ListGroup>
+                  <ListGroup.Item
+                    className="menuItem bg-light"
+                    as={Link}
+                    to={`/profile/${tokenDecoded.id}`}
+                    onClick={handleCloseMenu}
+                  >
+                    Profile
+                  </ListGroup.Item>
+                  <ListGroup.Item className="menuItem bg-light">Settings</ListGroup.Item>
+                  <ListGroup.Item className="menuItem bg-light">Support</ListGroup.Item>
+                  <ListGroup.Item className="menuItem bg-light">Community</ListGroup.Item>
+                  <ListGroup.Item
+                    className="menuItem mt-3 text-light bg-danger"
+                    onClick={handleLogOut}
+                    as={Link}
+                    to={"/"}
+                  >
+                    Logout
+                  </ListGroup.Item>
+                </ListGroup>
+              </Offcanvas.Body>
+            </Offcanvas>
           </>
         )}
       </Container>

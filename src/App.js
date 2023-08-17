@@ -10,6 +10,7 @@ import Footer from "./components/Footer/Footer";
 //! Pages Import
 import Homepage from "./Pages/Home/Homepage";
 import Login from "./Pages/Login/Login";
+import Profile from "./Pages/Profile/Profile";
 
 //! MiddleWares Import
 import ProtectedRoutes from "./middlewares/ProtectedRoutes";
@@ -23,6 +24,7 @@ const App = () => {
 
         <Route element={<ProtectedRoutes />}>
           <Route path="/homepage" element={<Homepage />} />
+          <Route path="/profile/:id" element={<Profile />} />
         </Route>
       </Routes>
       <Footer />

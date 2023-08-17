@@ -1,0 +1,33 @@
+.profileHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 10rem;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  position: relative;
+}
+
+.profileImgWrapper {
+  position: absolute;
+  bottom: 280px;
+}
+
+.editPropicIcon {
+  position: absolute;
+  left: 70%;
+  bottom: 2%;
+  background: #ffffff;
+  font-size: 2rem;
+  padding: 2px 2px;
+  border-radius: 50%;
+  border: 1px solid #00000070;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.editPropicIcon:hover {
+  box-shadow: 0 0 5px #000000;
+}

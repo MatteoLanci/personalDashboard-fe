@@ -1,14 +1,14 @@
-import React, { useRef, useState, useEffect, useContext } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 //! router-dom Import
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 //! external libraries Import
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 
 //! react-bootstrap Import
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
 //! react-icons Import
 import { PiUserSwitch } from "react-icons/pi";
@@ -16,25 +16,51 @@ import { PiUserSwitch } from "react-icons/pi";
 //! css Import
 import "./Profile.css";
 
-//! context Import
-import { UsersContext } from "../../context/usersContext";
+import { useDispatch, useSelector } from "react-redux";
+import { usersState } from "../../state/Reducers/usersSlice";
+import { fetchUsers } from "../../state/Reducers/usersSlice";
 
 const Profile = () => {
   const params = useParams();
   const { id } = params;
-  const { users, setUsers } = useContext(UsersContext);
+  const dispatch = useDispatch();
+
+  const users = useSelector(usersState);
 
   const user = users.find((user) => user._id === id);
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, [dispatch]);
 
   const token = JSON.parse(localStorage.getItem("userLogged"));
   const tokenDecoded = jwtDecode(token);
 
   const userLogged = tokenDecoded.id === id;
 
+  const [locationName, setLocationName] = useState("");
+  useEffect(() => {
+    if (user) {
+      const [latitude, longitude] = user.location.split(", ");
+
+      const apiUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+
+      axios
+        .get(apiUrl)
+        .then((response) => {
+          const address = response.data.address.town || response.data.address.city;
+          setLocationName(address);
+        })
+        .catch((error) => {
+          console.error("Error while geocoding:", error);
+        });
+    }
+  }, [user]);
+
   //! FUNCTION TO UPDATE PROPIC
   const [avatarUrl, setAvatarUrl] = useState(tokenDecoded.avatar);
   const fileInputRef = useRef(null);
-  const [file, setFile] = useState(null);
+  const [setFile] = useState(null);
 
   const handleBrowseImg = () => {
     fileInputRef.current.click();
@@ -129,7 +155,9 @@ const Profile = () => {
         <p>full name: {`${user.firstName} ${user.lastName}`}</p>
         <p>email: {user.email}</p>
         <p>date of birth: {user.dob}</p>
-        <p>location: {user.location}</p>
+        <p>
+          location: {locationName} ({user.location})
+        </p>
         <p>ID: {user._id}</p>
       </Container>
     </>

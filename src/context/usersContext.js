@@ -16,7 +16,7 @@ const UsersProvider = ({ children }) => {
           headers: { Authorization: token },
         });
         setUsers(res.data.users);
-        setLoading(false); // Imposta lo stato di caricamento su false quando hai i dati
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching users:", error);
       }

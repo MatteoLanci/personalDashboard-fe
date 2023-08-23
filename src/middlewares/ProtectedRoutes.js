@@ -3,19 +3,22 @@ import jwtDecode from "jwt-decode";
 
 import Login from "../Pages/Login/Login";
 
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const authorization = () => {
   return JSON.parse(localStorage.getItem("userLogged"));
 };
 
+const allowedRoutes = ["/", "/register"];
+
 export const useSession = () => {
   const session = authorization();
   const decodedSession = session ? jwtDecode(session) : null;
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    if (!session) {
+    if (!session && !allowedRoutes.includes(location.pathname)) {
       navigate("/", { replace: true });
     }
   }, [navigate, session]);
@@ -25,7 +28,6 @@ export const useSession = () => {
 
 const ProtectedRoutes = () => {
   const isAuthorized = authorization();
-  const session = useSession();
 
   return isAuthorized ? <Outlet /> : <Login />;
 };

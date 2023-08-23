@@ -20,7 +20,7 @@ const Login = () => {
         localStorage.setItem("userLogged", JSON.stringify(res.data.token));
         setTimeout(() => {
           navigate("/homepage");
-        }, 4000);
+        }, 2000);
       }
     } catch (error) {
       setIsLoading(false);
@@ -56,6 +56,10 @@ const Login = () => {
           </FormGroup>
           <Button type="submit">Login Now</Button>
         </Form>
+
+        <p>
+          Not an user? <Link to={"/register"}>Register here</Link>
+        </p>
       </Container>
     </>
   );

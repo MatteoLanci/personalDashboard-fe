@@ -1,25 +1,27 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
-import { Button, Container, Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 
-//! external libraries import
 import jwtDecode from "jwt-decode";
-import axios from "axios";
 import { nanoid } from "nanoid";
 
-//! components import
 import Todo from "../../components/Todo/Todo";
+import LatestNews from "../../components/LatestNews/LatestNews";
 
-//! context import
-import { UsersContext } from "../../context/usersContext";
+import { useDispatch, useSelector } from "react-redux";
+import { usersState } from "../../state/Reducers/usersSlice";
+import { fetchUsers } from "../../state/Reducers/usersSlice";
 
 const Homepage = () => {
   const token = JSON.parse(localStorage.getItem("userLogged"));
   const tokenDecoded = jwtDecode(token);
-  // console.log(tokenDecoded);
+  const dispatch = useDispatch();
 
-  const { users } = useContext(UsersContext);
+  const users = useSelector(usersState);
   console.log(users);
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, [dispatch]);
 
   if (!users.length) {
     return <p>loading...</p>;
@@ -40,16 +42,22 @@ const Homepage = () => {
             <Todo />
           </Col>
 
-          <Col>
-            <ul>
+          <Col key={nanoid()}>
+            <ul key={nanoid()}>
               {users.map((user) => (
-                <li key={user.id}>
+                <li key={nanoid()}>
                   <a key={nanoid()} href={`/profile/${user._id}`}>
                     {user.firstName}
                   </a>
                 </li>
               ))}
             </ul>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col>
+            <LatestNews />
           </Col>
         </Row>
       </Container>

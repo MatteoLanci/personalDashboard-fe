@@ -17,7 +17,6 @@ const Homepage = () => {
   const dispatch = useDispatch();
 
   const users = useSelector(usersState);
-  console.log(users);
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -55,7 +54,7 @@ const Homepage = () => {
           </Col>
         </Row>
 
-        <Row>
+        <Row className="mt-4">
           <Col>
             <LatestNews />
           </Col>

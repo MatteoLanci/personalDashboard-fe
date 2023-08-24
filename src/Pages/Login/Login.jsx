@@ -1,32 +1,34 @@
 import React, { useState } from "react";
-import { Button, Container, Row, Col, Form, Spinner, FormGroup } from "react-bootstrap";
+import { Button, Container, Form, FormGroup, Spinner } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../state/Reducers/usersSlice";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
   const [loginFormData, setLoginFormData] = useState({});
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    try {
-      setIsLoading(true);
+    setIsLoading(true);
 
-      const res = await axios.post(`${process.env.REACT_APP_SERVERBASE_URL}/login`, loginFormData);
-      if (res.data.token) {
-        localStorage.setItem("userLogged", JSON.stringify(res.data.token));
+    try {
+      const response = await dispatch(loginUser(loginFormData));
+      if (response.meta.requestStatus === "fulfilled") {
         setTimeout(() => {
           navigate("/homepage");
+          setIsLoading(false);
         }, 2000);
       }
     } catch (error) {
-      setIsLoading(false);
       console.error("Error occurs during login: ", error);
     }
   };
+
   return (
     <>
       <Container
@@ -54,7 +56,15 @@ const Login = () => {
               onChange={(e) => setLoginFormData({ ...loginFormData, password: e.target.value })}
             />
           </FormGroup>
-          <Button type="submit">Login Now</Button>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? (
+              <>
+                <Spinner animation="border" size="sm" /> Logging In
+              </>
+            ) : (
+              "Login Now"
+            )}
+          </Button>
         </Form>
 
         <p>

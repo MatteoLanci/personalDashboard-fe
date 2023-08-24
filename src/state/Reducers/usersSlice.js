@@ -7,6 +7,8 @@ const initialState = {
   error: null,
   registrationError: null,
   registrationResponse: null,
+  loginError: null,
+  loginResponse: null,
 };
 
 export const fetchUsers = createAsyncThunk("users/fetchUsers", async (_, thunkAPI) => {
@@ -36,6 +38,21 @@ export const createUser = createAsyncThunk(
   }
 );
 
+export const loginUser = createAsyncThunk("users/loginUser", async (loginData, thunkAPI) => {
+  try {
+    const response = await axios.post(`${process.env.REACT_APP_SERVERBASE_URL}/login`, loginData);
+
+    if (response.data.token) {
+      localStorage.setItem("userLogged", JSON.stringify(response.data.token));
+      return response.data.token;
+    } else {
+      return thunkAPI.rejectWithValue("Login failed.");
+    }
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
 const usersSlice = createSlice({
   name: "users",
   initialState,
@@ -63,6 +80,20 @@ const usersSlice = createSlice({
       .addCase(createUser.rejected, (state, action) => {
         state.loading = false;
         state.registrationError = action.payload;
+      })
+      .addCase(loginUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.userToken = action.payload; // Store the user token
+      })
+      .addCase(loginUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        state.userToken = null;
       });
   },
 });

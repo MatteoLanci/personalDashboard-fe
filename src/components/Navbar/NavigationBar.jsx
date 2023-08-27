@@ -6,13 +6,23 @@ import { Link } from "react-router-dom";
 
 import { FiLogOut } from "react-icons/fi";
 
-//! middlewares Import
 import { useSession } from "../../middlewares/ProtectedRoutes";
 
-//! css Import
 import "./Navbar.css";
 
+import { useDispatch, useSelector } from "react-redux";
+import { toggleTheme } from "../../state/Reducers/themeSlice";
+
+import { LuLightbulb } from "react-icons/lu";
+import { LuLightbulbOff } from "react-icons/lu";
+
 const NavigationBar = () => {
+  const theme = useSelector((state) => state.theme);
+  const dispatch = useDispatch();
+  const toggleThemeHandler = () => {
+    dispatch(toggleTheme());
+  };
+
   const [showMenu, setShowMenu] = useState(false);
   const session = useSession();
 
@@ -24,7 +34,6 @@ const NavigationBar = () => {
     setShowMenu(false);
   };
 
-  //! functions to trigger side-menu (Offcanvas)
   const handleShowMenu = () => {
     setShowMenu(!showMenu);
   };
@@ -57,6 +66,20 @@ const NavigationBar = () => {
 
         {session && (
           <>
+            {theme === "light" ? (
+              <LuLightbulbOff
+                className="text-light me-4"
+                style={{ fontSize: "1.5rem", cursor: "pointer" }}
+                onClick={toggleThemeHandler}
+              />
+            ) : (
+              <LuLightbulb
+                className="text-light me-4"
+                style={{ fontSize: "1.5rem", cursor: "pointer" }}
+                onClick={toggleThemeHandler}
+              />
+            )}
+
             <img
               src={tokenDecoded.avatar}
               alt={tokenDecoded.email}

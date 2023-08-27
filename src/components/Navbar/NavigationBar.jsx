@@ -45,7 +45,7 @@ const NavigationBar = () => {
     <Navbar expand="lg" className="bg-dark" variant="dark">
       <Container className="d-flex justify-content-between align-items-center">
         <Navbar.Brand as={Link} to={`/homepage`}>
-          React-Bootstrap
+          Personal Dashboard
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

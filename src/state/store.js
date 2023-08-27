@@ -3,6 +3,7 @@ import usersReducer from "./Reducers/usersSlice";
 import newsReducer from "./Reducers/newsSlice";
 import weatherReducer from "./Reducers/weatherSlice";
 import themeReducer from "./Reducers/themeSlice";
+import eventsReducer from "./Reducers/eventsSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     news: newsReducer,
     weather: weatherReducer,
     theme: themeReducer,
+    events: eventsReducer,
   },
 });
 

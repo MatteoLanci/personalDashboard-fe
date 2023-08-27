@@ -7,6 +7,7 @@ import { nanoid } from "nanoid";
 import Todo from "../../components/Todo/Todo";
 import LatestNews from "../../components/LatestNews/LatestNews";
 import WeatherApp from "../../components/WeatherApp/WeatherApp";
+import Events from "../../components/Events/Events";
 
 import { useDispatch, useSelector } from "react-redux";
 import { usersState } from "../../state/Reducers/usersSlice";
@@ -64,6 +65,12 @@ const Homepage = () => {
         <Row className="mt-4">
           <Col>
             <WeatherApp />
+          </Col>
+        </Row>
+
+        <Row className="mt-4">
+          <Col>
+            <Events />
           </Col>
         </Row>
       </Container>

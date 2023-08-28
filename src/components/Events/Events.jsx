@@ -21,9 +21,11 @@ const Events = () => {
     dispatch(fetchEvents(userCoordinates));
   }, [dispatch]);
 
+  console.log(events);
+
   return (
     <section className="border rounded p-3">
-      <h2>Events near you</h2>
+      <h2 key={nanoid()}>Events near you</h2>
       {events.map((event, index) => (
         <>
           <div key={index} className="mt-4">
@@ -40,6 +42,9 @@ const Events = () => {
               {event.distance}Km from your location
             </p>
           </div>
+
+          <div key={nanoid()}>Day of event: {event.dates.start.localDate}</div>
+          <div key={nanoid()}>Time of event: {event.dates.start.localTime}</div>
 
           <a href={event.url} target="_blank" rel="noreferrer" key={nanoid()}>
             discover more...

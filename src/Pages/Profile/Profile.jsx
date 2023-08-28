@@ -8,10 +8,11 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 
 //! react-bootstrap Import
-import { Container } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 
 //! react-icons Import
 import { PiUserSwitch } from "react-icons/pi";
+import { GoGear } from "react-icons/go";
 
 //! css Import
 import "./Profile.css";
@@ -19,6 +20,7 @@ import "./Profile.css";
 import { useDispatch, useSelector } from "react-redux";
 import { usersState } from "../../state/Reducers/usersSlice";
 import { fetchUsers } from "../../state/Reducers/usersSlice";
+import { handleUpdateUserInfo } from "../../state/Reducers/profileSlice";
 
 const Profile = () => {
   const params = useParams();
@@ -28,6 +30,17 @@ const Profile = () => {
   const users = useSelector(usersState);
 
   const user = users.find((user) => user._id === id);
+
+  const [isEditMode, setIsEditMode] = useState(false);
+  const handleEditModeToggle = () => {
+    setIsEditMode(!isEditMode);
+  };
+
+  const [dataToUpdate, setDataToUpdate] = useState({});
+  const handleEditUserInfo = () => {
+    dispatch(handleUpdateUserInfo({ id, dataToUpdate }));
+    setIsEditMode(false);
+  };
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -113,7 +126,7 @@ const Profile = () => {
   return (
     <>
       <Container
-        className="d-flex flex-column justify-content-center align-items-center"
+        className="d-flex flex-column justify-content-center align-items-center mb-5"
         style={{ minHeight: "80vh", position: "relative" }}
       >
         <section className="profileHeader ">
@@ -150,16 +163,82 @@ const Profile = () => {
 
         <h2>
           {user.firstName} {user.lastName}
+          {userLogged && <GoGear onClick={handleEditModeToggle} />}
         </h2>
 
-        <p>full name: {`${user.firstName} ${user.lastName}`}</p>
-        <p>email: {user.email}</p>
-        <p>date of birth: {user.dob}</p>
-        <p>
-          location: {locationName} ({user.location})
-        </p>
-        <p>ID: {user._id}</p>
+        {isEditMode ? (
+          <>
+            <p className="d-flex align-items-center gap-1">
+              Full Name:
+              <input
+                type="text"
+                placeholder={user.firstName}
+                onChange={(e) => setDataToUpdate({ ...dataToUpdate, firstName: e.target.value })}
+              />
+              <input
+                type="text"
+                placeholder={user.lastName}
+                onChange={(e) => setDataToUpdate({ ...dataToUpdate, lastName: e.target.value })}
+              />
+            </p>
+
+            <p className="d-flex align-items-center gap-1">
+              Email:
+              <input
+                type="email"
+                placeholder={user.email}
+                onChange={(e) => setDataToUpdate({ ...dataToUpdate, email: e.target.value })}
+              />
+            </p>
+
+            <p className="d-flex align-items-center gap-1">
+              Date of Birth:
+              <input
+                type="date"
+                placeholder={user.dob}
+                onChange={(e) => setDataToUpdate({ ...dataToUpdate, dob: e.target.value })}
+              />
+            </p>
+
+            <p className="d-flex align-items-center gap-1">
+              Location:
+              <input
+                type="text"
+                placeholder={locationName}
+                onChange={(e) => setDataToUpdate({ ...dataToUpdate, location: e.target.value })}
+              />
+            </p>
+
+            <p className="d-flex align-items-center gap-1"></p>
+          </>
+        ) : (
+          <>
+            <p>full name: {`${user.firstName} ${user.lastName}`}</p>
+
+            <p>email: {user.email}</p>
+
+            <p>date of birth: {user.dob}</p>
+
+            <p>
+              location: {locationName} ({user.location})
+            </p>
+
+            <p>ID: {user._id}</p>
+          </>
+        )}
       </Container>
+
+      {isEditMode && (
+        <div className="d-flex justify-content-center align-items-center gap-3 mb-4">
+          <Button variant="outline-success" onClick={handleEditUserInfo}>
+            Save Changes
+          </Button>
+
+          <Button variant="outline-danger" onClick={() => setIsEditMode(false)}>
+            Cancel
+          </Button>
+        </div>
+      )}
     </>
   );
 };

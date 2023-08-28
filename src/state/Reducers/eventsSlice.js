@@ -12,7 +12,7 @@ export const fetchEvents = createAsyncThunk(
   async (userCoordinates, thunkAPI) => {
     try {
       const response = await axios.get(
-        `https://app.ticketmaster.com/discovery/v2/events?apikey=FMt04I9D8JeWAPqHCfURFj5sdF6FKBKj&latlong=${userCoordinates}&locale=*&size=5&page=2`
+        `https://app.ticketmaster.com/discovery/v2/events?apikey=FMt04I9D8JeWAPqHCfURFj5sdF6FKBKj&latlong=${userCoordinates}&locale=*&size=5&page=2&`
       );
       return response.data._embedded.events;
     } catch (error) {

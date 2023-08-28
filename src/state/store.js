@@ -4,6 +4,7 @@ import newsReducer from "./Reducers/newsSlice";
 import weatherReducer from "./Reducers/weatherSlice";
 import themeReducer from "./Reducers/themeSlice";
 import eventsReducer from "./Reducers/eventsSlice";
+import profileReducer from "./Reducers/profileSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     weather: weatherReducer,
     theme: themeReducer,
     events: eventsReducer,
+    userInfo: profileReducer,
   },
 });
 

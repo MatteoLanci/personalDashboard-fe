@@ -8,6 +8,9 @@ import Todo from "../../components/Todo/Todo";
 import LatestNews from "../../components/LatestNews/LatestNews";
 import WeatherApp from "../../components/WeatherApp/WeatherApp";
 import Events from "../../components/Events/Events";
+import Map from "../../components/Map/Map";
+import Moneybox from "../../components/MoneyBox/Moneybox";
+import Wishlist from "../../components/Wishlist/Wishlist";
 
 import { useDispatch, useSelector } from "react-redux";
 import { usersState } from "../../state/Reducers/usersSlice";
@@ -71,6 +74,24 @@ const Homepage = () => {
         <Row className="mt-4">
           <Col>
             <Events />
+          </Col>
+        </Row>
+
+        <Row className="mt-4">
+          <Col>
+            <Map />
+          </Col>
+        </Row>
+
+        <Row className="mt-4">
+          <Col>
+            <Wishlist />
+          </Col>
+        </Row>
+
+        <Row className="mt-4">
+          <Col>
+            <Moneybox />
           </Col>
         </Row>
       </Container>

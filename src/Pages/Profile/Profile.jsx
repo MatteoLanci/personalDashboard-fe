@@ -1,34 +1,33 @@
 import React, { useRef, useState, useEffect } from "react";
 
-//! router-dom Import
 import { useParams } from "react-router-dom";
 
-//! external libraries Import
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 
-//! react-bootstrap Import
 import { Container, Button } from "react-bootstrap";
 
-//! react-icons Import
 import { PiUserSwitch } from "react-icons/pi";
 import { GoGear } from "react-icons/go";
 
-//! css Import
 import "./Profile.css";
 
 import { useDispatch, useSelector } from "react-redux";
 import { usersState } from "../../state/Reducers/usersSlice";
 import { fetchUsers } from "../../state/Reducers/usersSlice";
 import { handleUpdateUserInfo } from "../../state/Reducers/profileSlice";
+import { getCoordinatesFromCity } from "../../state/Reducers/profileSlice";
 
 const Profile = () => {
   const params = useParams();
   const { id } = params;
   const dispatch = useDispatch();
 
-  const users = useSelector(usersState);
+  const token = JSON.parse(localStorage.getItem("userLogged"));
+  const tokenDecoded = jwtDecode(token);
+  const userLogged = tokenDecoded.id === id;
 
+  const users = useSelector(usersState);
   const user = users.find((user) => user._id === id);
 
   const [isEditMode, setIsEditMode] = useState(false);
@@ -42,16 +41,12 @@ const Profile = () => {
     setIsEditMode(false);
   };
 
+  const [locationName, setLocationName] = useState("");
+
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
 
-  const token = JSON.parse(localStorage.getItem("userLogged"));
-  const tokenDecoded = jwtDecode(token);
-
-  const userLogged = tokenDecoded.id === id;
-
-  const [locationName, setLocationName] = useState("");
   useEffect(() => {
     if (user) {
       const [latitude, longitude] = user.location.split(", ");
@@ -61,7 +56,11 @@ const Profile = () => {
       axios
         .get(apiUrl)
         .then((response) => {
-          const address = response.data.address.town || response.data.address.city;
+          const address =
+            response.data.address.city ||
+            response.data.address.town ||
+            response.data.address.county;
+
           setLocationName(address);
         })
         .catch((error) => {
@@ -69,6 +68,30 @@ const Profile = () => {
         });
     }
   }, [user]);
+
+  const handleCityChange = (e) => {
+    const newCityName = e.target.value;
+    setLocationName(newCityName);
+
+    if (newCityName) {
+      dispatch(getCoordinatesFromCity(newCityName)).then((action) => {
+        if (getCoordinatesFromCity.fulfilled.match(action)) {
+          const { latitude, longitude } = action.payload;
+
+          const coordinatesString = `${latitude}, ${longitude}`;
+
+          setDataToUpdate((prevData) => ({
+            ...prevData,
+            location: coordinatesString,
+          }));
+
+          console.log("coordinates obtained: ", coordinatesString);
+        } else if (getCoordinatesFromCity.rejected.match(action)) {
+          console.error("Error occurs while obtaining coordinates", action.error);
+        }
+      });
+    }
+  };
 
   //! FUNCTION TO UPDATE PROPIC
   const [avatarUrl, setAvatarUrl] = useState(tokenDecoded.avatar);
@@ -98,7 +121,7 @@ const Profile = () => {
           console.log("Error occurs updating author: ", error);
         }
       } else {
-        console.error("File upoload failed");
+        console.error("File upload failed");
       }
     }
   };
@@ -118,7 +141,7 @@ const Profile = () => {
       console.log("Avatar upload error occurs: ", error);
     }
   };
-  //! END FUNCTION TO UPDATE PROPIC
+  //! end FUNCTION TO UPDATE PROPIC
 
   if (!user) {
     return <p>loading...</p>;
@@ -205,7 +228,10 @@ const Profile = () => {
               <input
                 type="text"
                 placeholder={locationName}
-                onChange={(e) => setDataToUpdate({ ...dataToUpdate, location: e.target.value })}
+                onChange={(e) => {
+                  setLocationName(e.target.value);
+                  handleCityChange(e); // Chiamata separata per ottenere le coordinate
+                }}
               />
             </p>
 

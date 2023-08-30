@@ -123,9 +123,34 @@ const NavigationBar = () => {
                   >
                     Profile
                   </ListGroup.Item>
-                  <ListGroup.Item className="menuItem bg-light">Settings</ListGroup.Item>
-                  <ListGroup.Item className="menuItem bg-light">Support</ListGroup.Item>
-                  <ListGroup.Item className="menuItem bg-light">Community</ListGroup.Item>
+
+                  <ListGroup.Item
+                    className="menuItem bg-light"
+                    as={Link}
+                    to={"/settings"}
+                    onClick={handleCloseMenu}
+                  >
+                    Settings
+                  </ListGroup.Item>
+
+                  <ListGroup.Item
+                    className="menuItem bg-light"
+                    as={Link}
+                    to={"/support"}
+                    onClick={handleCloseMenu}
+                  >
+                    Support
+                  </ListGroup.Item>
+
+                  <ListGroup.Item
+                    className="menuItem bg-light"
+                    as={Link}
+                    to={"/community"}
+                    onClick={handleCloseMenu}
+                  >
+                    Community
+                  </ListGroup.Item>
+
                   <ListGroup.Item
                     className="menuItem mt-3 text-light bg-danger"
                     onClick={handleLogOut}

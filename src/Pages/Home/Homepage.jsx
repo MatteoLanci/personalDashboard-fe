@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
 import jwtDecode from "jwt-decode";
-import { nanoid } from "nanoid";
 
 import Todo from "../../components/Todo/Todo";
 import LatestNews from "../../components/LatestNews/LatestNews";
@@ -11,6 +10,7 @@ import Events from "../../components/Events/Events";
 import Map from "../../components/Map/Map";
 import Moneybox from "../../components/MoneyBox/Moneybox";
 import Wishlist from "../../components/Wishlist/Wishlist";
+import Community from "../../components/Community/Community";
 
 import { useDispatch, useSelector } from "react-redux";
 import { usersState } from "../../state/Reducers/usersSlice";
@@ -44,18 +44,6 @@ const Homepage = () => {
         <Row className="w-100">
           <Col>
             <Todo />
-          </Col>
-
-          <Col key={nanoid()}>
-            <ul key={nanoid()}>
-              {users.map((user) => (
-                <li key={nanoid()}>
-                  <a key={nanoid()} href={`/profile/${user._id}`}>
-                    {user.firstName}
-                  </a>
-                </li>
-              ))}
-            </ul>
           </Col>
         </Row>
 
@@ -92,6 +80,12 @@ const Homepage = () => {
         <Row className="mt-4">
           <Col>
             <Moneybox />
+          </Col>
+        </Row>
+
+        <Row className="mt-4">
+          <Col>
+            <Community />
           </Col>
         </Row>
       </Container>

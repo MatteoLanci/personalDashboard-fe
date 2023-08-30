@@ -1,0 +1,10 @@
+.mapComponentWrapper {
+  width: 700px;
+  height: 300px;
+  margin-bottom: 3rem;
+}
+
+.mapWrapper {
+  height: 100%;
+  width: 100%;
+}

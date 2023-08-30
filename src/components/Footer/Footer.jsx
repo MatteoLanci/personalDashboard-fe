@@ -4,7 +4,10 @@ import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaGithub, FaGoogle } fr
 
 const Footer = () => {
   return (
-    <footer className="text-center text-white" style={{ backgroundColor: " #f1f1f1" }}>
+    <footer
+      className="text-center text-white"
+      style={{ backgroundColor: " #f1f1f1", marginTop: "4rem" }}
+    >
       <div className="container pt-4">
         <section className="mb-4">
           <a

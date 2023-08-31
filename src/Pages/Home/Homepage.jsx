@@ -11,6 +11,7 @@ import Map from "../../components/Map/Map";
 import Moneybox from "../../components/MoneyBox/Moneybox";
 import Wishlist from "../../components/Wishlist/Wishlist";
 import Community from "../../components/Community/Community";
+import Pharmacies from "../../components/Pharmacies/Pharmacies";
 
 import { useDispatch, useSelector } from "react-redux";
 import { usersState } from "../../state/Reducers/usersSlice";
@@ -68,6 +69,12 @@ const Homepage = () => {
         <Row className="mt-4">
           <Col>
             <Map />
+          </Col>
+        </Row>
+
+        <Row className="mt-4">
+          <Col>
+            <Pharmacies />
           </Col>
         </Row>
 

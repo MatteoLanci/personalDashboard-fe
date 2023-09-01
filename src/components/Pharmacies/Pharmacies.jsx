@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import cheerio from "cheerio";
+import { load } from "cheerio";
 
 import { Container } from "react-bootstrap";
 
@@ -11,17 +11,18 @@ const Pharmacies = () => {
   const fetchPharmacyData = async () => {
     try {
       const response = await axios.get(
-        "https://www.paginegialle.it/farmacie-turno/italia/30-08-2023/NOWOPEN"
+        `https://www.paginegialle.it/ricerca/Farmacie/Milano%20(MI)`
       );
 
       const html = response.data;
-      const $ = cheerio.load(html);
+      const $ = load(html);
       console.log($);
 
       const pharmacyData = [];
 
-      $(".search__cnt .search-itm").each(function () {
-        const name = $(this).find(".search-itm__rag").text().trim();
+      $(".search-itm").each(function () {
+        const name = $(this).find(".search-itm__sn").closest("a");
+        console.log(name);
 
         const addressSpans = $(this).find(".search-itm__adr span");
         const address = addressSpans

@@ -44,7 +44,7 @@ const WeatherApp = () => {
           console.error(error);
         });
     }, 3000);
-  }, [dispatch]);
+  }, [dispatch, user]);
 
   return (
     <section className="border rounded p-3 bg-dark text-light">

@@ -5,6 +5,7 @@ import weatherReducer from "./Reducers/weatherSlice";
 import themeReducer from "./Reducers/themeSlice";
 import eventsReducer from "./Reducers/eventsSlice";
 import profileReducer from "./Reducers/profileSlice";
+import moneyboxReducer from "./Reducers/moneyboxSlice";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     theme: themeReducer,
     events: eventsReducer,
     userInfo: profileReducer,
+    moneybox: moneyboxReducer,
   },
 });
 

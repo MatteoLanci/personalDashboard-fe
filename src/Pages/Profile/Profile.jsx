@@ -96,7 +96,7 @@ const Profile = () => {
   //! FUNCTION TO UPDATE PROPIC
   const [avatarUrl, setAvatarUrl] = useState(tokenDecoded.avatar);
   const fileInputRef = useRef(null);
-  const [setFile] = useState(null);
+  const [file, setFile] = useState(null);
 
   const handleBrowseImg = () => {
     fileInputRef.current.click();

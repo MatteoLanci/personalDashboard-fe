@@ -3,20 +3,20 @@ import React, { useEffect, useState } from "react";
 import jwtDecode from "jwt-decode";
 import { nanoid } from "nanoid";
 
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 
 import { useSelector, useDispatch } from "react-redux";
 
 import { usersState } from "../../state/Reducers/usersSlice";
 import { transactionState } from "../../state/Reducers/transactionsSlice";
-import { getMoneybox } from "../../state/Reducers/moneyboxSlice";
+import { getMoneybox, moneyboxState } from "../../state/Reducers/moneyboxSlice";
 import { getUserTransactions } from "../../state/Reducers/transactionsSlice";
 import { handleNewTransaction } from "../../state/Reducers/transactionsSlice";
 
 const Moneybox = () => {
   const dispatch = useDispatch();
 
-  const moneybox = useSelector((state) => state.moneybox.moneybox);
+  const moneybox = useSelector(moneyboxState);
   const users = useSelector(usersState);
   const userTransactions = useSelector(transactionState);
 
@@ -26,6 +26,27 @@ const Moneybox = () => {
   const userId = user._id;
 
   const [moneyboxIdLoading, setMoneyboxIdLoading] = useState(true);
+
+  const [transactionData, setTransactionData] = useState({
+    value: "",
+    description: "",
+  });
+
+  const [showAllTransactions, setShowAllTransactions] = useState(false);
+
+  const handleAddTransaction = () => {
+    if (!transactionData.value || isNaN(parseFloat(transactionData.value))) {
+      return;
+    }
+    dispatch(handleNewTransaction({ userId, moneyboxId, transactionData }))
+      .then(() => {
+        dispatch(getMoneybox(user._id));
+        dispatch(getUserTransactions({ userId, moneyboxId }));
+      })
+      .then(() => {
+        setTransactionData({ value: "", description: "" });
+      });
+  };
 
   useEffect(() => {
     dispatch(getMoneybox(user._id))
@@ -49,26 +70,27 @@ const Moneybox = () => {
     }
   }, [dispatch, userId, moneyboxId]);
 
-  const [transactionData, setTransactionData] = useState({
-    value: "",
-    description: "",
-  });
+  const sortedUserTransactions = userTransactions
+    .slice()
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-  const handleAddTransaction = () => {
-    if (!transactionData.value || isNaN(parseFloat(transactionData.value))) {
-      return;
-    }
-    dispatch(handleNewTransaction({ userId, moneyboxId, transactionData }));
+  const displayedTransactions = showAllTransactions
+    ? sortedUserTransactions
+    : sortedUserTransactions.slice(0, 3);
+
+  const handleLoadToggle = () => {
+    setShowAllTransactions(!showAllTransactions);
   };
 
   return (
-    <Container className="border rounded p-2">
+    <Container className="border rounded p-4">
       <h2> {user.firstName}'s MoneyBox</h2>
       <p>Total Amount: {moneybox.totalAmount} </p>
       <div>
         <input
           type="text"
           placeholder="e.g. 500"
+          value={transactionData.value}
           onChange={(e) => setTransactionData({ ...transactionData, value: e.target.value })}
         />
       </div>
@@ -76,6 +98,7 @@ const Moneybox = () => {
         <input
           type="text"
           placeholder="e.g. new personal income"
+          value={transactionData.description}
           onChange={(e) => setTransactionData({ ...transactionData, description: e.target.value })}
         />
       </div>
@@ -84,13 +107,17 @@ const Moneybox = () => {
       </Button>
 
       <ul className="mt-5">Latest Transactions</ul>
-      {userTransactions.map((transaction) => (
+      {displayedTransactions.map((transaction) => (
         <li key={nanoid}>
           <div>{transaction.value}</div>
           <div>{transaction.description}</div>
           <div>{transaction.createdAt}</div>
         </li>
       ))}
+
+      <Button variant="primary" className="mt-2" onClick={handleLoadToggle}>
+        {showAllTransactions ? "Show Less" : "Load More"}
+      </Button>
     </Container>
   );
 };

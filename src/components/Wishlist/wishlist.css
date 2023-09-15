@@ -1,0 +1,73 @@
+.wishlistWrapper {
+  border-radius: 10px;
+  padding: 0.25rem 0.5rem;
+  background-color: #ecffff;
+  opacity: 90%;
+  box-shadow: 0 0 10px #00000070;
+  height: 550px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.wishAnimation {
+  position: absolute;
+  bottom: 10%;
+  right: 0;
+  height: 200px;
+  z-index: 0;
+}
+
+.wishesWrapper {
+  align-self: flex-start !important;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  z-index: 1;
+}
+.singleWishBtn {
+  height: 50px;
+  background: #c0e6e6;
+  border: none;
+  box-shadow: 0 0 10px #528686;
+  color: #333333;
+  transition: all 0.3s;
+}
+.singleWishBtn:hover,
+.singleWishBtn:active {
+  background: #528686 !important;
+}
+
+.wishElCollapse {
+  box-shadow: 0 0 5px #528686;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background: #ecffff;
+  width: 99%;
+}
+
+.alertSingleWish {
+  box-shadow: 0 0 5px #528686;
+  background: #528686;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  color: #ffffff;
+}
+
+.newWishBtnWrapper {
+  align-self: flex-end !important;
+}
+.newWishBtn {
+  background: #528686;
+  border: none;
+  box-shadow: 0 0 10px #88b4b4;
+  color: #ffffff;
+  transition: all 0.3s;
+}
+.newWishBtn:hover,
+.newWishBtn:active {
+  background: #4f9b9b !important;
+}

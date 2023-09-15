@@ -4,6 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../state/Reducers/usersSlice";
+import Lottie from "lottie-react";
+import bgAnimation from "../../assets/bg/bg_light_hexa.json";
+import "./login.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -31,45 +34,52 @@ const Login = () => {
 
   return (
     <>
-      <Container
-        style={{ minHeight: "80vh" }}
-        className="d-flex flex-column align-items-center justify-content-center"
-      >
-        <h1>Login Page</h1>
-        <Form onSubmit={handleLogin}>
-          <FormGroup>
-            <Form.Control
-              name="email"
-              type="email"
-              placeholder="enter your Email"
-              required
-              onChange={(e) => setLoginFormData({ ...loginFormData, email: e.target.value })}
-            />
-          </FormGroup>
+      <div className="bgAnimation">
+        <Lottie animationData={bgAnimation} />
+      </div>
 
-          <FormGroup>
-            <Form.Control
-              name="password"
-              type="password"
-              placeholder="enter your password"
-              required
-              onChange={(e) => setLoginFormData({ ...loginFormData, password: e.target.value })}
-            />
-          </FormGroup>
-          <Button type="submit" disabled={isLoading}>
-            {isLoading ? (
-              <>
-                <Spinner animation="border" size="sm" /> Logging In
-              </>
-            ) : (
-              "Login Now"
-            )}
-          </Button>
-        </Form>
+      <Container className="d-flex justify-content-center align-items-center">
+        <section className="loginWrapper">
+          <h1>Login</h1>
+          <Form onSubmit={handleLogin} className="formWrapper">
+            <FormGroup className="loginInput">
+              <Form.Control
+                className="loginInputField"
+                name="email"
+                type="email"
+                // placeholder="Enter Your Email"
+                required
+                onChange={(e) => setLoginFormData({ ...loginFormData, email: e.target.value })}
+              />
+              <p className="loginPlaceholder">Enter Your Email</p>
+            </FormGroup>
 
-        <p>
-          Not an user? <Link to={"/register"}>Register here</Link>
-        </p>
+            <FormGroup className="loginInput">
+              <Form.Control
+                className="loginInputField"
+                name="password"
+                type="password"
+                // placeholder="Enter Your Password"
+                required
+                onChange={(e) => setLoginFormData({ ...loginFormData, password: e.target.value })}
+              />
+              <p className="loginPlaceholder">Enter Your Password</p>
+            </FormGroup>
+            <Button type="submit" disabled={isLoading} className="loginBtn">
+              {isLoading ? (
+                <>
+                  <Spinner animation="border" size="sm" /> Logging In
+                </>
+              ) : (
+                "Login Now"
+              )}
+            </Button>
+          </Form>
+
+          <p>
+            Aren't you a user? <Link to={"/register"}>Register here</Link>
+          </p>
+        </section>
       </Container>
     </>
   );

@@ -1,9 +1,88 @@
 .todosWrapper {
-  border: 1px solid black;
-  padding: 1rem 2.5rem;
+  padding: 0.5rem 1rem;
   border-radius: 10px;
-  background: #283849;
-  color: #f0f0f0;
-  box-shadow: 0 0 10px #587ba0;
-  max-width: 700px;
+  background: #cdf1f1;
+  opacity: 90%;
+  color: #1a1a1a;
+  box-shadow: 0 0 10px #00000070;
+}
+
+.todoInput {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: none;
+  background: #eeffff;
+  box-shadow: 0 0 5px #92c4c4;
+}
+
+.todoList {
+  height: 200px;
+  overflow-y: auto;
+}
+
+.singleTodoEl {
+  box-shadow: 0 0 5px #759c9c;
+  width: 90%;
+  padding: 0.25rem 0.5rem;
+  margin-left: 5px;
+  border-radius: 6px;
+  background: #eeffff;
+}
+
+.todoDelElBtn {
+  font-size: 1rem;
+  color: #cc0202;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 1rem !important;
+}
+.todoDelElBtn:hover {
+  color: #830000;
+}
+
+.todoNoList {
+  height: 300px;
+}
+
+.newTodoBtn {
+  background: #528686;
+  border: none;
+  box-shadow: 0 0 5px #88b4b4;
+  transition: all 0.3s;
+}
+.newTodoBtn:hover,
+.newTodoBtn:active {
+  background: #4f9b9b !important;
+}
+
+.todoClearListBtn {
+  background: #810101;
+  border: none;
+  transition: all 0.3s;
+}
+.todoClearListBtn:hover,
+.todoClearListBtn:active {
+  background: #a00101;
+  box-shadow: 0 0 5px #5a0101;
+}
+
+@media screen and (max-width: 500px) {
+  .todoAnimation {
+    height: 150px;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #eeffff;
+}
+::-webkit-scrollbar-thumb {
+  background: #92c4c4;
+  border-radius: 50px;
+  transition: all 0.5s !important;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1d1d1d;
 }

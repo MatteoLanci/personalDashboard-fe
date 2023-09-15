@@ -1,6 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchNews, newsState } from "../../state/Reducers/newsSlice";
+import "./latestNews.css";
+import { nanoid } from "nanoid";
+import { Container, Row } from "react-bootstrap";
+
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 const LatestNews = () => {
   const dispatch = useDispatch();
@@ -10,33 +16,58 @@ const LatestNews = () => {
     // dispatch(fetchNews());
   }, [dispatch]);
 
-  const articlesToShow = newsData.slice(0, 5);
+  const articlesToShow = newsData.slice(0, 15);
+
   const noImage =
-    "https://cdn.vectorstock.com/i/preview-1x/65/30/default-image-icon-missing-picture-page-vector-40546530.jpg";
+    "https://static.vecteezy.com/system/resources/thumbnails/006/299/370/original/world-breaking-news-digital-earth-hud-rotating-globe-rotating-free-video.jpg";
+
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 768 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 768, min: 0 },
+      items: 1,
+    },
+  };
 
   return (
-    <div>
+    <>
       <h2>Latest News: </h2>
-      {articlesToShow.map((article, index) => (
-        <div key={article.title} className="border p-2 rounded">
-          <h5>{article.title}</h5>
-          <a href={article.url} target="_blank" rel="noreferrer">
-            Read full article here...
-          </a>
-          <div>
-            <img
-              src={article.urlToImage || noImage}
-              style={{ width: "50px", height: "50px", objectFit: "cover" }}
-              alt={index}
-            />
-          </div>
-        </div>
-      ))}
-      <p>
-        remove comment from dispatch in useEffect @row10 in LatestNews.jsx to see articles (daily
-        request limit: 100)
-      </p>
-    </div>
+      <Container className="newsWrapper">
+        <Row className="galleryWrapper">
+          <Carousel
+            responsive={responsive}
+            infinite={true}
+            autoPlay={true}
+            autoPlaySpeed={10000}
+            className="customCarousel"
+            removeArrowOnDeviceType={["tablet", "mobile"]}
+          >
+            {articlesToShow.map((article, index) => (
+              <figure className="galleryItem me-4" key={nanoid()}>
+                <img
+                  src={article.urlToImage || noImage}
+                  alt={article.title}
+                  className="itemImage"
+                />
+                <figcaption className="itemDescription">
+                  <h2 className="articleTitle">{article.title}</h2>
+                  <a href={article.url} className="articleLink" target="_blank" rel="noreferrer">
+                    read full article...
+                  </a>
+                </figcaption>
+              </figure>
+            ))}
+          </Carousel>
+        </Row>
+      </Container>
+    </>
   );
 };
 

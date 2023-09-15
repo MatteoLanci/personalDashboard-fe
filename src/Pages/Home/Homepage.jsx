@@ -3,6 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 
 import jwtDecode from "jwt-decode";
 
+import Welcome from "../../components/WelcomeDate/WelcomeDate";
 import Todo from "../../components/Todo/Todo";
 import LatestNews from "../../components/LatestNews/LatestNews";
 import WeatherApp from "../../components/WeatherApp/WeatherApp";
@@ -16,6 +17,10 @@ import Pharmacies from "../../components/Pharmacies/Pharmacies";
 import { useDispatch, useSelector } from "react-redux";
 import { usersState } from "../../state/Reducers/usersSlice";
 import { fetchUsers } from "../../state/Reducers/usersSlice";
+
+import Lottie from "lottie-react";
+import bgAnimation from "../../assets/bg/bg_light_hexa.json";
+import "./Homepage.css";
 
 const Homepage = () => {
   const token = JSON.parse(localStorage.getItem("userLogged"));
@@ -34,59 +39,61 @@ const Homepage = () => {
 
   return (
     <>
-      <Container>
-        <h2 className="mb-5">Welcome back {tokenDecoded.firstName}, here's your dashboard</h2>
-      </Container>
+      <div className="bgAnimation">
+        <Lottie animationData={bgAnimation} />
+      </div>
 
       <Container
-        className="d-flex flex-column justify-content-start align-items-start"
+        className="d-flex flex-column justify-content-center align-items-center mt-5"
         style={{ minHeight: "80vh" }}
       >
-        <Row className="w-100">
-          <Col>
+        <Row className="mt-5 g-3 d-flex justify-content-center align-items-start w-100">
+          <Col
+            xs={12}
+            md={5}
+            className="m-0 d-flex flex-column justify-content-center align-items-center gap-3 mb-3"
+          >
+            <Welcome />
+            <WeatherApp />
+          </Col>
+          <Col xs={12} md={7} className="m-0">
             <Todo />
           </Col>
         </Row>
 
-        <Row className="mt-4">
+        <Row className="mt-4 w-100">
           <Col>
             <LatestNews />
           </Col>
         </Row>
 
-        <Row className="mt-4">
-          <Col>
-            <WeatherApp />
+        <Row className="mt-4 g-3 d-flex justify-content-center align-items-start w-100">
+          <Col xs={12} md={5}>
+            <Moneybox />
           </Col>
-        </Row>
-
-        <Row className="mt-4">
-          <Col>
-            <Events />
-          </Col>
-        </Row>
-
-        <Row className="mt-4">
-          <Col>
-            <Map />
-          </Col>
-        </Row>
-
-        <Row className="mt-4">
-          <Col>
-            <Pharmacies />
-          </Col>
-        </Row>
-
-        <Row className="mt-4">
-          <Col>
+          <Col xs={12} md={7}>
             <Wishlist />
           </Col>
         </Row>
 
-        <Row className="mt-4">
-          <Col>
-            <Moneybox />
+        <Row className="mt-4 d-flex justify-content-center align-items-center w-100">
+          <Col xs={12} md={5}>
+            <div className="border w-100 h-100 d-flex flex-column align-items-center justify-content-start">
+              <h2>Events Near You</h2>
+              <p>discover all the events and concerts near your position</p>
+            </div>
+          </Col>
+          <Col xs={12} md={7}>
+            <Events />
+          </Col>
+        </Row>
+
+        <Row className="mt-4 w-100">
+          <Col xs={12} md={5}>
+            <Pharmacies />
+          </Col>
+          <Col xs={12} md={7}>
+            <Map />
           </Col>
         </Row>
 

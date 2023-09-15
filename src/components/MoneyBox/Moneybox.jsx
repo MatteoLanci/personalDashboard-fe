@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import jwtDecode from "jwt-decode";
 import { nanoid } from "nanoid";
 
-import { Container, Button } from "react-bootstrap";
+import { Container, Button, Row, Col, Alert } from "react-bootstrap";
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -13,12 +13,18 @@ import { getMoneybox, moneyboxState } from "../../state/Reducers/moneyboxSlice";
 import { getUserTransactions } from "../../state/Reducers/transactionsSlice";
 import { handleNewTransaction } from "../../state/Reducers/transactionsSlice";
 
+import Lottie from "lottie-react";
+import moneyboxAnimation from "../../assets/moneybox/moneybox_animation.json";
+
+import "./moneybox.css";
+
 const Moneybox = () => {
   const dispatch = useDispatch();
 
   const moneybox = useSelector(moneyboxState);
   const users = useSelector(usersState);
   const userTransactions = useSelector(transactionState);
+  console.log(userTransactions);
 
   const token = JSON.parse(localStorage.getItem("userLogged"));
   const tokenDecoded = jwtDecode(token);
@@ -82,42 +88,90 @@ const Moneybox = () => {
     setShowAllTransactions(!showAllTransactions);
   };
 
-  return (
-    <Container className="border rounded p-4">
-      <h2> {user.firstName}'s MoneyBox</h2>
-      <p>Total Amount: {moneybox.totalAmount} </p>
-      <div>
-        <input
-          type="text"
-          placeholder="e.g. 500"
-          value={transactionData.value}
-          onChange={(e) => setTransactionData({ ...transactionData, value: e.target.value })}
-        />
-      </div>
-      <div>
-        <input
-          type="text"
-          placeholder="e.g. new personal income"
-          value={transactionData.description}
-          onChange={(e) => setTransactionData({ ...transactionData, description: e.target.value })}
-        />
-      </div>
-      <Button variant="success" className="mt-2" onClick={handleAddTransaction}>
-        Add Transaction
-      </Button>
+  // const totalSavings = moneybox.totalAmount.toFixed(2);
 
-      <ul className="mt-5">Latest Transactions</ul>
+  function getDateString(dateString) {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toDateString(undefined, options);
+  }
+
+  return (
+    <Container className="moneyboxWrapper">
+      <div className="d-flex justify-content-start align-items-center">
+        <h2 className="m-0">MoneyBox</h2>
+        <Lottie animationData={moneyboxAnimation} className="moneyboxAnimation" />
+      </div>
+      <p className="m-0 text-center">Your Total Savings:</p>
+      <h4 className="text-center fs-1 mb-3">{parseFloat(moneybox.totalAmount).toFixed(2)} €</h4>
+      <Row className="d-flex justify-content-center align-items-center">
+        <Col xs={12} md={6} className="text-center">
+          <input
+            className="moneyboxInput"
+            type="text"
+            placeholder="e.g. 500"
+            value={transactionData.value}
+            onChange={(e) => setTransactionData({ ...transactionData, value: e.target.value })}
+          />
+        </Col>
+
+        <Col xs={12} md={6} className="text-center">
+          <input
+            className="moneyboxInput"
+            type="text"
+            placeholder="e.g. new personal income"
+            value={transactionData.description}
+            onChange={(e) =>
+              setTransactionData({ ...transactionData, description: e.target.value })
+            }
+          />
+        </Col>
+      </Row>
+
+      <div className="text-center">
+        <Button
+          variant="success"
+          className="mt-2 w-100 mx-auto newTransactionBtn"
+          disabled={transactionData.value === "" || transactionData.description === ""}
+          onClick={handleAddTransaction}
+        >
+          Add Founds
+        </Button>
+      </div>
+
+      <ul className="mt-3 p-0">Latest Transactions :</ul>
       {displayedTransactions.map((transaction) => (
-        <li key={nanoid}>
-          <div>{transaction.value}</div>
-          <div>{transaction.description}</div>
-          <div>{transaction.createdAt}</div>
-        </li>
+        <div
+          key={nanoid}
+          className="d-flex justify-content-between align-items-center singleTransaction mb-2"
+        >
+          <div className="d-flex justify-content-center align-items-center gap-2">
+            <article>+ {parseFloat(transaction.value).toFixed(2)} €</article>
+            <em className="transactionDesc">( {transaction.description} )</em>
+          </div>
+
+          <em className="transactionCreatedAt">Added on {getDateString(transaction.createdAt)}</em>
+        </div>
       ))}
 
-      <Button variant="primary" className="mt-2" onClick={handleLoadToggle}>
-        {showAllTransactions ? "Show Less" : "Load More"}
-      </Button>
+      {displayedTransactions.length === 0 && (
+        <div className="mx-auto w-100">
+          <Alert variant="warning" className="text-center">
+            You haven't made any transactions yet, start saving something today!
+          </Alert>
+        </div>
+      )}
+
+      <div className="mt-5">
+        <Button
+          variant="primary"
+          className={`loadTransactionsBtn mt-2 ${
+            displayedTransactions.length === 0 ? "d-none" : ""
+          }`}
+          onClick={handleLoadToggle}
+        >
+          {showAllTransactions ? "Show Less" : "Load More"}
+        </Button>
+      </div>
     </Container>
   );
 };

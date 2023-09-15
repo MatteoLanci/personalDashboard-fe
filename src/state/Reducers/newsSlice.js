@@ -10,7 +10,6 @@ const initialState = {
 export const fetchNews = createAsyncThunk("news/fetchNews", async (_, thunkAPI) => {
   try {
     const response = await axios.get(
-      // `http://api.mediastack.com/v1/news?access_key=82e8504b4b448ad9c5904391568f3e4b&limit=5&countries=it&languages=it`,
       `https://newsapi.org/v2/top-headlines?country=it&apiKey=89c3d81fcd0e48f7b85b0e143aa2c077`
     );
     return response.data.articles;

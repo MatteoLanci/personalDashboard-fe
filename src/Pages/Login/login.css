@@ -1,0 +1,81 @@
+.loginWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px #a7c6ca;
+  width: 500px;
+  height: 400px !important;
+  padding: 0 !important;
+  margin-top: 15rem;
+  border-radius: 20px;
+  background: #d2f2f2;
+  opacity: 85%;
+}
+.bgAnimation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  /* background: #3d3d3d; */
+}
+
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  height: 70%;
+}
+
+.loginInput {
+  position: relative;
+}
+
+.loginInputField {
+  border-color: initial !important;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  line-height: 2.5rem;
+  background: #f0ffff;
+}
+.loginInputField:focus {
+  border-color: initial !important;
+  border: none !important;
+  outline: none;
+  box-shadow: none;
+  line-height: 2.5rem;
+  background: #f0ffff;
+  box-shadow: inset 0 0 5px #62949b;
+}
+
+.loginPlaceholder {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 13px;
+  color: #858585;
+  transition: all 0.3s;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.loginInputField:focus ~ .loginPlaceholder,
+.loginInputField:active ~ .loginPlaceholder,
+.loginInputField:valid ~ .loginPlaceholder,
+.loginInputField:not(:placeholder-shown):valid ~ .loginPlaceholder {
+  top: -8px;
+  left: 4.5px;
+  background: #00000000;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.loginBtn {
+  align-self: flex-start;
+}

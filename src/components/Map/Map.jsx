@@ -25,9 +25,7 @@ const Map = () => {
 
   return (
     <>
-      <Container className="mapComponentWrapper">
-        <h2>Map</h2>
-
+      <Container className="mapComponentWrapper w-100 p-0">
         <MapContainer center={position} zoom={15} scrollWheelZoom={false} className="mapWrapper">
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

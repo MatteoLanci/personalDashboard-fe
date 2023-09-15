@@ -38,6 +38,24 @@ export const handleNewTransaction = createAsyncThunk(
   }
 );
 
+export const handlePurchase = createAsyncThunk(
+  "user/purchase",
+  async (purchaseParams, thunkAPI) => {
+    console.log(purchaseParams.userId);
+    console.log(purchaseParams.moneyboxId);
+    console.log(purchaseParams.productId);
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVERBASE_URL}/users/${purchaseParams.userId}/${purchaseParams.moneyboxId}/${purchaseParams.productId}/purchase`
+      );
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 const transactionsSlice = createSlice({
   name: "transactions",
   initialState,
@@ -65,6 +83,34 @@ const transactionsSlice = createSlice({
       .addCase(handleNewTransaction.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      .addCase(handlePurchase.pending, (state) => {
+        state.loading = true;
+      })
+      // .addCase(handlePurchase.fulfilled, (state, action) => {
+      //   state.loading = false;
+
+      //   if (action.payload.newTransactions) {
+      //     state.transactions.push(action.payload);
+      //   }
+      // });
+      .addCase(handlePurchase.fulfilled, (state, action) => {
+        state.loading = false;
+
+        const { newMoneyboxTotalAmount, transaction } = action.payload;
+
+        // Cerca il moneybox corrispondente nel tuo stato
+        const moneyboxIndex = state.transactions.findIndex(
+          (moneybox) => moneybox._id === transaction.moneybox // Assumendo che il tuo payload contenga un riferimento al moneybox
+        );
+
+        if (moneyboxIndex !== -1) {
+          // Aggiorna il totalAmount del moneybox
+          state.transactions[moneyboxIndex].totalAmount = newMoneyboxTotalAmount;
+
+          // Aggiungi la nuova transazione alle transazioni del moneybox
+          state.transactions[moneyboxIndex].latestTransactions.push(transaction);
+        }
       });
   },
 });

@@ -1,0 +1,11 @@
+.eventsMainWrapper {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px #00000070;
+}
+
+.eventsWrapper {
+  width: 100% !important;
+  height: 700px !important;
+  border-radius: 10px;
+}

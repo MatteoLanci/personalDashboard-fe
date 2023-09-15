@@ -12,9 +12,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { wishlistState } from "../../state/Reducers/wishlistSlice";
 import { usersState } from "../../state/Reducers/usersSlice";
 import { moneyboxState } from "../../state/Reducers/moneyboxSlice";
+import { getUserTransactions } from "../../state/Reducers/transactionsSlice";
 
 import { getUserWishlist } from "../../state/Reducers/wishlistSlice";
 import { handleDeleteWishEl } from "../../state/Reducers/wishlistSlice";
+import { handlePurchase } from "../../state/Reducers/transactionsSlice";
+
+import Lottie from "lottie-react";
+import wishlistAnimation from "../../assets/wishlist/wishlist_animation.json";
+
+import "./wishlist.css";
 
 const Wishlist = () => {
   const dispatch = useDispatch();
@@ -58,7 +65,6 @@ const Wishlist = () => {
       setLoadingDelete(true);
 
       await dispatch(handleDeleteWishEl(params));
-
       await dispatch(getUserWishlist(user._id));
     } catch (error) {
       console.error("Error removing element from wishlist:", error);
@@ -67,64 +73,103 @@ const Wishlist = () => {
     }
   };
 
+  const [purchaseParams, setPurchaseParams] = useState({
+    userId: user._id,
+    productId: "",
+    moneyboxId: "",
+  });
+  console.log(purchaseParams);
+  const handleMoneyboxBuy = async () => {
+    try {
+      await dispatch(handlePurchase(purchaseParams));
+      await dispatch(getUserTransactions(purchaseParams));
+    } catch (error) {
+      console.error("Error completing purchase through moneybox: ", error);
+    }
+  };
+
   useEffect(() => {
     dispatch(getUserWishlist(user._id));
   }, [dispatch, user._id]);
 
   return (
-    <Container className="p-4 border rounded" style={{ width: "400px" }}>
-      <h2 className="mb-5">Wishlist</h2>
+    <Container className="wishlistWrapper ">
+      <Lottie animationData={wishlistAnimation} className="wishAnimation" />
+      <h2 className="mb-3">Wishlist</h2>
+      <Row className="w-100 wishesWrapper mx-auto">
+        {userWishlist.map((userWishEl) => {
+          const itemPercentage = (userWishEl.price / userMoneybox.totalAmount) * 100;
+          const itemDiff = userWishEl.price - userMoneybox.totalAmount;
+          const wishItemStatus = userWishEl.completed === false ? "false" : "true";
 
-      {userWishlist.map((userWishEl) => {
-        const itemPercentage = (userWishEl.price / userMoneybox.totalAmount) * 100;
-        const itemDiff = userWishEl.price - userMoneybox.totalAmount;
-        const wishItemStatus = userWishEl.completed === false ? "false" : "true";
-
-        return (
-          <Row key={userWishEl._id} className="mb-4">
-            <Button
-              onClick={() => handleExpand(userWishEl._id)}
-              aria-controls={`collapse-wishEl-${userWishEl._id}`}
-              aria-expanded={expandedItems[userWishEl._id]}
-              variant="outline-primary"
-            >
-              <h5>{userWishEl.content}</h5>
-              <p>{userWishEl.price.toFixed(2)} $(US)</p>
-            </Button>
-
-            <Collapse in={expandedItems[userWishEl._id]}>
-              <div id={`collapse-wishEl-${userWishEl._id}`}>
-                <p>{userWishEl.description}</p>
-
-                <p className={`border rounded p-2`}>
-                  {userWishEl.price > userMoneybox.totalAmount
-                    ? ` You need to save ${itemDiff.toFixed(2)} $(US) to afford this item`
-                    : `You should use the ${itemPercentage.toFixed(
-                        2
-                      )}% of your total Moneybox to afford
-                  this item`}
-                </p>
-                <p>Completed: {wishItemStatus}</p>
-                <div className="d-flex align-items-center gap-3">
-                  <Button
-                    variant="danger"
-                    onClick={() => {
-                      setParams({ ...params, wishlistItemId: userWishEl._id });
-                      handleDeleteWish();
-                    }}
-                    disabled={loadingDelete}
-                  >
-                    {loadingDelete ? "Removing..." : "Delete"}
-                  </Button>
-                  <Button variant="outline-success">Buy with MoneyBox</Button>
+          return (
+            <Row key={userWishEl._id} className="mb-4 mx-auto w-100">
+              <Button
+                onClick={() => handleExpand(userWishEl._id)}
+                aria-controls={`collapse-wishEl-${userWishEl._id}`}
+                aria-expanded={expandedItems[userWishEl._id]}
+                variant="outline-primary"
+                className="singleWishBtn"
+              >
+                <div className="d-flex justify-content-between align-items-center">
+                  <h5>{userWishEl.content}</h5>
+                  <p className="m-0">{userWishEl.price.toFixed(2)} €</p>
                 </div>
-              </div>
-            </Collapse>
-          </Row>
-        );
-      })}
-      <Row>
-        <Button variant="outline-info" onClick={handleShowNewWish}>
+              </Button>
+
+              <Collapse in={expandedItems[userWishEl._id]}>
+                <div id={`collapse-wishEl-${userWishEl._id}`} className="wishElCollapse mx-auto">
+                  <p>{userWishEl.description}</p>
+                  {wishItemStatus === "true" ? (
+                    <p className={`alertSingleWish text-center`}>
+                      You have already bought this item!
+                    </p>
+                  ) : (
+                    <p className={`alertSingleWish`}>
+                      {userWishEl.price > userMoneybox.totalAmount
+                        ? ` You need to save ${itemDiff.toFixed(2)} € to afford this item`
+                        : `You should use the ${itemPercentage.toFixed(
+                            2
+                          )}% of your total Moneybox to afford
+                  this item`}
+                    </p>
+                  )}
+
+                  <p>Completed: {wishItemStatus}</p>
+                  <div className="d-flex align-items-center gap-3 mb-2">
+                    <Button
+                      variant="danger"
+                      onClick={() => {
+                        setParams({ ...params, wishlistItemId: userWishEl._id });
+                        handleDeleteWish();
+                      }}
+                      disabled={loadingDelete}
+                    >
+                      {loadingDelete ? "Removing..." : "Remove"}
+                    </Button>
+                    <Button
+                      variant="outline-success"
+                      className={`${wishItemStatus === "true" ? "d-none" : null}`}
+                      onClick={() => {
+                        setPurchaseParams({
+                          ...purchaseParams,
+                          productId: userWishEl._id,
+                          moneyboxId: userMoneybox._id,
+                        });
+                        handleMoneyboxBuy();
+                      }}
+                    >
+                      Buy with MoneyBox
+                    </Button>
+                  </div>
+                </div>
+              </Collapse>
+            </Row>
+          );
+        })}
+      </Row>
+      <Row className="mx-auto newWishBtnWrapper w-100 mb-3">
+        <Button variant="outline-secondary" className="newWishBtn" onClick={handleShowNewWish}>
           Make a wish
         </Button>
 

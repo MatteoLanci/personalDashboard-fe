@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Button } from "react-bootstrap";
+import { Button, Row, Col, Alert } from "react-bootstrap";
 
 //! external libraries import
 import jwtDecode from "jwt-decode";
@@ -9,9 +9,13 @@ import { nanoid } from "nanoid";
 
 //! icons import
 import { PiTrashSimple, PiAlarm } from "react-icons/pi";
+import { FaTrashAlt } from "react-icons/fa";
 
 //! CSS import
 import "./todo.css";
+
+import Lottie from "lottie-react";
+import todoAnimation from "../../assets/todo/animation_lmj95byh.json";
 
 const Todo = () => {
   const [todos, setTodos] = useState([]);
@@ -135,77 +139,106 @@ const Todo = () => {
   return (
     <>
       <section className="todosWrapper">
-        <div className="mb-4">{tokenDecoded.firstName} Todos</div>
-        {todos.length === 0 ? (
-          <>
-            <input
-              type="text"
-              placeholder="Add a new task..."
-              value={newTodoData.content}
-              onChange={(e) => setNewTodoData({ ...newTodoData, content: e.target.value })}
-            />
-            <Button variant="outline-primary" size="sm" onClick={handleNewTodo}>
-              Create
-            </Button>
-          </>
-        ) : (
-          <>
-            <ul key={nanoid()} className="p-0">
-              {sortedTodos.map((todo) => (
-                <>
-                  <li key={nanoid()} className="list-unstyled mb-3">
-                    <div className="d-flex justify-content-start align-items-center">
-                      <input
-                        key={nanoid()}
-                        type="checkbox"
-                        className="me-3"
-                        checked={todo.completed}
-                        onChange={() => handleCompleteTodo(todo._id)}
-                      />
-                      <span
-                        style={
-                          todo.completed ? { textDecoration: "line-through", color: "#28C773" } : {}
-                        }
-                      >
-                        {todo.content}
-                      </span>
+        <Row>
+          <h2 className="mb-4">Todos</h2>
+          <Col xs={12} md={9}>
+            {todos.length === 0 ? (
+              <section className="d-flex flex-column gap-3 todoNoList">
+                <Alert variant="light" className="text-center">
+                  No ToDos on your list yet!
+                </Alert>
+                <input
+                  type="text"
+                  placeholder="Add a new task..."
+                  value={newTodoData.content}
+                  onChange={(e) => setNewTodoData({ ...newTodoData, content: e.target.value })}
+                />
+                <div>
+                  <Button variant="primary" size="sm" onClick={handleNewTodo}>
+                    Create
+                  </Button>
+                </div>
+              </section>
+            ) : (
+              <>
+                <ul key={nanoid()} className=" py-2 todoList  px-0">
+                  {sortedTodos.map((todo) => (
+                    <>
+                      <li key={nanoid()} className="list-unstyled mb-3 singleTodoEl">
+                        <div
+                          key={nanoid()}
+                          className="d-flex justify-content-between align-items-center"
+                        >
+                          <div>
+                            <input
+                              key={nanoid()}
+                              type="checkbox"
+                              className="me-3"
+                              checked={todo.completed}
+                              onChange={() => handleCompleteTodo(todo._id)}
+                            />
+                            <span
+                              style={
+                                todo.completed
+                                  ? { textDecoration: "line-through", color: "#28C773" }
+                                  : {}
+                              }
+                            >
+                              {todo.content}
+                            </span>
+                          </div>
 
-                      <PiTrashSimple
-                        key={nanoid()}
-                        className="mx-4 text-danger"
-                        onClick={() => handleDeleteTodo(todo._id)}
-                      />
-                    </div>
+                          <FaTrashAlt
+                            key={nanoid()}
+                            className="mx-4 todoDelElBtn"
+                            onClick={() => handleDeleteTodo(todo._id)}
+                          />
+                        </div>
 
-                    <div
-                      className="ms-4 d-flex align-items-center justify-content-start"
-                      style={{ fontSize: ".7rem" }}
+                        <div
+                          className="ms-4 d-flex align-items-center justify-content-start"
+                          style={{ fontSize: ".7rem" }}
+                        >
+                          <PiAlarm className="mx-1" />
+                          <span>{formatExpireDate(todo.expireDate)}</span>
+                        </div>
+                      </li>
+                    </>
+                  ))}
+                </ul>
+
+                <section className="d-flex flex-column">
+                  <input
+                    className="todoInput"
+                    type="text"
+                    placeholder="Add a new task..."
+                    value={newTodoData.content}
+                    onChange={(e) => setNewTodoData({ ...newTodoData, content: e.target.value })}
+                  />
+
+                  <div className="d-flex gap-4 mt-3">
+                    <Button key={nanoid()} className="newTodoBtn" size="sm" onClick={handleNewTodo}>
+                      Create
+                    </Button>
+
+                    <Button
+                      key={nanoid()}
+                      className="todoClearListBtn"
+                      size="sm"
+                      onClick={handleClearTodos}
                     >
-                      <PiAlarm className="mx-1" />
-                      <span>{formatExpireDate(todo.expireDate)}</span>
-                    </div>
-                  </li>
-                </>
-              ))}
-            </ul>
-            <input
-              type="text"
-              placeholder="Add a new task..."
-              value={newTodoData.content}
-              onChange={(e) => setNewTodoData({ ...newTodoData, content: e.target.value })}
-            />
+                      Clear List
+                    </Button>
+                  </div>
+                </section>
+              </>
+            )}
+          </Col>
 
-            <div className="d-flex gap-4 mt-3">
-              <Button key={nanoid()} variant="primary" size="sm" onClick={handleNewTodo}>
-                Create
-              </Button>
-
-              <Button key={nanoid()} variant="danger" size="sm" onClick={handleClearTodos}>
-                Clear List
-              </Button>
-            </div>
-          </>
-        )}
+          <Col xs={12} md={3}>
+            <Lottie animationData={todoAnimation} loop={2} className="todoAnimation" />
+          </Col>
+        </Row>
       </section>
     </>
   );

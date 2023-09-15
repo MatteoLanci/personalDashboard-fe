@@ -1,0 +1,46 @@
+.welcomeWrapper {
+  box-shadow: 0 0 10px #00000070;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  background: #fafafa;
+  opacity: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.calendarWrapper {
+  position: relative;
+  width: -moz-fit-content;
+  width: fit-content;
+  align-self: flex-start;
+}
+.calendarIcon {
+  font-size: 4rem;
+}
+.dayOfMonth {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 25px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #202020;
+  line-height: 1.5rem;
+  background: #cfd8dc;
+}
+
+.quoteWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+.quoteContent {
+  margin: 0;
+  font-size: 0.9rem;
+}
+.quoteAuthor {
+  font-size: 0.8rem;
+  font-weight: 600;
+}

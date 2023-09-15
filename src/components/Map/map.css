@@ -1,7 +1,8 @@
 .mapComponentWrapper {
-  width: 700px;
+  width: 100%;
   height: 400px;
-  margin-bottom: 3rem;
+  box-shadow: 0 0 10px #00000070;
+  border-radius: 10px;
 }
 
 .mapWrapper {

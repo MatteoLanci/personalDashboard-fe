@@ -1,3 +1,36 @@
+.navbarWrapper {
+  background: linear-gradient(to right, #a7e2e2, #cdf7f7);
+  box-shadow: 0 0 10px #7ca3ad;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 5;
+}
+
+.logoWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-right: 2rem;
+}
+
+.logoAnimation {
+  height: 80px;
+  position: absolute;
+  top: -20px;
+  right: -70px;
+}
+
+.navUserAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 5px #0e0e0e;
+}
+
 /*! OFFCANVASS MENU STYLE */
 .menuPropic {
   width: 150px !important;

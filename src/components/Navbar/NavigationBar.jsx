@@ -16,6 +16,9 @@ import { toggleTheme } from "../../state/Reducers/themeSlice";
 import { LuLightbulb } from "react-icons/lu";
 import { LuLightbulbOff } from "react-icons/lu";
 
+import Lottie from "lottie-react";
+import logoAnimation from "../../assets/navbar/logo_animation.json";
+
 const NavigationBar = () => {
   const theme = useSelector((state) => state.theme);
   const dispatch = useDispatch();
@@ -42,11 +45,13 @@ const NavigationBar = () => {
   };
 
   return (
-    <Navbar expand="lg" className="bg-dark" variant="dark">
+    <Navbar expand="lg" className="navbarWrapper">
       <Container className="d-flex justify-content-between align-items-center">
-        <Navbar.Brand as={Link} to={`/homepage`}>
-          Personal Dashboard
+        <Navbar.Brand as={Link} to={`/homepage`} className="logoWrapper">
+          DataDash
+          <Lottie animationData={logoAnimation} className="logoAnimation" />
         </Navbar.Brand>
+
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -68,13 +73,13 @@ const NavigationBar = () => {
           <>
             {theme === "light" ? (
               <LuLightbulbOff
-                className="text-light me-4"
+                className="me-4"
                 style={{ fontSize: "1.5rem", cursor: "pointer" }}
                 onClick={toggleThemeHandler}
               />
             ) : (
               <LuLightbulb
-                className="text-light me-4"
+                className="me-4"
                 style={{ fontSize: "1.5rem", cursor: "pointer" }}
                 onClick={toggleThemeHandler}
               />
@@ -83,8 +88,7 @@ const NavigationBar = () => {
             <img
               src={tokenDecoded.avatar}
               alt={tokenDecoded.email}
-              style={{ width: "40px", height: "40px", borderRadius: "50%", objectFit: "cover" }}
-              className="me-3"
+              className="me-3 navUserAvatar"
               onClick={handleShowMenu}
             />
 
@@ -122,15 +126,6 @@ const NavigationBar = () => {
                     onClick={handleCloseMenu}
                   >
                     Profile
-                  </ListGroup.Item>
-
-                  <ListGroup.Item
-                    className="menuItem bg-light"
-                    as={Link}
-                    to={"/settings"}
-                    onClick={handleCloseMenu}
-                  >
-                    Settings
                   </ListGroup.Item>
 
                   <ListGroup.Item

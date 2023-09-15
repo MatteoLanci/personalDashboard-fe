@@ -4,6 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 import { createUser } from "../../state/Reducers/usersSlice";
+import "./registration.css";
+import Lottie from "lottie-react";
+import bgAnimation from "../../assets/bg/bg_light_hexa.json";
 
 const Registration = () => {
   const dispatch = useDispatch();
@@ -25,6 +28,9 @@ const Registration = () => {
   };
   return (
     <>
+      <div className="bgAnimation">
+        <Lottie animationData={bgAnimation} />
+      </div>
       <Container
         style={{ minHeight: "80vh" }}
         className="d-flex flex-column align-items-center justify-content-center"

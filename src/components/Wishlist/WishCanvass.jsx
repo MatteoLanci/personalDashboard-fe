@@ -9,6 +9,7 @@ import { getUserWishlist } from "../../state/Reducers/wishlistSlice";
 import { usersState } from "../../state/Reducers/usersSlice";
 
 import jwtDecode from "jwt-decode";
+import "./wishCanvass.css";
 
 const WishCanvass = ({ showNewWish, setShowNewWish }) => {
   const dispatch = useDispatch();
@@ -39,11 +40,11 @@ const WishCanvass = ({ showNewWish, setShowNewWish }) => {
 
   return (
     <>
-      <Offcanvas show={showNewWish} onHide={handleCloseNewWish}>
-        <Offcanvas.Header closeButton>
+      <Offcanvas show={showNewWish} onHide={handleCloseNewWish} className="offcanvasWrapper">
+        <Offcanvas.Header closeButton className="offcanvasHeader">
           <Offcanvas.Title>Offcanvas</Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>
+        <Offcanvas.Body className="offcanvasBody">
           <Form onSubmit={handleAddWishEl}>
             <Form.Group className="mb-4">
               <Form.Label>content</Form.Label>

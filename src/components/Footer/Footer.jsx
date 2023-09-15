@@ -1,12 +1,21 @@
 import React from "react";
+import { Link, useLocation } from "react-router-dom";
 
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaGithub, FaGoogle } from "react-icons/fa";
 
 const Footer = () => {
+  const location = useLocation();
+
+  const isHidden = location.pathname === "/" || location.pathname === "/register";
+
+  if (isHidden) {
+    return null;
+  }
+
   return (
     <footer
-      className="text-center text-white"
-      style={{ backgroundColor: " #f1f1f1", marginTop: "4rem" }}
+      className="footerWrapper text-center text-white"
+      style={{ backgroundColor: "#a7e2e2", marginTop: "4rem", opacity: "90%" }}
     >
       <div className="container pt-4">
         <section className="mb-4">

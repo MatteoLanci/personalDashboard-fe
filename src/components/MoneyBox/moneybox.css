@@ -1,0 +1,71 @@
+.moneyboxWrapper {
+  border-radius: 10px;
+  background-color: #ddf7f5;
+  opacity: 90%;
+  box-shadow: 0 0 10px #00000070;
+  height: 550px;
+  overflow-y: auto;
+}
+
+.moneyboxAnimation {
+  height: 100px;
+}
+
+.moneyboxInput {
+  border: none;
+  background: #eeffff;
+  box-shadow: 0 0 5px #60a5a5;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+}
+
+.newTransactionBtn {
+  width: 94% !important;
+  background: #528686;
+  border: none;
+  box-shadow: 0 0 10px #88b4b4;
+  color: #ffffff;
+  transition: all 0.3s;
+}
+.newTransactionBtn:hover,
+.newTransactionBtn:active {
+  background: #4f9b9b !important;
+}
+
+.singleTransaction {
+  box-shadow: 0 0 5px #60a5a5;
+  background: #eeffff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+}
+@media screen and (max-width: 500px) {
+  .singleTransaction {
+    font-size: 0.8rem;
+  }
+  .transactionDesc {
+    font-size: 0.7rem !important;
+  }
+  .transactionCreatedAt {
+    font-size: 0.6rem !important;
+  }
+}
+
+.transactionDesc {
+  font-size: 0.8rem;
+}
+.transactionCreatedAt {
+  font-size: 0.7rem;
+}
+
+.loadTransactionsBtn {
+  background: #528686;
+  border: none;
+  box-shadow: 0 0 10px #88b4b4;
+  color: #ffffff;
+  transition: all 0.3s;
+  margin-bottom: 0.5rem;
+}
+.loadTransactionsBtn:hover,
+.loadTransactionsBtn:active {
+  background: #4f9b9b !important;
+}

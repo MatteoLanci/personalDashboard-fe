@@ -12,7 +12,6 @@ import Homepage from "./Pages/Home/Homepage";
 import Login from "./Pages/Login/Login";
 import Profile from "./Pages/Profile/Profile";
 import Registration from "./components/Registration/Registration";
-import Settings from "./Pages/Settings/Settings";
 import Support from "./Pages/Support/Support";
 import CommunityPage from "./Pages/CommunityPage/CommunityPage";
 
@@ -30,7 +29,6 @@ const App = () => {
         <Route element={<ProtectedRoutes />}>
           <Route path="/homepage" element={<Homepage />} />
           <Route path="/profile/:id" element={<Profile />} />
-          <Route path="/settings" element={<Settings />} />
           <Route path="/support" element={<Support />} />
           <Route path="/community" element={<CommunityPage />} />
         </Route>

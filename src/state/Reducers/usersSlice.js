@@ -53,6 +53,20 @@ export const loginUser = createAsyncThunk("users/loginUser", async (loginData, t
   }
 });
 
+export const handleDeleteAccount = createAsyncThunk(
+  "users/userId/delete",
+  async (userId, thunkAPI) => {
+    try {
+      const response = await axios.delete(
+        `${process.env.REACT_APP_SERVERBASE_URL}/users/${userId}/delete`
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 const usersSlice = createSlice({
   name: "users",
   initialState,

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Container, Form, FormGroup, Spinner } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginUser } from "../../state/Reducers/usersSlice";
 import Lottie from "lottie-react";
 import bgAnimation from "../../assets/bg/bg_light_hexa.json";

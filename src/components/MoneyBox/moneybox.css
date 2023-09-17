@@ -32,6 +32,10 @@
   background: #4f9b9b !important;
 }
 
+.noTransactionAnimation {
+  height: 70px;
+}
+
 .singleTransaction {
   box-shadow: 0 0 5px #60a5a5;
   background: #eeffff;

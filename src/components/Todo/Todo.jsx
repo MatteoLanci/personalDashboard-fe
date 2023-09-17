@@ -8,7 +8,7 @@ import axios from "axios";
 import { nanoid } from "nanoid";
 
 //! icons import
-import { PiTrashSimple, PiAlarm } from "react-icons/pi";
+import { PiAlarm } from "react-icons/pi";
 import { FaTrashAlt } from "react-icons/fa";
 
 //! CSS import

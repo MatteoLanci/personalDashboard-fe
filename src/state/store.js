@@ -8,6 +8,7 @@ import profileReducer from "./Reducers/profileSlice";
 import moneyboxReducer from "./Reducers/moneyboxSlice";
 import transactionReducer from "./Reducers/transactionsSlice";
 import wishlistReducer from "./Reducers/wishlistSlice";
+import userLocationReducer from "./Reducers/userLocationSlice";
 
 const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ const store = configureStore({
     moneybox: moneyboxReducer,
     transactions: transactionReducer,
     wishlist: wishlistReducer,
+    userLocation: userLocationReducer,
   },
 });
 

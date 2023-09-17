@@ -62,7 +62,7 @@
 
 .articleTitle {
   font-size: 27px;
-  background: linear-gradient(90deg, #14c38e, #00ffab);
+  background: linear-gradient(90deg, #76b3b3, #b1d6d6);
   padding-inline: 10px;
   transform: translateY(-10px);
   min-width: 70%;
@@ -70,7 +70,7 @@
 
 a.articleLink {
   display: block;
-  background: linear-gradient(90deg, #12a87b, #02da92);
+  background: linear-gradient(90deg, #76b3b3, #b1d6d6);
   padding: 5px;
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
   transform: translateY(10px);

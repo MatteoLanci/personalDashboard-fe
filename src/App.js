@@ -13,7 +13,7 @@ import Login from "./Pages/Login/Login";
 import Profile from "./Pages/Profile/Profile";
 import Registration from "./components/Registration/Registration";
 import Support from "./Pages/Support/Support";
-import CommunityPage from "./Pages/CommunityPage/CommunityPage";
+// import CommunityPage from "./Pages/CommunityPage/CommunityPage";
 
 //! MiddleWares Import
 import ProtectedRoutes from "./middlewares/ProtectedRoutes";
@@ -30,7 +30,7 @@ const App = () => {
           <Route path="/homepage" element={<Homepage />} />
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/support" element={<Support />} />
-          <Route path="/community" element={<CommunityPage />} />
+          {/* <Route path="/community" element={<CommunityPage />} /> */}
         </Route>
       </Routes>
       <Footer />

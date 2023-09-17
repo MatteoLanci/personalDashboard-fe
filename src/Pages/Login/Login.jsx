@@ -76,8 +76,11 @@ const Login = () => {
             </Button>
           </Form>
 
-          <p>
-            Aren't you a user? <Link to={"/register"}>Register here</Link>
+          <p className="m-0">
+            Aren't you a user?{" "}
+            <Link to={"/register"} className="loginRegisterLink">
+              Register here
+            </Link>
           </p>
         </section>
       </Container>

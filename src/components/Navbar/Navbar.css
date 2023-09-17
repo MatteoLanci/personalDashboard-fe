@@ -7,6 +7,16 @@
   left: 0;
   z-index: 5;
 }
+.navbarWrapperDark {
+  background: linear-gradient(to right, #161616, #3d3d3d);
+  box-shadow: 0 0 10px #7ca3ad;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  color: #c2eff7;
+}
 
 .logoWrapper {
   display: flex;
@@ -14,6 +24,14 @@
   align-items: center;
   position: relative;
   margin-right: 2rem;
+}
+.logoWrapperDark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-right: 2rem;
+  color: #c2eff7;
 }
 
 .logoAnimation {
@@ -32,11 +50,61 @@
 }
 
 /*! OFFCANVASS MENU STYLE */
+.navbarMenu {
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
+  background: #c2eff7 !important;
+  box-shadow: 0 0 10px #424444;
+}
+
 .menuPropic {
   width: 150px !important;
   height: 150px !important;
   border-radius: 50%;
   object-fit: cover;
+  box-shadow: 0 0 5px #0e0e0e;
+}
+
+.userInfoWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+}
+
+.userDataElWrapper {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 2;
+  border-radius: 10px;
+  box-shadow: 0 0 5px #7ca3ad;
+  background: #f0ffff;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  height: auto;
+}
+
+.userDataName {
+  margin: 0;
+  padding-right: 2rem;
+}
+
+.userDataIcon {
+  font-size: 1.4rem;
+  margin-right: 1rem;
+}
+
+.menuLinkWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  height: 450px;
+  position: relative;
 }
 
 .menuItem {
@@ -48,6 +116,20 @@
   font-size: 1.5rem;
   cursor: pointer;
   border-radius: 6px;
+  width: 100%;
+  background: #f0ffff;
+  border: none;
+  box-shadow: 0 0 10px #7ca3ad;
+  transition: all 0.3s;
+}
+.menuItem:hover {
+  background: #cfebeb;
+}
+
+.logoutBtn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 
 @media screen and (max-width: 576px) {

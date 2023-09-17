@@ -18,7 +18,12 @@ import { fetchUsers } from "../../state/Reducers/usersSlice";
 import { handleUpdateUserInfo } from "../../state/Reducers/profileSlice";
 import { getCoordinatesFromCity } from "../../state/Reducers/profileSlice";
 
+import Lottie from "lottie-react";
+import bgAnimation from "../../assets/bg/bg_light_hexa.json";
+
 const Profile = () => {
+  const userLocation = useSelector((state) => state.userLocation.userLocation);
+
   const params = useParams();
   const { id } = params;
   const dispatch = useDispatch();
@@ -49,9 +54,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (user) {
-      const [latitude, longitude] = user.location.split(", ");
-
-      const apiUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+      const apiUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${userLocation.latitude}&lon=${userLocation.longitude}`;
 
       axios
         .get(apiUrl)
@@ -67,7 +70,7 @@ const Profile = () => {
           console.error("Error while geocoding:", error);
         });
     }
-  }, [user]);
+  }, [userLocation, user]);
 
   const handleCityChange = (e) => {
     const newCityName = e.target.value;
@@ -148,15 +151,20 @@ const Profile = () => {
   }
   return (
     <>
+      <div className="bgAnimation">
+        <Lottie animationData={bgAnimation} />
+      </div>
+
       <Container
         className="d-flex flex-column justify-content-center align-items-center mb-5"
-        style={{ minHeight: "80vh", position: "relative" }}
+        style={{ minHeight: "78.5vh", position: "relative" }}
       >
         <section className="profileHeader ">
           <img
             src={tokenDecoded.profileCover}
             alt={`${tokenDecoded.firstName}'s profileCover`}
             style={{ objectFit: "cover" }}
+            className="profileCover"
           />
         </section>
 
@@ -183,75 +191,93 @@ const Profile = () => {
           />
           {userLogged && <PiUserSwitch className="editPropicIcon" onClick={handleBrowseImg} />}
         </section>
+        <div className="d-flex justify-content-center align-items-center gap-3 mb-3">
+          <h2 className="m-0">Your Personal Data</h2>
+          <p className="m-0 fs-4 editDataIcon">
+            {userLogged && <GoGear onClick={handleEditModeToggle} />}
+          </p>
+        </div>
 
-        <h2>
-          {user.firstName} {user.lastName}
-          {userLogged && <GoGear onClick={handleEditModeToggle} />}
-        </h2>
+        <section className="userDataWrapper">
+          {isEditMode ? (
+            <>
+              <p className="d-flex align-items-center gap-1">
+                Full Name:
+                <input
+                  type="text"
+                  placeholder={user.firstName}
+                  onChange={(e) => setDataToUpdate({ ...dataToUpdate, firstName: e.target.value })}
+                />
+                <input
+                  type="text"
+                  placeholder={user.lastName}
+                  onChange={(e) => setDataToUpdate({ ...dataToUpdate, lastName: e.target.value })}
+                />
+              </p>
 
-        {isEditMode ? (
-          <>
-            <p className="d-flex align-items-center gap-1">
-              Full Name:
-              <input
-                type="text"
-                placeholder={user.firstName}
-                onChange={(e) => setDataToUpdate({ ...dataToUpdate, firstName: e.target.value })}
-              />
-              <input
-                type="text"
-                placeholder={user.lastName}
-                onChange={(e) => setDataToUpdate({ ...dataToUpdate, lastName: e.target.value })}
-              />
-            </p>
+              <p className="d-flex align-items-center gap-1">
+                Email:
+                <input
+                  type="email"
+                  placeholder={user.email}
+                  onChange={(e) => setDataToUpdate({ ...dataToUpdate, email: e.target.value })}
+                />
+              </p>
 
-            <p className="d-flex align-items-center gap-1">
-              Email:
-              <input
-                type="email"
-                placeholder={user.email}
-                onChange={(e) => setDataToUpdate({ ...dataToUpdate, email: e.target.value })}
-              />
-            </p>
+              <p className="d-flex align-items-center gap-1">
+                Date of Birth:
+                <input
+                  type="date"
+                  placeholder={user.dob}
+                  onChange={(e) => setDataToUpdate({ ...dataToUpdate, dob: e.target.value })}
+                />
+              </p>
 
-            <p className="d-flex align-items-center gap-1">
-              Date of Birth:
-              <input
-                type="date"
-                placeholder={user.dob}
-                onChange={(e) => setDataToUpdate({ ...dataToUpdate, dob: e.target.value })}
-              />
-            </p>
+              <p className="d-flex align-items-center gap-1">
+                Location:
+                <input
+                  type="text"
+                  placeholder={locationName}
+                  onChange={(e) => {
+                    setLocationName(e.target.value);
+                    handleCityChange(e); // Chiamata separata per ottenere le coordinate
+                  }}
+                />
+              </p>
 
-            <p className="d-flex align-items-center gap-1">
-              Location:
-              <input
-                type="text"
-                placeholder={locationName}
-                onChange={(e) => {
-                  setLocationName(e.target.value);
-                  handleCityChange(e); // Chiamata separata per ottenere le coordinate
-                }}
-              />
-            </p>
+              <p className="d-flex align-items-center gap-1"></p>
+            </>
+          ) : (
+            <section className="d-flex flex-column justify-content-center align-items-start gap-3">
+              <div className="d-flex justify-content-between align-items-center gap-3 w-100">
+                <p className="m-0">Full Name:</p>
+                <p className="userDataField">{`${user.firstName} ${user.lastName}`}</p>
+              </div>
 
-            <p className="d-flex align-items-center gap-1"></p>
-          </>
-        ) : (
-          <>
-            <p>full name: {`${user.firstName} ${user.lastName}`}</p>
+              <div className="d-flex justify-content-between align-items-center gap-3 w-100">
+                <p className="m-0">Email:</p>
+                <p className="userDataField">{user.email}</p>
+              </div>
 
-            <p>email: {user.email}</p>
+              <div className="d-flex justify-content-between align-items-center gap-3 w-100">
+                <p className="m-0">Date of Birth:</p>
+                <p className="userDataField">{user.dob}</p>
+              </div>
 
-            <p>date of birth: {user.dob}</p>
+              <div className="d-flex justify-content-between align-items-center gap-3 w-100">
+                <p className="m-0">Location:</p>
+                <p className="userDataField">
+                  {locationName} ({user.location})
+                </p>
+              </div>
 
-            <p>
-              location: {locationName} ({user.location})
-            </p>
-
-            <p>ID: {user._id}</p>
-          </>
-        )}
+              <div className="d-flex justify-content-between align-items-center gap-3 w-100">
+                <p className="m-0">DataDash ID:</p>
+                <p className="userDataField">{user._id}</p>
+              </div>
+            </section>
+          )}
+        </section>
       </Container>
 
       {isEditMode && (

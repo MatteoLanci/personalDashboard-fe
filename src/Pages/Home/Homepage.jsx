@@ -1,17 +1,15 @@
 import React, { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
-import jwtDecode from "jwt-decode";
-
 import Welcome from "../../components/WelcomeDate/WelcomeDate";
 import Todo from "../../components/Todo/Todo";
 import LatestNews from "../../components/LatestNews/LatestNews";
 import WeatherApp from "../../components/WeatherApp/WeatherApp";
 import Events from "../../components/Events/Events";
+import EventsList from "../../components/Events/EventsList";
 import Map from "../../components/Map/Map";
 import Moneybox from "../../components/MoneyBox/Moneybox";
 import Wishlist from "../../components/Wishlist/Wishlist";
-import Community from "../../components/Community/Community";
 import Pharmacies from "../../components/Pharmacies/Pharmacies";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -23,11 +21,10 @@ import bgAnimation from "../../assets/bg/bg_light_hexa.json";
 import "./Homepage.css";
 
 const Homepage = () => {
-  const token = JSON.parse(localStorage.getItem("userLogged"));
-  const tokenDecoded = jwtDecode(token);
   const dispatch = useDispatch();
 
   const users = useSelector(usersState);
+  const theme = useSelector((state) => state.theme);
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -39,7 +36,7 @@ const Homepage = () => {
 
   return (
     <>
-      <div className="bgAnimation">
+      <div className={`${theme === "light" ? "bgAnimation" : "bgAnimationDark"}`}>
         <Lottie animationData={bgAnimation} />
       </div>
 
@@ -78,10 +75,7 @@ const Homepage = () => {
 
         <Row className="mt-4 d-flex justify-content-center align-items-center w-100">
           <Col xs={12} md={5}>
-            <div className="border w-100 h-100 d-flex flex-column align-items-center justify-content-start">
-              <h2>Events Near You</h2>
-              <p>discover all the events and concerts near your position</p>
-            </div>
+            <EventsList />
           </Col>
           <Col xs={12} md={7}>
             <Events />
@@ -94,12 +88,6 @@ const Homepage = () => {
           </Col>
           <Col xs={12} md={7}>
             <Map />
-          </Col>
-        </Row>
-
-        <Row className="mt-4">
-          <Col>
-            <Community />
           </Col>
         </Row>
       </Container>

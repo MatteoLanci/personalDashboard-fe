@@ -164,12 +164,12 @@ const Todo = () => {
                 <ul key={nanoid()} className=" py-2 todoList  px-0">
                   {sortedTodos.map((todo) => (
                     <>
-                      <li key={nanoid()} className="list-unstyled mb-3 singleTodoEl">
+                      <li key={nanoid()} className="list-unstyled mb-2 singleTodoEl">
                         <div
                           key={nanoid()}
                           className="d-flex justify-content-between align-items-center"
                         >
-                          <div>
+                          <div key={nanoid()}>
                             <input
                               key={nanoid()}
                               type="checkbox"
@@ -178,6 +178,7 @@ const Todo = () => {
                               onChange={() => handleCompleteTodo(todo._id)}
                             />
                             <span
+                              key={nanoid()}
                               style={
                                 todo.completed
                                   ? { textDecoration: "line-through", color: "#28C773" }
@@ -196,11 +197,12 @@ const Todo = () => {
                         </div>
 
                         <div
+                          key={nanoid()}
                           className="ms-4 d-flex align-items-center justify-content-start"
                           style={{ fontSize: ".7rem" }}
                         >
-                          <PiAlarm className="mx-1" />
-                          <span>{formatExpireDate(todo.expireDate)}</span>
+                          <PiAlarm key={nanoid()} className="mx-1" />
+                          <span key={nanoid()}>{formatExpireDate(todo.expireDate)}</span>
                         </div>
                       </li>
                     </>

@@ -31,91 +31,108 @@ const Registration = () => {
       <div className="bgAnimation">
         <Lottie animationData={bgAnimation} />
       </div>
+
       <Container
         style={{ minHeight: "80vh" }}
         className="d-flex flex-column align-items-center justify-content-center"
       >
-        <h1>Registation Page</h1>
-        <Form onSubmit={handleSubmitRegistration}>
-          <FormGroup>
-            <Form.Control
-              name="firstName"
-              type="text"
-              placeholder="enter your firstName"
-              onChange={(e) =>
-                setFormUser({
-                  ...formUser,
-                  firstName: e.target.value,
-                })
-              }
-              required
-            />
-          </FormGroup>
+        <section className="registrationWrapper">
+          <h1 className="mb-4">Registration</h1>
+          <Form onSubmit={handleSubmitRegistration} className="formWrapper">
+            <FormGroup className="registrationInput">
+              <Form.Control
+                className="registrationInputField"
+                name="firstName"
+                type="text"
+                // placeholder="enter your firstName"
+                onChange={(e) =>
+                  setFormUser({
+                    ...formUser,
+                    firstName: e.target.value,
+                  })
+                }
+                required
+              />
+              <p className="registrationPlaceholder">Your First Name</p>
+            </FormGroup>
 
-          <FormGroup>
-            <Form.Control
-              name="lastName"
-              type="text"
-              placeholder="enter your lastName"
-              onChange={(e) =>
-                setFormUser({
-                  ...formUser,
-                  lastName: e.target.value,
-                })
-              }
-              required
-            />
-          </FormGroup>
+            <FormGroup className="registrationInput">
+              <Form.Control
+                className="registrationInputField"
+                name="lastName"
+                type="text"
+                // placeholder="enter your lastName"
+                onChange={(e) =>
+                  setFormUser({
+                    ...formUser,
+                    lastName: e.target.value,
+                  })
+                }
+                required
+              />
+              <p className="registrationPlaceholder">Your Last Name</p>
+            </FormGroup>
 
-          <FormGroup>
-            <Form.Control
-              name="dob"
-              type="date"
-              onChange={(e) =>
-                setFormUser({
-                  ...formUser,
-                  dob: e.target.value,
-                })
-              }
-              required
-            />
-          </FormGroup>
+            <FormGroup className="registrationInput">
+              <Form.Control
+                className="registrationInputField"
+                name="dob"
+                type="date"
+                onChange={(e) =>
+                  setFormUser({
+                    ...formUser,
+                    dob: e.target.value,
+                  })
+                }
+                required
+              />
+            </FormGroup>
 
-          <FormGroup>
-            <Form.Control
-              name="email"
-              type="email"
-              placeholder="enter your Email"
-              onChange={(e) =>
-                setFormUser({
-                  ...formUser,
-                  email: e.target.value,
-                })
-              }
-              required
-            />
-          </FormGroup>
+            <FormGroup className="registrationInput">
+              <Form.Control
+                className="registrationInputField"
+                name="email"
+                type="email"
+                // placeholder="enter your Email"
+                onChange={(e) =>
+                  setFormUser({
+                    ...formUser,
+                    email: e.target.value,
+                  })
+                }
+                required
+              />
+              <p className="registrationPlaceholder">Your Email</p>
+            </FormGroup>
 
-          <FormGroup>
-            <Form.Control
-              name="password"
-              type="password"
-              placeholder="enter your password"
-              onChange={(e) =>
-                setFormUser({
-                  ...formUser,
-                  password: e.target.value,
-                })
-              }
-              required
-            />
-          </FormGroup>
-          <Button type="submit">Register Now</Button>
-        </Form>
+            <FormGroup className="registrationInput">
+              <Form.Control
+                className="registrationInputField"
+                name="password"
+                type="password"
+                // placeholder="enter your password"
+                onChange={(e) =>
+                  setFormUser({
+                    ...formUser,
+                    password: e.target.value,
+                  })
+                }
+                required
+              />
+              <p className="registrationPlaceholder">Choose a Password</p>
+            </FormGroup>
+            <Button type="submit" className="registrationBtn">
+              Register Now
+            </Button>
+          </Form>
 
-        <p>
-          Already a member? <Link to={"/"}>Login here</Link>
-        </p>
+          <p className="m-0 mt-4">
+            Already a member?{" "}
+            <Link to={"/"} className="registerLoginLink">
+              Login here
+            </Link>
+          </p>
+        </section>
       </Container>
     </>
   );

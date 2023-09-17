@@ -12,6 +12,7 @@ import { transactionState } from "../../state/Reducers/transactionsSlice";
 import { getMoneybox, moneyboxState } from "../../state/Reducers/moneyboxSlice";
 import { getUserTransactions } from "../../state/Reducers/transactionsSlice";
 import { handleNewTransaction } from "../../state/Reducers/transactionsSlice";
+import { createMoneybox } from "../../state/Reducers/moneyboxSlice";
 
 import Lottie from "lottie-react";
 import moneyboxAnimation from "../../assets/moneybox/moneybox_animation.json";
@@ -30,6 +31,7 @@ const Moneybox = () => {
   const tokenDecoded = jwtDecode(token);
   const user = users.find((user) => user._id === tokenDecoded.id);
   const userId = user._id;
+  const userMoneybox = user.moneybox;
 
   const [moneyboxIdLoading, setMoneyboxIdLoading] = useState(true);
 
@@ -93,6 +95,23 @@ const Moneybox = () => {
   function getDateString(dateString) {
     const options = { year: "numeric", month: "long", day: "numeric" };
     return new Date(dateString).toDateString(undefined, options);
+  }
+
+  const handleCreateMoneybox = () => {
+    dispatch(createMoneybox(userId));
+  };
+
+  if (!userMoneybox) {
+    return (
+      <Container className="moneyboxWrapper">
+        <div className="d-flex justify-content-start align-items-center">
+          <h2 className="m-0">MoneyBox</h2>
+          <Lottie animationData={moneyboxAnimation} className="moneyboxAnimation" />
+        </div>
+        <Alert variant="danger">oops</Alert>
+        <Button onClick={handleCreateMoneybox}>Create Personal Moneybox</Button>
+      </Container>
+    );
   }
 
   return (

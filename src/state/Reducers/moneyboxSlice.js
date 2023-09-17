@@ -20,6 +20,18 @@ export const getMoneybox = createAsyncThunk("moneybox/getMoneybox", async (userI
   }
 });
 
+export const createMoneybox = createAsyncThunk("moneybox/create", async (userId, thunkAPI) => {
+  try {
+    const response = await axios.post(
+      `${process.env.REACT_APP_SERVERBASE_URL}/users/${userId}/moneybox/create`
+    );
+
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
 const moneyboxSlice = createSlice({
   name: "moneybox",
   initialState,

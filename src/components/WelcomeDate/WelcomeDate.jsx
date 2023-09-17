@@ -43,7 +43,7 @@ const WelcomeDate = () => {
     <>
       <section className="welcomeWrapper">
         <div>
-          <h3>Welcome back {tokenDecoded.firstName}</h3>
+          <h4>Welcome back {tokenDecoded.firstName}</h4>
           <h5>today is {formattedDate}</h5>
 
           <div className="quoteWrapper">

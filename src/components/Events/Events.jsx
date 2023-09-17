@@ -2,33 +2,29 @@ import React, { useEffect } from "react";
 import { Carousel } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEvents } from "../../state/Reducers/eventsSlice";
-import { usersState } from "../../state/Reducers/usersSlice";
 
-import jwtDecode from "jwt-decode";
 import { nanoid } from "nanoid";
 
 import "./events.css";
 
 const Events = () => {
-  const users = useSelector(usersState);
   const dispatch = useDispatch();
   const events = useSelector((state) => state.events.events);
 
-  const token = JSON.parse(localStorage.getItem("userLogged"));
-  const tokenDecoded = jwtDecode(token);
-
-  const user = users.find((user) => user._id === tokenDecoded.id);
-  const userCoordinates = user.location.replace(" ", "");
+  const userLocation = useSelector((state) => state.userLocation.userLocation);
+  console.log(userLocation);
+  const params = userLocation ? `${userLocation.latitude},${userLocation.longitude}` : "";
+  console.log(params);
 
   useEffect(() => {
-    dispatch(fetchEvents(userCoordinates));
-  }, [dispatch]);
+    dispatch(fetchEvents(params));
+  }, [dispatch, params]);
 
   return (
     <>
       <Carousel className="eventsMainWrapper">
         {events.map((event, index) => (
-          <Carousel.Item className="eventsWrapper">
+          <Carousel.Item className="eventsWrapper" key={nanoid()}>
             <img
               src={event.images[0].url}
               alt={event.name}

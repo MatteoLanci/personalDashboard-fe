@@ -78,4 +78,22 @@
 
 .loginBtn {
   align-self: flex-start;
+  background: #528686;
+  border: none;
+  box-shadow: 0 0 10px #88b4b4;
+  color: #ffffff;
+  transition: all 0.3s;
+}
+.loginBtn:hover,
+.loginBtn:active {
+  background: #4f9b9b !important;
+}
+
+.loginRegisterLink {
+  text-decoration: none;
+  color: #528686;
+  transition: 0.3s;
+}
+.loginRegisterLink:hover {
+  text-decoration: underline;
 }

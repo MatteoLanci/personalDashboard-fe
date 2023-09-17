@@ -4,9 +4,8 @@ import { Spinner } from "react-bootstrap";
 
 import { useDispatch, useSelector } from "react-redux";
 import { fetchWeather, weatherState } from "../../state/Reducers/weatherSlice";
-import { usersState } from "../../state/Reducers/usersSlice";
+import { setUserLocation, setLoading, setError } from "../../state/Reducers/userLocationSlice";
 
-import jwtDecode from "jwt-decode";
 import Lottie from "lottie-react";
 
 import cloudsAnimationDay from "../../assets/weather/day/clouds_animation.json";
@@ -25,43 +24,10 @@ import thunderAnimationNight from "../../assets/weather/night/thunder_night_anim
 import "./weatherApp.css";
 
 const WeatherApp = () => {
-  //!
-  const [userLocation, setUserLocation] = useState(null);
-  const getUserLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setUserLocation({ latitude, longitude });
-        },
-        (error) => {
-          console.error("Error getting user location:", error);
-        }
-      );
-    } else {
-      console.error("Geolocation is not supported by this browser.");
-    }
-  };
-  useEffect(() => {
-    getUserLocation();
-  }, []);
-  useEffect(() => {
-    console.log(userLocation); // Esegui il console.log solo quando userLocation cambia
-  }, [userLocation]);
-  //!
-  const users = useSelector(usersState);
-  const token = JSON.parse(localStorage.getItem("userLogged"));
-  const tokenDecoded = jwtDecode(token);
-
-  const user = users.find((user) => user._id === tokenDecoded.id);
-
-  const userCoordinates = user.location.split(",");
-
-  const userLat = userCoordinates[0].split(" ");
-  const userLon = userCoordinates[1].trim();
-
   const dispatch = useDispatch();
   const weatherInfo = useSelector(weatherState);
+
+  const userLocation = useSelector((state) => state.userLocation.userLocation);
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -72,19 +38,37 @@ const WeatherApp = () => {
   const tempMaxCelsius = tempMaxKelvin - 273.15;
 
   useEffect(() => {
+    dispatch(setLoading(true));
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+        dispatch(setUserLocation({ latitude, longitude }));
+        dispatch(setLoading(false));
+      });
+    } else {
+      dispatch(setError("Geolocation is not supported by this browser"));
+      dispatch(setLoading(false));
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
     setIsLoading(true);
 
     setTimeout(() => {
-      dispatch(fetchWeather({ userLat, userLon }))
-        .then(() => {
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          setIsLoading(false);
-          console.error(error);
-        });
+      if (userLocation) {
+        const { latitude, longitude } = userLocation;
+        dispatch(fetchWeather({ userLat: latitude, userLon: longitude }))
+          .then(() => {
+            setIsLoading(false);
+          })
+          .catch((error) => {
+            setIsLoading(false);
+            console.error(error);
+          });
+      }
     }, 3000);
-  }, [dispatch, user, users]);
+  }, [dispatch, userLocation]);
 
   const now = new Date();
   const hours = now.getHours();

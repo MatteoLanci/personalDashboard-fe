@@ -16,6 +16,7 @@ import { createMoneybox } from "../../state/Reducers/moneyboxSlice";
 
 import Lottie from "lottie-react";
 import moneyboxAnimation from "../../assets/moneybox/moneybox_animation.json";
+import noTransactionAnimation from "../../assets/moneybox/noTransactions_animation.json";
 
 import "./moneybox.css";
 
@@ -76,7 +77,7 @@ const Moneybox = () => {
           console.error("Error getting transactions:", error);
         });
     }
-  }, [dispatch, userId, moneyboxId]);
+  }, [dispatch, userId, moneyboxId, user]);
 
   const sortedUserTransactions = userTransactions
     .slice()
@@ -98,7 +99,13 @@ const Moneybox = () => {
   }
 
   const handleCreateMoneybox = () => {
-    dispatch(createMoneybox(userId));
+    dispatch(createMoneybox(userId))
+      .then(() => {
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error("Error creating moneybox:", error);
+      });
   };
 
   if (!userMoneybox) {
@@ -174,8 +181,9 @@ const Moneybox = () => {
 
       {displayedTransactions.length === 0 && (
         <div className="mx-auto w-100">
-          <Alert variant="warning" className="text-center">
-            You haven't made any transactions yet, start saving something today!
+          <Lottie animationData={noTransactionAnimation} className="noTransactionAnimation" />
+          <Alert variant="warning" className=" mt-2 text-center">
+            No transactions yet, start saving something today!
           </Alert>
         </div>
       )}

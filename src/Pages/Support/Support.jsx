@@ -1,7 +1,12 @@
 import React from "react";
+import { Container } from "react-bootstrap";
 
 const Support = () => {
-  return <div>Support</div>;
+  return (
+    <Container>
+      <h1>Support</h1>
+    </Container>
+  );
 };
 
 export default Support;

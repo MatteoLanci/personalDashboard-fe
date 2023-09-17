@@ -21,6 +21,9 @@ import fogAnimationNight from "../../assets/weather/night/fog_night_animation.js
 import snowAnimationNight from "../../assets/weather/night/snow_night_animation.json";
 import thunderAnimationNight from "../../assets/weather/night/thunder_night_animation.json";
 
+import { FaTemperatureHigh, FaTemperatureLow } from "react-icons/fa";
+import { WiHumidity } from "react-icons/wi";
+
 import "./weatherApp.css";
 
 const WeatherApp = () => {
@@ -82,15 +85,25 @@ const WeatherApp = () => {
       ) : weatherInfo ? (
         <>
           <div className="d-flex justify-content-between align-items-center">
-            <div>
-              <h3>weather in {weatherInfo.name}</h3>
+            <div className="weatherDataWrapper">
+              <h3>Weather in {weatherInfo.name}</h3>
               {weatherInfo?.weather && weatherInfo.weather.length > 0 && (
-                <div>local weather: {weatherInfo.weather[0].description}</div>
+                <h6>{weatherInfo.weather[0].description}</h6>
               )}
+              <div className="tempWrapper">
+                <p className="singleTempWrapper">
+                  <FaTemperatureLow className="tempLowIcon" /> {tempMinCelsius.toFixed(1)} °C
+                </p>
+                <p className="singleTempWrapper">
+                  <FaTemperatureHigh className="tempHighIcon" /> {tempMaxCelsius.toFixed(1)} °C
+                </p>
+              </div>
 
-              <p className="m-0">min temp: {tempMinCelsius.toFixed(1)} °C</p>
-              <p className="m-0">max temp: {tempMaxCelsius.toFixed(1)} °C</p>
-              <p className="m-0">humidity: {weatherInfo.main.humidity} %</p>
+              <div className="tempWrapper mt-1 ps-0">
+                <p className="singleTempWrapper">
+                  <WiHumidity className="humidIcon" /> {weatherInfo.main.humidity}%
+                </p>
+              </div>
             </div>
 
             <div className="d-flex justify-content-start">

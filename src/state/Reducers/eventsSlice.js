@@ -14,6 +14,7 @@ export const fetchEvents = createAsyncThunk(
       const response = await axios.get(
         `https://app.ticketmaster.com/discovery/v2/events?apikey=FMt04I9D8JeWAPqHCfURFj5sdF6FKBKj&latlong=${userCoordinates}&locale=*&size=15&page=2&`
       );
+
       return response.data._embedded.events;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

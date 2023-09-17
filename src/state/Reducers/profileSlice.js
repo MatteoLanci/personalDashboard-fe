@@ -9,10 +9,10 @@ const initialState = {
 
 export const handleUpdateUserInfo = createAsyncThunk(
   "users/updateData",
-  async ({ id, dataToUpdate }, thunkAPI) => {
+  async ({ userId, dataToUpdate }, thunkAPI) => {
     try {
       const response = await axios.patch(
-        `${process.env.REACT_APP_SERVERBASE_URL}/users/${id}`,
+        `${process.env.REACT_APP_SERVERBASE_URL}/users/${userId}`,
         dataToUpdate,
         { headers: { "Content-Type": "application/json" } }
       );

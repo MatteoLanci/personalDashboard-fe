@@ -23,9 +23,12 @@ const Registration = () => {
   const handleSubmitRegistration = (e) => {
     e.preventDefault();
 
-    dispatch(createUser(formUser));
+    dispatch(createUser(formUser)).then(() => {
+      window.location.reload();
+    });
     navigate("/");
   };
+
   return (
     <>
       <div className="bgAnimation">

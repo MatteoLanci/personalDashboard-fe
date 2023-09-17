@@ -1,0 +1,81 @@
+.modalHeaderWrapper {
+  background: #8ed3c790;
+  box-shadow: 0 0 5px #000000;
+}
+
+.modalBodyWrapper {
+  background: #8ed3c790;
+  padding-bottom: 1rem;
+}
+
+.modalFooterWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+  padding-top: 1rem;
+  background: #dafff9;
+  box-shadow: 0 0 5px #000000;
+}
+
+.modalInfoWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.modalInfoFooter {
+  font-size: 0.8rem;
+  padding-bottom: 0.5rem;
+}
+
+.confirmDelBtn {
+  border: none;
+  background: #cf5c4d;
+  color: #000000;
+  transition: all 0.1s;
+}
+.confirmDelBtn:hover {
+  background: #91392e;
+  box-shadow: inset 0 0 5px #cf5c4d;
+}
+.confirmDelBtn:active {
+  background: #cf5c4d !important;
+}
+
+.closeModalBtn {
+  border: none;
+  background: #579c91;
+  transition: all 0.1s;
+}
+.closeModalBtn:hover {
+  background: #3fbb92;
+  box-shadow: inset 0 0 5px #579c91;
+}
+.closeModalBtn:active {
+  background: #579c91 !important;
+}
+
+.delAnimationWrapper {
+  border-radius: 20px;
+  box-shadow: 0 0 5px #000000;
+  background: #dafff990;
+}
+
+@media screen and (max-width: 576px) {
+  .delAnimation {
+    height: 150px;
+  }
+  .confirmDelBtn,
+  .closeModalBtn {
+    font-size: 0.8rem;
+  }
+  .modalInfoMain {
+    font-size: 0.8rem;
+  }
+  .modalInfoFooter {
+    font-size: 0.7rem;
+  }
+}

@@ -4,11 +4,16 @@ import { FcCalendar } from "react-icons/fc";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
 
+import { usersState } from "../../state/Reducers/usersSlice";
+import { useSelector } from "react-redux";
+
 const WelcomeDate = () => {
   const [randomQuote, setRandomQuote] = useState("");
 
   const token = JSON.parse(localStorage.getItem("userLogged"));
   const tokenDecoded = jwtDecode(token);
+  const users = useSelector(usersState);
+  const user = users.find((user) => user._id === tokenDecoded.id);
   const date = new Date();
   const options = {
     weekday: "long",
@@ -43,7 +48,7 @@ const WelcomeDate = () => {
     <>
       <section className="welcomeWrapper">
         <div>
-          <h4>Welcome back {tokenDecoded.firstName}</h4>
+          <h4>Welcome back {user?.firstName}</h4>
           <h5>today is {formattedDate}</h5>
 
           <div className="quoteWrapper">

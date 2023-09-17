@@ -7,3 +7,44 @@
   box-shadow: 0 0 10px #00000070;
   color: #414141;
 }
+
+.tempWrapper {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 1.5rem;
+  box-shadow: 0 0 5px #638b8b;
+  background: #f0ffff;
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.singleTempWrapper {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 500;
+}
+
+.tempLowIcon {
+  color: #0099ff;
+}
+.tempHighIcon {
+  color: #d30000;
+}
+.humidIcon {
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 576px) {
+  .weatherDataWrapper {
+    font-size: 0.9rem;
+  }
+  .tempWrapper {
+    gap: 0.9rem;
+  }
+}

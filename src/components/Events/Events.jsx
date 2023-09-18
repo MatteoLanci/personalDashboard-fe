@@ -12,9 +12,9 @@ const Events = () => {
   const events = useSelector((state) => state.events.events);
 
   const userLocation = useSelector((state) => state.userLocation.userLocation);
-  console.log(userLocation);
+  // console.log(userLocation);
   const params = userLocation ? `${userLocation.latitude},${userLocation.longitude}` : "";
-  console.log(params);
+  // console.log(params);
 
   useEffect(() => {
     dispatch(fetchEvents(params));

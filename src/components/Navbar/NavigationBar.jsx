@@ -36,6 +36,7 @@ import { BiSupport } from "react-icons/bi";
 import Lottie from "lottie-react";
 import logoAnimation from "../../assets/navbar/logo_animation.json";
 import logoutAnimation from "../../assets/navbar/logout_animation.json";
+import supportAnimation from "../../assets/navbar/support_animation.json";
 
 const NavigationBar = () => {
   const theme = useSelector((state) => state.theme);
@@ -55,6 +56,7 @@ const NavigationBar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [userEditMode, setUserEditMode] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState(tokenDecoded?.avatar);
+  // eslint-disable-next-line no-unused-vars
   const [file, setFile] = useState(null);
   const [dataToUpdate, setDataToUpdate] = useState({});
   const [showDelModal, setShowDelModal] = useState(false);
@@ -150,10 +152,6 @@ const NavigationBar = () => {
     setShowDelModal(true);
   };
 
-  const handleCloseModal = () => {
-    setShowDelModal(false);
-  };
-
   return (
     <Navbar expand="lg" className={`${theme === "light" ? "navbarWrapper" : "navbarWrapperDark"}`}>
       <Container className="d-flex justify-content-between align-items-center">
@@ -201,7 +199,7 @@ const NavigationBar = () => {
                 <Offcanvas.Title />
               </Offcanvas.Header>
 
-              <Offcanvas.Body>
+              <Offcanvas.Body className="userMenuBody">
                 <div className="userMenuHeaderWrapper">
                   <img src={user?.avatar || avatarUrl} alt={user?.id} className="menuPropic" />
 
@@ -300,7 +298,7 @@ const NavigationBar = () => {
                     <p className="m-0 userMenuIdField">{user?._id}</p>
                   </div>
 
-                  <div className="userDataElWrapper">
+                  <div className="userDataElWrapper userDataLocation">
                     <FaMapMarkedAlt className="userDataIcon" />
                     <p className="m-0 me-2">Logged from: </p>
                     <p className="m-0">
@@ -331,10 +329,13 @@ const NavigationBar = () => {
                   </Button>
                 </section>
 
-                <section className="d-flex flex-column align-items-center justify-content-center gap-5 mt-4">
+                <section className={`userMenuFooterWrapper ${userEditMode ? "d-none" : null}`}>
                   <div className="supportWrapper">
-                    <h5>Need Help?</h5>
-                    <Button
+                    <div>
+                      <h5 className="m-0">Need Help?</h5>
+                      {/* <h6>Check out our support page</h6> */}
+                    </div>
+                    {/* <Button
                       className="supportBtn"
                       as={Link}
                       to={"/support"}
@@ -342,7 +343,15 @@ const NavigationBar = () => {
                     >
                       <BiSupport className="supportIcon" />
                       Support
-                    </Button>
+                    </Button> */}
+
+                    <Link
+                      className="supportAnimationWrapper"
+                      to={"/support"}
+                      onClick={handleCloseMenu}
+                    >
+                      <Lottie animationData={supportAnimation} className="supportAnimation" />
+                    </Link>
                   </div>
 
                   <div className="logoutBtnWrapper">

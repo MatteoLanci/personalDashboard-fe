@@ -47,4 +47,15 @@
   .tempWrapper {
     gap: 0.9rem;
   }
+  .singleTempWrapper {
+    font-size: 0.8rem;
+  }
+  .tempWrapper {
+    gap: 0.5rem !important;
+  }
+}
+@media screen and (max-width: 360px) {
+  .singleTempWrapper {
+    font-size: 0.7rem;
+  }
 }

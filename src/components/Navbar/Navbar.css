@@ -57,6 +57,10 @@
   box-shadow: 0 0 10px #424444;
 }
 
+.userMenuBody {
+  position: relative;
+}
+
 .userMenuHeaderWrapper {
   text-align: center;
   margin-bottom: 3rem;
@@ -193,11 +197,42 @@
   border: none !important;
 }
 
+.userMenuFooterWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+}
+
 .supportWrapper {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* flex-direction: column; */
+  width: 100% !important;
+  box-shadow: 0 0 5px #347970;
+  background: #f0ffff;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+}
+
+.supportAnimationWrapper {
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  border-radius: 50%;
+  box-shadow: 0 0 5px #0e0e0e;
+  padding: 0.5rem;
+}
+.supportAnimation {
+  height: 50px;
 }
 
 .supportBtn {
@@ -205,8 +240,9 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  width: -moz-fit-content;
-  width: fit-content;
+  /* width: -moz-fit-content; */
+  /* width: fit-content; */
+  width: 100%;
 }
 
 .supportIcon {
@@ -221,6 +257,7 @@
   justify-content: center;
   align-items: center;
   gap: 2rem;
+  border-radius: 10px;
 }
 .logoutAnimation {
   height: 30px !important;
@@ -241,6 +278,13 @@
   }
   .userEditSaveBtn,
   .userEditCancBtn {
+    font-size: 0.8rem;
+  }
+  .userMenuFooterWrapper {
+    padding: 0.5rem 1rem !important;
+    gap: 1rem;
+  }
+  .userDataLocation p {
     font-size: 0.8rem;
   }
 }

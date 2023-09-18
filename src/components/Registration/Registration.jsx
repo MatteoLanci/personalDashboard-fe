@@ -8,9 +8,28 @@ import "./registration.css";
 import Lottie from "lottie-react";
 import bgAnimation from "../../assets/bg/bg_light_hexa.json";
 
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Registration = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  //! TOAST FOR SUCCESSFUL REGISTRATION
+  const registrationNotify = () =>
+    toast.info(
+      "Congratulations! Your registration has been successfully completed 🎉 Check your email inbox!",
+      {
+        position: "bottom-center",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: `colored`,
+      }
+    );
 
   const [formUser, setFormUser] = useState({
     firstName: "",
@@ -23,10 +42,14 @@ const Registration = () => {
   const handleSubmitRegistration = (e) => {
     e.preventDefault();
 
-    dispatch(createUser(formUser)).then(() => {
+    dispatch(createUser(formUser));
+
+    registrationNotify();
+
+    setTimeout(() => {
+      navigate("/");
       window.location.reload();
-    });
-    navigate("/");
+    }, 4000);
   };
 
   return (
@@ -137,6 +160,20 @@ const Registration = () => {
           </p>
         </section>
       </Container>
+      <ToastContainer
+        position="top-right"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
+      {/* Same as */}
+      <ToastContainer />
     </>
   );
 };

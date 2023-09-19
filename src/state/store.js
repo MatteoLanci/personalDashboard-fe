@@ -9,6 +9,7 @@ import moneyboxReducer from "./Reducers/moneyboxSlice";
 import transactionReducer from "./Reducers/transactionsSlice";
 import wishlistReducer from "./Reducers/wishlistSlice";
 import userLocationReducer from "./Reducers/userLocationSlice";
+import pharmaciesReducer from "./Reducers/pharmaciesSlice";
 
 const store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ const store = configureStore({
     transactions: transactionReducer,
     wishlist: wishlistReducer,
     userLocation: userLocationReducer,
+    pharmacies: pharmaciesReducer,
   },
 });
 

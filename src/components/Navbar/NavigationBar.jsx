@@ -31,7 +31,6 @@ import {
 import { IoIosMail } from "react-icons/io";
 import { BsFillGearFill } from "react-icons/bs";
 import { PiUserSwitch } from "react-icons/pi";
-import { BiSupport } from "react-icons/bi";
 
 import Lottie from "lottie-react";
 import logoAnimation from "../../assets/navbar/logo_animation.json";

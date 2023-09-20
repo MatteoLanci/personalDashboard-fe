@@ -15,7 +15,7 @@ const Footer = () => {
   return (
     <footer
       className="footerWrapper text-center text-white"
-      style={{ backgroundColor: "#a7e2e2", marginTop: "4rem", opacity: "90%" }}
+      style={{ backgroundColor: "#a7e2e2", opacity: "90%" }}
     >
       <div className="container pt-4">
         <section className="mb-4">

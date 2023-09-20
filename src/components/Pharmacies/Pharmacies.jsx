@@ -9,6 +9,8 @@ import { handleGetPharmacies } from "../../state/Reducers/pharmaciesSlice";
 import { nanoid } from "nanoid";
 import "./pharmacies.css";
 
+import { ImPhone } from "react-icons/im";
+
 import Lottie from "lottie-react";
 import loadingAnimation from "../../assets/generic/loading_animation.json";
 import pharmaAnimation from "../../assets/pharmacies/pharma_animation.json";
@@ -79,7 +81,7 @@ const Pharmacies = () => {
                     </p>
                   </div>
 
-                  <div className="d-flex gap-3 mb-2">
+                  <div key={nanoid()} className="d-flex gap-3 mb-2">
                     <p className="m-0" key={nanoid()}>
                       {pharma.time}
                     </p>
@@ -95,16 +97,21 @@ const Pharmacies = () => {
                     )}
                   </div>
 
-                  <div key={nanoid()} className={`d-flex gap-3 `}>
-                    <p key={nanoid()}>{pharma.phone}</p>
+                  <div
+                    key={nanoid()}
+                    className={`d-flex gap-3 justify-content-start align-items-center `}
+                  >
                     <a
                       key={nanoid()}
                       href={`tel: ${pharma.phone}`}
                       rel="noreferrer"
                       target="_blank"
                     >
-                      Call Now
+                      <ImPhone className="pharmaPhoneIcon" />
                     </a>
+                    <p className="m-0" key={nanoid()}>
+                      {pharma.phone}
+                    </p>
                   </div>
                 </div>
               </>

@@ -1,66 +1,41 @@
 import React, { useEffect, useState, useCallback } from "react";
 
+import { Container, Row, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
+import { useDispatch } from "react-redux";
+import { fetchUsers } from "../../state/Reducers/usersSlice";
+
+import Lottie from "lottie-react";
+import notFoundAnimation from "../../assets/notFound/404_animation.json";
+import notFoundRobotAnimation from "../../assets/notFound/robotOhNo_animation.json";
+
+import "./NotFound.css";
+
 const NotFound = () => {
-  const [isJumping, setIsJumping] = useState(false);
-  const [position, setPosition] = useState(0);
-
-  const jump = useCallback(() => {
-    if (!isJumping) {
-      setIsJumping(true);
-      setTimeout(() => {
-        setIsJumping(false);
-      }, 1000);
-    }
-  }, [isJumping]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === " ") {
-        jump();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [jump]);
-
-  useEffect(() => {
-    let gameInterval;
-
-    const startGame = () => {
-      gameInterval = setInterval(() => {
-        // Sposta il dinosauro in base allo stato di salto
-        if (isJumping) {
-          setPosition(1);
-        } else {
-          setPosition(0);
-        }
-      }, 16);
-    };
-
-    startGame();
-
-    return () => {
-      clearInterval(gameInterval);
-    };
-  }, [isJumping]);
+    dispatch(fetchUsers());
+  }, [dispatch]);
 
   return (
-    <section style={{ width: "90vh", marginTop: "10rem" }}>
-      <h1>Not Found Page</h1>
-      <div>
-        <div
-          className={`dinosaur ${isJumping ? "jump" : ""}`}
-          style={{ bottom: `${position * 100}px` }}
-        >
-          🦖
+    <>
+      <section className="notFoundAnimationWrapper">
+        <Lottie animationData={notFoundAnimation} className="notFoundAnimation" />
+        <Lottie
+          animationData={notFoundRobotAnimation}
+          className="notFoundRobotAnimation"
+          loop="1"
+        />
+
+        <div className="notFoundBtnWrapper">
+          <Button as={Link} to={"/homepage"}>
+            Back to Homepage
+          </Button>
         </div>
-        <p>Press the spacebar to jump!</p>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

@@ -1,0 +1,12 @@
+.supportPageAnimationWrapper {
+  width: 100%;
+  padding-top: 2rem;
+  background: #b8e6e7;
+  box-shadow: 0 0 10px #759292;
+  position: relative;
+}
+
+.supportPageAnimation {
+  height: 400px;
+  width: 70%;
+}

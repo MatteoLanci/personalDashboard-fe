@@ -1,0 +1,31 @@
+.notFoundAnimationWrapper {
+  height: 84.7vh;
+  position: relative;
+}
+.notFoundAnimation {
+  height: 900px !important;
+}
+.notFoundRobotAnimation {
+  height: 300px;
+  z-index: 1;
+  position: absolute;
+  bottom: 1rem;
+  right: 0;
+}
+
+.notFoundBtnWrapper {
+  width: -moz-fit-content;
+  width: fit-content;
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@media screen and (max-width: 576px) {
+  .notFoundRobotAnimation {
+    top: 0 !important;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

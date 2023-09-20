@@ -41,7 +41,7 @@ const Homepage = () => {
       </div>
 
       <Container
-        className="d-flex flex-column justify-content-center align-items-center mt-5"
+        className="d-flex flex-column justify-content-center align-items-center my-5"
         style={{ minHeight: "80vh" }}
       >
         <Row className="mt-5 g-3 d-flex justify-content-center align-items-start w-100">

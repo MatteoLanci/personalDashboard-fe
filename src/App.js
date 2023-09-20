@@ -30,10 +30,8 @@ const App = () => {
         <Route element={<ProtectedRoutes />}>
           <Route path="/homepage" element={<Homepage />} />
           <Route path="/support" element={<Support />} />
-          {/* <Route path="/profile/:id" element={<Profile />} /> */}
-
-          {/* <Route path="/community" element={<CommunityPage />} /> */}
         </Route>
+
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

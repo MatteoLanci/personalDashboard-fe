@@ -4,9 +4,89 @@
   background: #b8e6e7;
   box-shadow: 0 0 10px #759292;
   position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .supportPageAnimation {
   height: 400px;
   width: 70%;
+}
+
+.bgAnimation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+.bgAnimationDark {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background: #3d3d3d;
+}
+
+.supportHeaderText {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 50%;
+  transform: translateX(-50%);
+  transform-origin: center center;
+  transition: transform 0.5s ease;
+}
+
+.supportCardsWrapper {
+  padding: 2rem;
+  margin-top: 5rem;
+  margin-bottom: 7rem;
+}
+
+.supportCard {
+  box-shadow: 0 0 10px #759292;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  background: #e4fafa;
+  transition: 0.3s;
+  height: 200px;
+}
+.supportCard:hover {
+  box-shadow: 0 0 20px #759292;
+}
+
+.supportCardLogo {
+  font-size: 3.5rem;
+}
+
+.supportCardSubtext {
+  font-size: 0.8rem;
+  color: #888888;
+  font-style: italic;
+}
+
+@media screen and (max-width: 576px) {
+  .supportPageAnimationWrapper {
+    height: 250px;
+  }
+  .supportHeaderText {
+    font-size: 1.3rem;
+  }
+  .supportCardsWrapper {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+  .supportCard {
+    margin-bottom: 1.5rem;
+  }
 }

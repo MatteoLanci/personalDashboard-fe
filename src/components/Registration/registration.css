@@ -100,3 +100,9 @@
 .registerLoginLink:hover {
   text-decoration: underline;
 }
+
+@media screen and (max-width: 576px) {
+  .registrationWrapper {
+    margin-top: 5rem;
+  }
+}

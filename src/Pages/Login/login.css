@@ -97,3 +97,9 @@
 .loginRegisterLink:hover {
   text-decoration: underline;
 }
+
+@media screen and (max-width: 576px) {
+  .loginWrapper {
+    margin-top: 10rem;
+  }
+}

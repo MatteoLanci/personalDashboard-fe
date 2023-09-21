@@ -331,18 +331,8 @@ const NavigationBar = () => {
                 <section className={`userMenuFooterWrapper ${userEditMode ? "d-none" : null}`}>
                   <div className="supportWrapper">
                     <div>
-                      <h5 className="m-0">Need Help?</h5>
-                      {/* <h6>Check out our support page</h6> */}
+                      <h5 className="m-0 supportText">Need Help?</h5>
                     </div>
-                    {/* <Button
-                      className="supportBtn"
-                      as={Link}
-                      to={"/support"}
-                      onClick={handleCloseMenu}
-                    >
-                      <BiSupport className="supportIcon" />
-                      Support
-                    </Button> */}
 
                     <Link
                       className="supportAnimationWrapper"

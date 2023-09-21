@@ -51,8 +51,8 @@
 
 /*! OFFCANVASS MENU STYLE */
 .navbarMenu {
-  border-bottom-left-radius: 20px;
-  border-top-left-radius: 20px;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
   background: #c2eff7 !important;
   box-shadow: 0 0 10px #424444;
 }
@@ -203,9 +203,9 @@
   align-items: center;
   justify-content: center;
   gap: 3rem;
-  position: absolute;
+  /* position: absolute;
   bottom: 0;
-  left: 0;
+  left: 0; */
   width: 100%;
   padding: 1rem 2rem;
 }
@@ -233,6 +233,7 @@
 }
 .supportAnimation {
   height: 50px;
+  width: 50px;
 }
 
 .supportBtn {
@@ -286,5 +287,12 @@
   }
   .userDataLocation p {
     font-size: 0.8rem;
+  }
+  .supportAnimation {
+    height: 30px;
+    width: 30px;
+  }
+  .supportText {
+    font-size: 1rem;
   }
 }

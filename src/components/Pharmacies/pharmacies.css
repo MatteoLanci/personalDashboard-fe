@@ -19,6 +19,28 @@
   margin-bottom: 1rem;
   padding: 0.5rem 1rem;
   background: #d2f2f2;
+  position: relative;
+  overflow: hidden;
+}
+
+.pharmaTimeWrapper {
+  box-shadow: 0 0 5px #638686;
+  border-radius: 10px;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0.25rem 0.5rem;
+  background: #eeffff;
+}
+
+.pharmaDistance {
+  /* font-size: 0.8rem; */
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  box-shadow: 0 0 5px #638686;
+  padding: 0.5rem;
+  border-bottom-left-radius: 10px;
+  background: #eeffff;
 }
 
 .pharmaLoadingAnimation {

@@ -69,29 +69,41 @@ const Pharmacies = () => {
             {pharmacies.map((pharma) => (
               <>
                 <div key={nanoid()} className="singlePharmaEl">
-                  <p key={nanoid()}>{pharma.name}</p>
+                  <h6 key={nanoid()} className="m-0">
+                    {pharma.name}
+                  </h6>
 
-                  <div className="d-flex gap-5">
+                  <div className="d-flex gap-5 mt-2">
                     <p style={{ fontSize: ".8rem" }} key={nanoid()}>
                       {pharma.address}
                     </p>
 
-                    <p style={{ fontSize: ".8rem" }} key={nanoid()}>
+                    <h6 className="pharmaDistance" key={nanoid()}>
                       {pharma.distance}
-                    </p>
+                    </h6>
                   </div>
 
-                  <div key={nanoid()} className="d-flex gap-3 mb-2">
+                  <div key={nanoid()} className=" pharmaTimeWrapper d-flex gap-3 mb-2 ">
                     <p className="m-0" key={nanoid()}>
                       {pharma.time}
                     </p>
 
                     {isPharmacyOpen(pharma) ? (
-                      <Badge key={nanoid()} pill bg="success">
+                      <Badge
+                        key={nanoid()}
+                        pill
+                        bg="success"
+                        className="d-flex align-items-center justify-content-center"
+                      >
                         Now Open
                       </Badge>
                     ) : (
-                      <Badge key={nanoid()} pill bg="danger">
+                      <Badge
+                        key={nanoid()}
+                        pill
+                        bg="danger"
+                        className="d-flex align-items-center justify-content-center"
+                      >
                         Closed
                       </Badge>
                     )}
@@ -99,7 +111,7 @@ const Pharmacies = () => {
 
                   <div
                     key={nanoid()}
-                    className={`d-flex gap-3 justify-content-start align-items-center `}
+                    className={`d-flex gap-3 justify-content-start align-items-center mt-3 `}
                   >
                     <a
                       key={nanoid()}

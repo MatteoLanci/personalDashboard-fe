@@ -6,12 +6,15 @@ import "./map.css";
 import { Container } from "react-bootstrap";
 
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
+import mapMarkerIcon from "../../assets/map/map_marker.png";
 
 import { useSelector } from "react-redux";
 
 const Map = () => {
   const userLocation = useSelector((state) => state.userLocation.userLocation);
   const params = userLocation ? [userLocation.latitude, userLocation.longitude] : [0, 0];
+  const icon = mapMarkerIcon;
 
   return (
     <>
@@ -22,10 +25,8 @@ const Map = () => {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={params}>
-              <Popup>
-                A pretty CSS3 popup. <br /> Easily customizable.
-              </Popup>
+            <Marker position={params} icon={L.icon({ iconUrl: icon, iconSize: [30, 40] })}>
+              <Popup>You are Here</Popup>
             </Marker>
           </MapContainer>
         ) : (

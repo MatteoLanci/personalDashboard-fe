@@ -119,7 +119,7 @@ const Pharmacies = () => {
                       rel="noreferrer"
                       target="_blank"
                     >
-                      <ImPhone className="pharmaPhoneIcon" />
+                      <ImPhone key={nanoid()} className="pharmaPhoneIcon" />
                     </a>
                     <p className="m-0" key={nanoid()}>
                       {pharma.phone}

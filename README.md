@@ -13,6 +13,8 @@ Design personalizzato con Bootstrap e CSS per un look unico.
 Utilizzo di react-leaflet per la visualizzazione delle mappe interattive.
 Requisizioni HTTP ottimizzate con Axios per migliorare l'esperienza utente.
 
+Di seguito il link per la repository al backend: https://github.com/MatteoLanci/personalDashboard-be
+
 ## Funzionalità Principali 📌
 📅 Widget Data Odierna con citazione Forbes.
 ☀️ Widget Meteo basato sulla tua posizione attuale.

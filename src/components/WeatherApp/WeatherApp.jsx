@@ -111,9 +111,13 @@ const WeatherApp = () => {
                 <Lottie animationData={clearSkyAnimationDay} style={{ height: "200px" }} />
               ) : weatherInfo.weather[0].description.includes("clear") && hours >= 17 ? (
                 <Lottie animationData={clearSkyAnimationNight} style={{ height: "200px" }} />
-              ) : weatherInfo.weather[0].description.includes("rain") && hours <= 17 ? (
+              ) : (weatherInfo.weather[0].description.includes("rain") ||
+                  weatherInfo.weather[0].description.includes("light")) &&
+                hours <= 17 ? (
                 <Lottie animationData={lightRainAnimationDay} style={{ height: "200px" }} />
-              ) : weatherInfo.weather[0].description.includes("rain") && hours >= 17 ? (
+              ) : (weatherInfo.weather[0].description.includes("rain") ||
+                  weatherInfo.weather[0].description.includes("light")) &&
+                hours >= 17 ? (
                 <Lottie animationData={lightRainAnimationNight} style={{ height: "200px" }} />
               ) : weatherInfo.weather[0].description.includes("clouds") && hours <= 17 ? (
                 <Lottie animationData={cloudsAnimationDay} style={{ height: "200px" }} />

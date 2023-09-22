@@ -9,7 +9,7 @@ Utilizzo di Nodemailer per le notifiche e le email.
 
 ## Lato Client 💻
 Realizzato con React e Redux per un'interfaccia utente reattiva e scalabile.
-Design personalizzato con Bootstrap e CSS per un look unico.
+Design personalizzato con Bootstrap e custom CSS per un look unico.
 Utilizzo di react-leaflet per la visualizzazione delle mappe interattive.
 Requisizioni HTTP ottimizzate con Axios per migliorare l'esperienza utente.
 

@@ -17,13 +17,21 @@ Di seguito il link per la repository al backend: https://github.com/MatteoLanci/
 
 ## Funzionalità Principali 📌
 📅 Widget Data Odierna con citazione Forbes.
+
 ☀️ Widget Meteo basato sulla tua posizione attuale.
+
 ✅ Widget Todo/Tasks per la gestione dei compiti.
+
 📰 Widget News per le ultime notizie e letture complete.
+
 💰 Widget Moneybox per monitorare il portafoglio e le transazioni finanziarie.
+
 📋 Widget Wishlist per la creazione di liste personali.
+
 🎫 Widget Eventi per scoprire eventi nelle vicinanze e acquistare biglietti.
+
 💊 Widget Farmacie di Turno per trovare farmacie aperte nella tua zona.
+
 🗺️ Widget Mappa interattiva per la geolocalizzazione.
 
 ## Area Utente 🔐

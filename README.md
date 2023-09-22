@@ -1,6 +1,6 @@
-## 🚀 DataDash - Personal Dashboard Project 📊
+# 🚀 DataDash - Personal Dashboard Project 📊
 
-# Benvenuti nel repository ufficiale di DataDash, la tua dashboard personale all-in-one per rimanere aggiornato e organizzato! 📅
+## Benvenuti nel repository ufficiale di DataDash, la tua dashboard personale all-in-one per rimanere aggiornato e organizzato! 📅
 
 ## Lato Server 🛠️
 Sviluppato con MongoDB, Node.js, e Express.js per gestire i dati.
@@ -35,4 +35,4 @@ Abilita la Dark Mode per un'esperienza visiva più confortevole.
 Trova guide e risorse nella pagina di supporto.
 
 
-# Grazie per esplorare DataDash! Per ulteriori dettagli e per contribuire al progetto, visita la repository.
+## Grazie per esplorare DataDash! Per ulteriori dettagli e per contribuire al progetto, visita la repository.

@@ -13,7 +13,7 @@ const LatestNews = () => {
   const newsData = useSelector(newsState);
 
   useEffect(() => {
-    // dispatch(fetchNews());
+    dispatch(fetchNews());
   }, [dispatch]);
 
   const articlesToShow = newsData.slice(0, 15);

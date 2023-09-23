@@ -2,7 +2,8 @@
 
 ### Di seguito il link per la repository al backend: https://github.com/MatteoLanci/personalDashboard-be
 
-## Benvenuti nel repository ufficiale di DataDash, la tua dashboard personale all-in-one per rimanere aggiornato e organizzato! 📅
+## Benvenuti nel repository ufficiale di DataDash
+La tua dashboard personale all-in-one per rimanere aggiornato e organizzato! 📅
 
 ## Lato Server 🛠️
 Sviluppato con MongoDB, Node.js, e Express.js per gestire i dati.

@@ -20,7 +20,7 @@ const Footer = () => {
       <div className="container pt-4">
         <section className="mb-4">
           <a
-            className="btn btn-link btn-floating btn-lg text-dark m-1"
+            className="btn btn-link btn-floating btn-lg text-dark"
             href="#!"
             role="button"
             data-mdb-ripple-color="dark"
@@ -29,7 +29,7 @@ const Footer = () => {
           </a>
 
           <a
-            className="btn btn-link btn-floating btn-lg text-dark m-1"
+            className="btn btn-link btn-floating btn-lg text-dark"
             href="#!"
             role="button"
             data-mdb-ripple-color="dark"
@@ -38,7 +38,7 @@ const Footer = () => {
           </a>
 
           <a
-            className="btn btn-link btn-floating btn-lg text-dark m-1"
+            className="btn btn-link btn-floating btn-lg text-dark"
             href="#!"
             role="button"
             data-mdb-ripple-color="dark"
@@ -47,7 +47,7 @@ const Footer = () => {
           </a>
 
           <a
-            className="btn btn-link btn-floating btn-lg text-dark m-1"
+            className="btn btn-link btn-floating btn-lg text-dark"
             href="#!"
             role="button"
             data-mdb-ripple-color="dark"
@@ -56,7 +56,7 @@ const Footer = () => {
           </a>
 
           <a
-            className="btn btn-link btn-floating btn-lg text-dark m-1"
+            className="btn btn-link btn-floating btn-lg text-dark"
             href="#!"
             role="button"
             data-mdb-ripple-color="dark"
@@ -64,7 +64,7 @@ const Footer = () => {
             <FaLinkedin />
           </a>
           <a
-            className="btn btn-link btn-floating btn-lg text-dark m-1"
+            className="btn btn-link btn-floating btn-lg text-dark"
             href="#!"
             role="button"
             data-mdb-ripple-color="dark"

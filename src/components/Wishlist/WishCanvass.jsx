@@ -11,6 +11,9 @@ import { usersState } from "../../state/Reducers/usersSlice";
 import jwtDecode from "jwt-decode";
 import "./wishCanvass.css";
 
+import Lottie from "lottie-react";
+import wishElAnimation from "../../assets/wishlist/newWish_animation.json";
+
 const WishCanvass = ({ showNewWish, setShowNewWish }) => {
   const dispatch = useDispatch();
   const users = useSelector(usersState);
@@ -41,48 +44,50 @@ const WishCanvass = ({ showNewWish, setShowNewWish }) => {
   return (
     <>
       <Offcanvas show={showNewWish} onHide={handleCloseNewWish} className="offcanvasWrapper">
-        <Offcanvas.Header closeButton className="offcanvasHeader">
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
-        </Offcanvas.Header>
+        <Offcanvas.Header closeButton className="offcanvasHeader"></Offcanvas.Header>
+
+        <div className=" wishCanvasHeader mb-5">
+          <h2 className="wishCanvasText">Make a Wish</h2>
+          <Lottie animationData={wishElAnimation} className="newWishElAnimation" loop="0" />
+        </div>
+
         <Offcanvas.Body className="offcanvasBody">
           <Form onSubmit={handleAddWishEl}>
             <Form.Group className="mb-4">
-              <Form.Label>content</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="text"
+                placeholder="Item"
                 onChange={(e) => setFormData({ ...formData, content: e.target.value })}
               ></Form.Control>
             </Form.Group>
 
             <Form.Group className="mb-4">
-              <Form.Label>price</Form.Label>
               <Form.Control
                 type="number"
-                placeholder="text"
+                placeholder="€"
                 onChange={(e) => setFormData({ ...formData, price: e.target.value })}
               ></Form.Control>
             </Form.Group>
 
             <Form.Group className="mb-4">
-              <Form.Label>url (optional)</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="text"
+                placeholder="url (optional)"
                 onChange={(e) => setFormData({ ...formData, url: e.target.value })}
               ></Form.Control>
             </Form.Group>
 
             <Form.Group className="mb-4">
-              <Form.Label>description (optional)</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="text"
+                placeholder="description (optional)"
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               ></Form.Control>
             </Form.Group>
 
-            <Button type="submit">Submit</Button>
+            <Button type="submit" className="newWishElBtn">
+              Add element
+            </Button>
           </Form>
         </Offcanvas.Body>
       </Offcanvas>

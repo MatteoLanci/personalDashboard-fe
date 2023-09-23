@@ -3,3 +3,46 @@
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
+
+.wishCanvasHeader {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+}
+
+.wishCanvasText {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) !important;
+  z-index: 1;
+  color: rgb(44, 44, 44);
+  font-weight: 700;
+  white-space: nowrap;
+  letter-spacing: 0.5rem;
+}
+
+.newWishElAnimation {
+  width: 200px;
+  height: 200px;
+  margin-top: 3rem;
+}
+
+.newWishElBtn {
+  border: none;
+  background: rgb(110, 180, 163);
+  transition: all 0.2s;
+}
+.newWishElBtn:hover {
+  background: rgb(76, 129, 116);
+}
+.newWishElBtn:active {
+  background: rgb(110, 180, 163) !important;
+}
+
+@media screen and (max-width: 576px) {
+  .offcanvasWrapper {
+    width: 80% !important;
+  }
+}

@@ -267,7 +267,7 @@
   margin-left: -4rem;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 500px) {
   .navbarMenu {
     width: 70% !important;
   }
@@ -294,5 +294,8 @@
   }
   .supportText {
     font-size: 1rem;
+  }
+  .logoAnimation {
+    right: -85px;
   }
 }

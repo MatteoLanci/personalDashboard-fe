@@ -20,7 +20,7 @@ const Map = () => {
     <>
       <Container className="mapComponentWrapper w-100 p-0">
         {JSON.stringify(params) !== JSON.stringify([0, 0]) ? (
-          <MapContainer center={params} zoom={15} scrollWheelZoom={false} className="mapWrapper">
+          <MapContainer center={params} zoom={15} scrollWheelZoom={true} className="mapWrapper">
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -30,7 +30,7 @@ const Map = () => {
             </Marker>
           </MapContainer>
         ) : (
-          <div>oops</div>
+          <div>Couldn't retrieve your position</div>
         )}
       </Container>
     </>

@@ -8,6 +8,7 @@ import { usersState } from "../../state/Reducers/usersSlice";
 import { useSelector } from "react-redux";
 
 const WelcomeDate = () => {
+  const theme = useSelector((state) => state.theme);
   const [randomQuote, setRandomQuote] = useState("");
 
   const token = JSON.parse(localStorage.getItem("userLogged"));
@@ -46,7 +47,7 @@ const WelcomeDate = () => {
 
   return (
     <>
-      <section className="welcomeWrapper">
+      <section className={`${theme === "light" ? "welcomeWrapper" : "welcomeWrapperDark"}`}>
         <div>
           <h4>Welcome back {user?.firstName}</h4>
           <h5>today is {formattedDate}</h5>

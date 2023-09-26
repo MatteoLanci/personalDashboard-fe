@@ -110,13 +110,18 @@ const Moneybox = () => {
 
   if (!userMoneybox) {
     return (
-      <Container className="moneyboxWrapper">
+      <Container className="moneyboxWrapper d-flex flex-column justify-content-start align-items-center">
         <div className="d-flex justify-content-start align-items-center">
           <h2 className="m-0">MoneyBox</h2>
           <Lottie animationData={moneyboxAnimation} className="moneyboxAnimation" />
         </div>
-        <Alert variant="danger">oops</Alert>
-        <Button onClick={handleCreateMoneybox}>Create Personal Moneybox</Button>
+        <Alert variant="danger">
+          You haven't created your moneybox yet, click the button below to start saving for your
+          dreams
+        </Alert>
+        <Button className="createMoneyboxBtn" onClick={handleCreateMoneybox}>
+          Create Personal Moneybox
+        </Button>
       </Container>
     );
   }

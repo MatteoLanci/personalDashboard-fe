@@ -192,7 +192,7 @@ const NavigationBar = () => {
               show={showMenu}
               onHide={handleCloseMenu}
               placement="end"
-              className="navbarMenu bg-light"
+              className={`${theme === "light" ? "navbarMenu" : "navbarMenuDark"}`}
             >
               <Offcanvas.Header closeButton>
                 <Offcanvas.Title />

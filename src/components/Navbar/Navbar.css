@@ -57,6 +57,13 @@
   box-shadow: 0 0 10px #424444;
 }
 
+.navbarMenuDark {
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  background: #336f77 !important;
+  box-shadow: 0 0 10px #e4e4e4;
+}
+
 .userMenuBody {
   position: relative;
 }

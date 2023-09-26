@@ -5,6 +5,25 @@
   box-shadow: 0 0 10px #00000070;
   height: 550px;
   overflow-y: auto;
+  position: relative;
+}
+
+.createMoneyboxBtn {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #528686;
+  border: none;
+  box-shadow: 0 0 10px #88b4b4;
+  color: #ffffff;
+  transition: all 0.3s;
+}
+.createMoneyboxBtn:hover {
+  background: #4f9b9b !important;
+}
+.createMoneyboxBtn:active {
+  background: #528686 !important;
 }
 
 .moneyboxAnimation {

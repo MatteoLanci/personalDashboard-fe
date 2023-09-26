@@ -20,6 +20,7 @@ import { handlePurchase } from "../../state/Reducers/transactionsSlice";
 
 import Lottie from "lottie-react";
 import wishlistAnimation from "../../assets/wishlist/wishlist_animation.json";
+import wishCompleteAnimation from "../../assets/wishlist/itemPurchased_animation.json";
 
 import "./wishlist.css";
 
@@ -29,6 +30,7 @@ const Wishlist = () => {
   const users = useSelector(usersState);
   const userMoneybox = useSelector(moneyboxState);
   const wishlists = useSelector(wishlistState);
+  const theme = useSelector((state) => state.theme);
 
   const token = JSON.parse(localStorage.getItem("userLogged"));
   const tokenDecoded = jwtDecode(token);
@@ -78,11 +80,12 @@ const Wishlist = () => {
     productId: "",
     moneyboxId: "",
   });
-  console.log(purchaseParams);
+
   const handleMoneyboxBuy = async () => {
     try {
       await dispatch(handlePurchase(purchaseParams));
       await dispatch(getUserTransactions(purchaseParams));
+      await dispatch(getUserWishlist(user._id));
     } catch (error) {
       console.error("Error completing purchase through moneybox: ", error);
     }
@@ -109,17 +112,26 @@ const Wishlist = () => {
                 aria-controls={`collapse-wishEl-${userWishEl._id}`}
                 aria-expanded={expandedItems[userWishEl._id]}
                 variant="outline-primary"
-                className="singleWishBtn"
+                className={`${
+                  wishItemStatus === "true" ? "singleWishBtnCompleted" : "singleWishBtn"
+                }`}
               >
                 <div className="d-flex justify-content-between align-items-center">
-                  <h5>{userWishEl.content}</h5>
+                  <h5 className="m-0">{userWishEl.content}</h5>
                   <p className="m-0">{userWishEl.price.toFixed(2)} €</p>
+                  {wishItemStatus === "true" ? (
+                    <Lottie
+                      animationData={wishCompleteAnimation}
+                      className="wishCompleteAnimation"
+                      loop="0"
+                    />
+                  ) : null}
                 </div>
               </Button>
 
               <Collapse in={expandedItems[userWishEl._id]}>
                 <div id={`collapse-wishEl-${userWishEl._id}`} className="wishElCollapse mx-auto">
-                  <p>{userWishEl.description}</p>
+                  <p className="mt-3">{userWishEl.description}</p>
                   {wishItemStatus === "true" ? (
                     <p className={`alertSingleWish text-center`}>
                       You have already bought this item!
@@ -135,7 +147,6 @@ const Wishlist = () => {
                     </p>
                   )}
 
-                  <p>Completed: {wishItemStatus}</p>
                   <div className="d-flex align-items-center gap-3 mb-2">
                     <Button
                       variant="danger"

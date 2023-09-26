@@ -46,6 +46,7 @@ const WeatherApp = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         const { latitude, longitude } = position.coords;
+        // console.log(position.coords);
         dispatch(setUserLocation({ latitude, longitude }));
         dispatch(setLoading(false));
       });

@@ -45,9 +45,9 @@ const LatestNews = () => {
             responsive={responsive}
             infinite={true}
             autoPlay={true}
-            autoPlaySpeed={10000}
+            autoPlaySpeed={5000}
             className="customCarousel"
-            removeArrowOnDeviceType={["tablet", "mobile"]}
+            removeArrowOnDeviceType={["desktop", "tablet", "mobile"]}
           >
             {articlesToShow.map((article, index) => (
               <figure className="galleryItem me-4" key={nanoid()}>

@@ -29,6 +29,7 @@ import "./weatherApp.css";
 const WeatherApp = () => {
   const dispatch = useDispatch();
   const weatherInfo = useSelector(weatherState);
+  const theme = useSelector((state) => state.theme);
 
   const userLocation = useSelector((state) => state.userLocation.userLocation);
 
@@ -78,7 +79,7 @@ const WeatherApp = () => {
   const hours = now.getHours();
 
   return (
-    <section className="weatherMainWrapper">
+    <section className={`${theme === "light" ? "weatherMainWrapper" : "weatherMainWrapperDark"}`}>
       {isLoading ? (
         <div className="d-flex justify-content-center align-items-center">
           <Spinner animation="grow" />
@@ -91,7 +92,7 @@ const WeatherApp = () => {
               {weatherInfo?.weather && weatherInfo.weather.length > 0 && (
                 <h6>{weatherInfo.weather[0].description}</h6>
               )}
-              <div className="tempWrapper">
+              <div className={`${theme === "light" ? "tempWrapper" : "tempWrapperDark"}`}>
                 <p className="singleTempWrapper">
                   <FaTemperatureLow className="tempLowIcon" /> {tempMinCelsius.toFixed(1)} °C
                 </p>
@@ -101,7 +102,9 @@ const WeatherApp = () => {
               </div>
 
               <div className="tempWrapper mt-1 ps-0">
-                <p className="singleTempWrapper">
+                <p
+                  className={`${theme === "light" ? "singleTempWrapper" : "singleTempWrapperDark"}`}
+                >
                   <WiHumidity className="humidIcon" /> {weatherInfo.main.humidity}%
                 </p>
               </div>

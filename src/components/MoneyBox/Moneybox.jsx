@@ -23,10 +23,10 @@ import "./moneybox.css";
 const Moneybox = () => {
   const dispatch = useDispatch();
 
+  const theme = useSelector((state) => state.theme);
   const moneybox = useSelector(moneyboxState);
   const users = useSelector(usersState);
   const userTransactions = useSelector(transactionState);
-  console.log(userTransactions);
 
   const token = JSON.parse(localStorage.getItem("userLogged"));
   const tokenDecoded = jwtDecode(token);
@@ -91,8 +91,6 @@ const Moneybox = () => {
     setShowAllTransactions(!showAllTransactions);
   };
 
-  // const totalSavings = moneybox.totalAmount.toFixed(2);
-
   function getDateString(dateString) {
     const options = { year: "numeric", month: "long", day: "numeric" };
     return new Date(dateString).toDateString(undefined, options);
@@ -110,7 +108,10 @@ const Moneybox = () => {
 
   if (!userMoneybox) {
     return (
-      <Container className="moneyboxWrapper d-flex flex-column justify-content-start align-items-center">
+      <Container
+        className={`${theme === "light" ? "moneyboxWrapper" : "moneyboxWrapperDark"} 
+        d-flex flex-column justify-content-start align-items-center `}
+      >
         <div className="d-flex justify-content-start align-items-center">
           <h2 className="m-0">MoneyBox</h2>
           <Lottie animationData={moneyboxAnimation} className="moneyboxAnimation" />
@@ -127,9 +128,11 @@ const Moneybox = () => {
   }
 
   return (
-    <Container className="moneyboxWrapper">
+    <Container
+      className={`${theme === "light" ? "moneyboxWrapper" : "moneyboxWrapperDark text-light"}`}
+    >
       <div className="d-flex justify-content-start align-items-center">
-        <h2 className="m-0">MoneyBox</h2>
+        <h2 className={`m-0`}>MoneyBox</h2>
         <Lottie animationData={moneyboxAnimation} className="moneyboxAnimation" />
       </div>
       <p className="m-0 text-center">Your Total Savings:</p>
@@ -175,7 +178,11 @@ const Moneybox = () => {
           key={nanoid}
           className="d-flex justify-content-between align-items-center singleTransaction mb-2"
         >
-          <div className="d-flex justify-content-center align-items-center gap-2">
+          <div
+            className={`d-flex justify-content-center align-items-center gap-2 ${
+              theme === "light" ? null : "text-dark"
+            }`}
+          >
             <article>+ {parseFloat(transaction.value).toFixed(2)} €</article>
             <em className="transactionDesc">( {transaction.description} )</em>
           </div>

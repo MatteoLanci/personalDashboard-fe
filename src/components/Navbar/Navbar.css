@@ -275,7 +275,8 @@
 }
 
 @media screen and (max-width: 500px) {
-  .navbarMenu {
+  .navbarMenu,
+  .navbarMenuDark {
     width: 70% !important;
   }
   .userMenuIdField {

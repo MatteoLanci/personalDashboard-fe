@@ -8,6 +8,16 @@
   color: #414141;
 }
 
+.weatherMainWrapperDark {
+  width: 100%;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  background: #285661;
+  opacity: 100%;
+  box-shadow: 0 0 10px #ececec;
+  color: #ececec;
+}
+
 .tempWrapper {
   display: flex;
   justify-content: start;
@@ -21,6 +31,20 @@
   width: fit-content;
 }
 
+.tempWrapperDark {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 1.5rem;
+  box-shadow: 0 0 5px #638b8b;
+  background: #f0ffff;
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  color: #222222;
+}
+
 .singleTempWrapper {
   margin: 0;
   display: flex;
@@ -28,6 +52,16 @@
   align-items: center;
   gap: 0.25rem;
   font-weight: 500;
+}
+
+.singleTempWrapperDark {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 500;
+  color: #222222;
 }
 
 .tempLowIcon {

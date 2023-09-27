@@ -1,8 +1,17 @@
 .moneyboxWrapper {
   border-radius: 10px;
-  background-color: #ddf7f5;
+  background-color: #ddf7f5 !important;
   opacity: 90%;
   box-shadow: 0 0 10px #00000070;
+  height: 550px;
+  overflow-y: auto;
+  position: relative;
+}
+.moneyboxWrapperDark {
+  border-radius: 10px;
+  background-color: #285661 !important;
+  opacity: 100%;
+  box-shadow: 0 0 10px #ececec;
   height: 550px;
   overflow-y: auto;
   position: relative;

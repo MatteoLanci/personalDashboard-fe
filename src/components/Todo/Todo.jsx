@@ -7,6 +7,8 @@ import jwtDecode from "jwt-decode";
 import axios from "axios";
 import { nanoid } from "nanoid";
 
+import { useSelector } from "react-redux";
+
 //! icons import
 import { PiAlarm } from "react-icons/pi";
 import { FaTrashAlt } from "react-icons/fa";
@@ -19,7 +21,7 @@ import todoAnimation from "../../assets/todo/animation_lmj95byh.json";
 
 const Todo = () => {
   const [todos, setTodos] = useState([]);
-  // const [todoCompleted, setTodoCompleted] = useState(false);
+  const theme = useSelector((state) => state.theme);
 
   const token = JSON.parse(localStorage.getItem("userLogged"));
   const tokenDecoded = jwtDecode(token);
@@ -138,7 +140,7 @@ const Todo = () => {
 
   return (
     <>
-      <section className="todosWrapper">
+      <section className={`${theme === "light" ? "todosWrapper" : "todosWrapperDark"}`}>
         <Row>
           <h2 className="mb-4">Todos</h2>
           <Col xs={12} md={9}>
@@ -164,7 +166,12 @@ const Todo = () => {
                 <ul key={nanoid()} className=" py-2 todoList  px-0">
                   {sortedTodos.map((todo) => (
                     <>
-                      <li key={nanoid()} className="list-unstyled mb-2 singleTodoEl">
+                      <li
+                        key={nanoid()}
+                        className={` list-unstyled mb-2 ${
+                          theme === "light" ? "singleTodoEl" : "singleTodoElDark"
+                        }`}
+                      >
                         <div
                           key={nanoid()}
                           className="d-flex justify-content-between align-items-center"
@@ -209,8 +216,9 @@ const Todo = () => {
                   ))}
                 </ul>
 
-                <section className="d-flex flex-column">
+                <section key={nanoid()} className="d-flex flex-column">
                   <input
+                    key={nanoid()}
                     className="todoInput"
                     type="text"
                     placeholder="Add a new task..."
@@ -218,7 +226,7 @@ const Todo = () => {
                     onChange={(e) => setNewTodoData({ ...newTodoData, content: e.target.value })}
                   />
 
-                  <div className="d-flex gap-4 mt-3">
+                  <div key={nanoid()} className="d-flex gap-4 mt-3">
                     <Button key={nanoid()} className="newTodoBtn" size="sm" onClick={handleNewTodo}>
                       Create
                     </Button>

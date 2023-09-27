@@ -11,11 +11,11 @@
 }
 
 .welcomeWrapperDark {
-  box-shadow: 0 0 10px #6da5c0;
+  box-shadow: 0 0 10px #ececec;
   border-radius: 10px;
   padding: 0.5rem 1rem;
   width: 100%;
-  background: #0c7075;
+  background: #222222;
   opacity: 90%;
   display: flex;
   justify-content: space-between;

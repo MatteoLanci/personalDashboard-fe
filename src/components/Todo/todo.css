@@ -7,6 +7,16 @@
   box-shadow: 0 0 10px #00000070;
 }
 
+.todosWrapperDark {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  background: #285661;
+  opacity: 90%;
+  color: #1a1a1a;
+  box-shadow: 0 0 10px #ececec;
+  color: #ececec;
+}
+
 .todoInput {
   padding: 0.5rem 1rem;
   border-radius: 10px;
@@ -27,6 +37,15 @@
   margin-left: 5px;
   border-radius: 6px;
   background: #eeffff;
+}
+
+.singleTodoElDark {
+  box-shadow: 0 0 5px #759c9c;
+  width: 90%;
+  padding: 0.25rem 0.5rem;
+  margin-left: 5px;
+  border-radius: 6px;
+  background: #19414b;
 }
 
 .todoDelElBtn {

@@ -96,7 +96,9 @@ const Wishlist = () => {
   }, [dispatch, user._id]);
 
   return (
-    <Container className="wishlistWrapper ">
+    <Container
+      className={`${theme === "light" ? "wishlistWrapper" : "wishlistWrapperDark text-light"}`}
+    >
       <Lottie animationData={wishlistAnimation} className="wishAnimation" />
       <h2 className="mb-3">Wishlist</h2>
       <Row className="w-100 wishesWrapper mx-auto">
@@ -131,7 +133,9 @@ const Wishlist = () => {
 
               <Collapse in={expandedItems[userWishEl._id]}>
                 <div id={`collapse-wishEl-${userWishEl._id}`} className="wishElCollapse mx-auto">
-                  <p className="mt-3">{userWishEl.description}</p>
+                  <p className={` mt-3 ${theme === "light" ? null : "text-dark"}`}>
+                    {userWishEl.description}
+                  </p>
                   {wishItemStatus === "true" ? (
                     <p className={`alertSingleWish text-center`}>
                       You have already bought this item!

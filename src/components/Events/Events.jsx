@@ -12,9 +12,7 @@ const Events = () => {
   const events = useSelector((state) => state.events.events);
 
   const userLocation = useSelector((state) => state.userLocation.userLocation);
-  // console.log(userLocation);
   const params = userLocation ? `${userLocation.latitude},${userLocation.longitude}` : "";
-  // console.log(params);
 
   useEffect(() => {
     dispatch(fetchEvents(params));
@@ -26,7 +24,7 @@ const Events = () => {
         {events.map((event, index) => (
           <Carousel.Item className="eventsWrapper" key={nanoid()}>
             <img
-              src={event.images[0].url}
+              src={event.images[4].url}
               alt={event.name}
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />

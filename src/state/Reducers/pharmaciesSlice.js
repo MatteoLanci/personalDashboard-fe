@@ -12,7 +12,7 @@ export const handleGetPharmacies = createAsyncThunk(
   async (locationName, thunkAPI) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_SERVERBASE_URL}/scrape?locationName=${locationName}?rk=1`
+        `${process.env.REACT_APP_SERVERBASE_URL}/scrape?locationName=${locationName}?f=apertura`
       );
       return response.data;
     } catch (error) {

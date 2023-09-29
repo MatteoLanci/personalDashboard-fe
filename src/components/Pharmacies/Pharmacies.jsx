@@ -19,20 +19,12 @@ const Pharmacies = () => {
   const dispatch = useDispatch();
 
   const loading = useSelector((state) => state.pharmacies.loading);
+  const userLocation = useSelector((state) => state.userLocation.userLocation);
 
-  const date = new Date();
-  const timeNowHours = date.getHours();
-  const timeNowMin = date.getMinutes();
-  const timeNow = `${timeNowHours}:${timeNowMin}`;
-
-  const weatherInfo = useSelector(weatherState);
   const pharmacies = useSelector(pharmaciesState);
-  const locationName = weatherInfo.name;
-
-  const isPharmacyOpen = (pharmacy) => {
-    const [openTime, closeTime] = pharmacy.time.split(" - ");
-    return timeNow >= openTime && timeNow <= closeTime;
-  };
+  // const locationName = weatherInfo.name;
+  const locationName = `${userLocation?.latitude},${userLocation?.longitude}`;
+  console.log(locationName);
 
   useEffect(() => {
     dispatch(handleGetPharmacies(locationName));
@@ -66,68 +58,46 @@ const Pharmacies = () => {
           </>
         ) : (
           <Row key={nanoid()} className="pharmaciesWrapper">
-            {pharmacies.map((pharma) => (
-              <>
-                <div key={nanoid()} className="singlePharmaEl">
-                  <h6 key={nanoid()} className="m-0">
-                    {pharma.name}
-                  </h6>
-
-                  <div className="d-flex gap-5 mt-2">
-                    <p style={{ fontSize: ".8rem" }} key={nanoid()}>
-                      {pharma.address}
-                    </p>
-
-                    <h6 className="pharmaDistance" key={nanoid()}>
-                      {pharma.distance}
+            {pharmacies.map((pharma) => {
+              const pharmaClosed = pharma.info === "Chiuso";
+              const pharmaClosing = pharma.info.includes("Chiude tra");
+              return (
+                <>
+                  <div key={nanoid()} className="singlePharmaEl">
+                    <h6 key={nanoid()} className="m-0">
+                      {pharma.name}
                     </h6>
-                  </div>
 
-                  <div key={nanoid()} className=" pharmaTimeWrapper d-flex gap-3 mb-2 ">
-                    <p className="m-0" key={nanoid()}>
-                      {pharma.time}
-                    </p>
+                    <div key={nanoid()} className="d-flex gap-5 mt-2">
+                      <p style={{ fontSize: ".8rem" }} key={nanoid()}>
+                        {pharma.address}
+                      </p>
 
-                    {isPharmacyOpen(pharma) ? (
-                      <Badge
+                      <a
                         key={nanoid()}
-                        pill
-                        bg="success"
-                        className="d-flex align-items-center justify-content-center"
+                        href={`tel: ${pharma.phone}`}
+                        rel="noreferrer"
+                        target="_blank"
+                        className={`pharmaCall ${pharmaClosed ? "d-none" : null}`}
                       >
-                        Now Open
-                      </Badge>
-                    ) : (
-                      <Badge
-                        key={nanoid()}
-                        pill
-                        bg="danger"
-                        className="d-flex align-items-center justify-content-center"
-                      >
-                        Closed
-                      </Badge>
-                    )}
-                  </div>
+                        <ImPhone key={nanoid()} className="pharmaPhoneIcon" />
+                      </a>
+                    </div>
 
-                  <div
-                    key={nanoid()}
-                    className={`d-flex gap-3 justify-content-start align-items-center mt-3 `}
-                  >
-                    <a
+                    <div
                       key={nanoid()}
-                      href={`tel: ${pharma.phone}`}
-                      rel="noreferrer"
-                      target="_blank"
+                      className={`pharmaTimeWrapper d-flex gap-3 mb-2 ${
+                        pharmaClosed ? "bg-danger text-light" : null
+                      } ${pharmaClosing ? "bg-warning fw-bold" : null}`}
                     >
-                      <ImPhone key={nanoid()} className="pharmaPhoneIcon" />
-                    </a>
-                    <p className="m-0" key={nanoid()}>
-                      {pharma.phone}
-                    </p>
+                      <p className="m-0" key={nanoid()}>
+                        {pharma.info}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </>
-            ))}
+                </>
+              );
+            })}
           </Row>
         )}
       </Container>

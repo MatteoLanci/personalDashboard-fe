@@ -16,7 +16,6 @@ const EventsList = () => {
 
   const userLocation = useSelector((state) => state.userLocation.userLocation);
   const params = userLocation ? `${userLocation.latitude},${userLocation.longitude}` : "";
-  // console.log(params);
 
   const moreEventsLink = `https://www.ticketmaster.it`;
 

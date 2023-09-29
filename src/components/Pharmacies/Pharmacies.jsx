@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
-import { Container, Row, Col, Badge } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 import { useDispatch, useSelector } from "react-redux";
-import { weatherState } from "../../state/Reducers/weatherSlice";
 import { pharmaciesState } from "../../state/Reducers/pharmaciesSlice";
 import { handleGetPharmacies } from "../../state/Reducers/pharmaciesSlice";
 
@@ -22,9 +21,7 @@ const Pharmacies = () => {
   const userLocation = useSelector((state) => state.userLocation.userLocation);
 
   const pharmacies = useSelector(pharmaciesState);
-  // const locationName = weatherInfo.name;
   const locationName = `${userLocation?.latitude},${userLocation?.longitude}`;
-  console.log(locationName);
 
   useEffect(() => {
     dispatch(handleGetPharmacies(locationName));

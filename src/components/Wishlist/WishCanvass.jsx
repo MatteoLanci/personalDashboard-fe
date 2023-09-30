@@ -65,6 +65,7 @@ const WishCanvass = ({ showNewWish, setShowNewWish }) => {
                 type="text"
                 placeholder="Item"
                 onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                required
               ></Form.Control>
             </Form.Group>
 
@@ -73,6 +74,7 @@ const WishCanvass = ({ showNewWish, setShowNewWish }) => {
                 type="number"
                 placeholder="€"
                 onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+                required
               ></Form.Control>
             </Form.Group>
 

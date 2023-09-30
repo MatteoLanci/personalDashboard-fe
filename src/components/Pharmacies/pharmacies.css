@@ -79,7 +79,8 @@
 }
 
 @media screen and (max-width: 576px) {
-  .pharmaciesElementWrapper {
+  .pharmaciesElementWrapper,
+  .pharmaciesElementWrapperDark {
     margin-bottom: 1rem;
   }
 }

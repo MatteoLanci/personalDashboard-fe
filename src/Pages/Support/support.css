@@ -1,8 +1,18 @@
 .supportPageAnimationWrapper {
   width: 100%;
-  padding-top: 2rem;
-  background: #b8e6e7;
+  padding-top: 1rem;
+  background: #d2f2f2e0;
   box-shadow: 0 0 10px #759292;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.supportPageAnimationWrapperDark {
+  width: 100%;
+  padding-top: 1rem;
+  box-shadow: 0 0 5px #f4f7f5;
+  background: #19414bf8;
   position: relative;
   display: flex;
   justify-content: flex-start;
@@ -34,17 +44,17 @@
 
 .supportHeaderText {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 40%;
   left: 50%;
   transform: translateX(-50%);
   transform-origin: center center;
   transition: transform 0.5s ease;
+  font-size: 5rem;
 }
 
 .supportCardsWrapper {
   padding: 2rem;
-  margin-top: 5rem;
+  margin-top: 6.2rem;
   margin-bottom: 7rem;
 }
 
@@ -76,11 +86,16 @@
 }
 
 @media screen and (max-width: 576px) {
-  .supportPageAnimationWrapper {
-    height: 250px;
+  .supportPageAnimationWrapper,
+  .supportPageAnimationWrapperDark {
+    height: 250px !important;
   }
   .supportHeaderText {
-    font-size: 1.3rem;
+    top: 50%;
+    font-size: 1.8rem;
+    width: 100%;
+    text-align: end;
+    padding-right: 1.5rem;
   }
   .supportCardsWrapper {
     margin-top: 1rem;

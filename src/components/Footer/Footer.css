@@ -1,1 +1,33 @@
+.footerWrapper {
+  background: linear-gradient(to right, #a7e2e2, #cdf7f7);
+  box-shadow: 0 0 10px #7ca3ad;
+  text-align: center;
+}
+.footerWrapperDark {
+  background: linear-gradient(to right, #161616fa, #3d3d3dfa);
+  box-shadow: 0 0 10px #7ca3ad;
+  text-align: center;
+  color: #fafafa !important;
+}
 
+.footerCopyright {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footerCopyrightName {
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.footerCopyrightName:hover {
+  color: #ca410b !important;
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 576px) {
+  .footerCopyright {
+    font-size: 0.8rem;
+  }
+}

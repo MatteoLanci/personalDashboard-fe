@@ -10,9 +10,11 @@ const initialState = {
 export const fetchNews = createAsyncThunk("news/fetchNews", async (_, thunkAPI) => {
   try {
     const response = await axios.get(
-      `https://newsapi.org/v2/top-headlines?country=it&apiKey=89c3d81fcd0e48f7b85b0e143aa2c077`
+      // `https://newsapi.org/v2/top-headlines?country=it&apiKey=89c3d81fcd0e48f7b85b0e143aa2c077`
+      `${process.env.REACT_APP_SERVERBASE_URL}/scrapenews`
     );
-    return response.data.articles;
+    // return response.data.articles;
+    return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }

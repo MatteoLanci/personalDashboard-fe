@@ -49,16 +49,12 @@ const LatestNews = () => {
             className="customCarousel"
             removeArrowOnDeviceType={["desktop", "tablet", "mobile"]}
           >
-            {articlesToShow.map((article, index) => (
-              <figure className="galleryItem me-4" key={nanoid()}>
-                <img
-                  src={article.urlToImage || noImage}
-                  alt={article.title}
-                  className="itemImage"
-                />
+            {articlesToShow.slice(0, 8).map((article, index) => (
+              <figure className="galleryItem me-3" key={nanoid()}>
+                <img src={article.img || noImage} alt={article.title} className="itemImage" />
                 <figcaption className="itemDescription">
                   <h2 className="articleTitle">{article.title}</h2>
-                  <a href={article.url} className="articleLink" target="_blank" rel="noreferrer">
+                  <a href={article.link} className="articleLink" target="_blank" rel="noreferrer">
                     read full article...
                   </a>
                 </figcaption>

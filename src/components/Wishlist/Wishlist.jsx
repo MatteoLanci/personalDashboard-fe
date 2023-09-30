@@ -132,10 +132,13 @@ const Wishlist = () => {
               </Button>
 
               <Collapse in={expandedItems[userWishEl._id]}>
-                <div id={`collapse-wishEl-${userWishEl._id}`} className="wishElCollapse mx-auto">
-                  <p className={` mt-3 ${theme === "light" ? null : "text-dark"}`}>
-                    {userWishEl.description}
-                  </p>
+                <div
+                  id={`collapse-wishEl-${userWishEl._id}`}
+                  className={` mx-auto ${
+                    theme === "light" ? "wishElCollapse" : "wishElCollapseDark"
+                  }`}
+                >
+                  <p className={`mt-3`}>{userWishEl.description}</p>
                   {wishItemStatus === "true" ? (
                     <p className={`alertSingleWish text-center`}>
                       You have already bought this item!

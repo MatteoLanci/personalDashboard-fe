@@ -5,6 +5,13 @@
   box-shadow: 0 0 10px #638686;
   background: #eeffff;
 }
+.pharmaciesElementWrapperDark {
+  height: 400px;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 5px #f4f7f5;
+  background: #19414be7;
+}
 
 .pharmaciesWrapper {
   height: 320px;
@@ -22,10 +29,22 @@
   position: relative;
   overflow: hidden;
 }
+.singlePharmaElDark {
+  border: none;
+  box-shadow: 0 0 5px #638686;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  /* background: #285861; */
+  background: #162729e7;
+  position: relative;
+  overflow: hidden;
+  color: #eeffff;
+}
 
 .pharmaTimeWrapper {
   box-shadow: 0 0 5px #638686;
-  border-radius: 10px;
+  border-radius: 5px;
   width: -moz-fit-content;
   width: fit-content;
   padding: 0.25rem 0.5rem;

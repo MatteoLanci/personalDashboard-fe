@@ -10,10 +10,10 @@
 .todosWrapperDark {
   padding: 0.5rem 1rem;
   border-radius: 10px;
-  background: #285661;
+  box-shadow: 0 0 5px #f4f7f5;
+  background: #19414bfd;
   opacity: 90%;
   color: #1a1a1a;
-  box-shadow: 0 0 10px #ececec;
   color: #ececec;
 }
 
@@ -45,7 +45,7 @@
   padding: 0.25rem 0.5rem;
   margin-left: 5px;
   border-radius: 6px;
-  background: #19414b;
+  background: #162729;
 }
 
 .todoDelElBtn {

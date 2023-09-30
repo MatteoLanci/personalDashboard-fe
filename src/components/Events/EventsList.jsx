@@ -12,9 +12,11 @@ import { BsTicketFill } from "react-icons/bs";
 
 const EventsList = () => {
   const dispatch = useDispatch();
-  const events = useSelector((state) => state.events.events);
 
+  const events = useSelector((state) => state.events.events);
   const userLocation = useSelector((state) => state.userLocation.userLocation);
+  const theme = useSelector((state) => state.theme);
+
   const params = userLocation ? `${userLocation.latitude},${userLocation.longitude}` : "";
 
   const moreEventsLink = `https://www.ticketmaster.it`;
@@ -39,17 +41,20 @@ const EventsList = () => {
   };
 
   return (
-    <Container className="eventsListWrapper">
+    <Container className={`${theme === "light" ? "eventsListWrapper" : "eventsListWrapperDark"}`}>
       <div className="d-flex justify-content-start align-items-center gap-3">
-        <h2 className="mt-3">Events near You</h2>
+        <h2 className={`mt-3 ${theme === "light" ? null : "text-light"}`}>Events near You</h2>
         <Lottie loop="1" animationData={eventsAnimation} className="eventsAnimation" />
       </div>
       <ul className="eventsList">
         {events.map((event) => (
-          <div key={nanoid()} className="eventListed">
+          <div
+            key={nanoid()}
+            className={`${theme === "light" ? "eventListed" : "eventListedDark"}`}
+          >
             <h5>{event.name}</h5>
 
-            <div className="eventDateTimeWrapper">
+            <div className={`eventDateTimeWrapper ${theme === "light" ? null : "text-dark"}`}>
               <p className="m-0">{formatDateString(event.dates.start.localDate)}</p>
               <em className="m-0">at</em>
               <p className="m-0">{formatTimeString(event.dates.start.localTime)}</p>

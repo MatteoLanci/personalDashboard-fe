@@ -17,6 +17,7 @@ import wishElAnimation from "../../assets/wishlist/newWish_animation.json";
 const WishCanvass = ({ showNewWish, setShowNewWish }) => {
   const dispatch = useDispatch();
   const users = useSelector(usersState);
+  const theme = useSelector((state) => state.theme);
   const token = JSON.parse(localStorage.getItem("userLogged"));
   const tokenDecoded = jwtDecode(token);
   const user = users.find((user) => user._id === tokenDecoded.id);
@@ -43,12 +44,18 @@ const WishCanvass = ({ showNewWish, setShowNewWish }) => {
 
   return (
     <>
-      <Offcanvas show={showNewWish} onHide={handleCloseNewWish} className="offcanvasWrapper">
+      <Offcanvas
+        show={showNewWish}
+        onHide={handleCloseNewWish}
+        className={`${theme === "light" ? "offcanvasWrapper" : "offcanvasWrapperDark"}`}
+      >
         <Offcanvas.Header closeButton className="offcanvasHeader"></Offcanvas.Header>
 
         <div className=" wishCanvasHeader mb-5">
-          <h2 className="wishCanvasText">Make a Wish</h2>
-          <Lottie animationData={wishElAnimation} className="newWishElAnimation" loop="0" />
+          <h2 className={`wishCanvasText ${theme === "light" ? null : "text-light"}`}>
+            Make a Wish
+          </h2>
+          <Lottie animationData={wishElAnimation} className={`newWishElAnimation`} loop="0" />
         </div>
 
         <Offcanvas.Body className="offcanvasBody">

@@ -60,7 +60,7 @@
 .navbarMenuDark {
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
-  background: #336f77 !important;
+  background: #19414bf5 !important;
   box-shadow: 0 0 10px #e4e4e4;
 }
 
@@ -91,6 +91,13 @@
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 0 5px #0e0e0e;
+}
+.menuPropicDark {
+  width: 150px !important;
+  height: 150px !important;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 5px #e4e4e4;
 }
 
 .userInfoWrapper {

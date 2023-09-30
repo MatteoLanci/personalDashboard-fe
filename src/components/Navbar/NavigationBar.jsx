@@ -200,7 +200,11 @@ const NavigationBar = () => {
 
               <Offcanvas.Body className="userMenuBody">
                 <div className="userMenuHeaderWrapper">
-                  <img src={user?.avatar || avatarUrl} alt={user?.id} className="menuPropic" />
+                  <img
+                    src={user?.avatar || avatarUrl}
+                    alt={user?.id}
+                    className={`${theme === "light" ? "menuPropic" : "menuPropicDark"}`}
+                  />
 
                   <input
                     ref={fileInputRef}

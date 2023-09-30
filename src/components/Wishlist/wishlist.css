@@ -15,9 +15,8 @@
 .wishlistWrapperDark {
   border-radius: 10px;
   padding: 0.25rem 0.5rem;
-  background-color: #19414b;
-  opacity: 100%;
-  box-shadow: 0 0 10px #ececec;
+  box-shadow: 0 0 5px #f4f7f5;
+  background: #19414bf5;
   height: 550px;
   overflow-y: auto;
   display: flex;
@@ -83,6 +82,13 @@
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   background: #ecffff;
+  width: 99%;
+}
+.wishElCollapseDark {
+  box-shadow: 0 0 5px #528686;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background: #162729f5;
   width: 99%;
 }
 

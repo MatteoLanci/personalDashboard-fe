@@ -9,9 +9,9 @@
 }
 .moneyboxWrapperDark {
   border-radius: 10px;
-  background-color: #285661 !important;
+  box-shadow: 0 0 5px #f4f7f5;
+  background: #162729f5;
   opacity: 100%;
-  box-shadow: 0 0 10px #ececec;
   height: 550px;
   overflow-y: auto;
   position: relative;
@@ -46,6 +46,13 @@
   padding: 0.25rem 0.5rem;
   border-radius: 6px;
 }
+.moneyboxInputDark {
+  border: none;
+  background: #96bbbb;
+  box-shadow: 0 0 5px #96bbbb;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+}
 
 .newTransactionBtn {
   width: 94% !important;
@@ -65,11 +72,24 @@
 }
 
 .singleTransaction {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   box-shadow: 0 0 5px #60a5a5;
   background: #eeffff;
   padding: 0.25rem 0.5rem;
   border-radius: 6px;
 }
+.singleTransactionDark {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 5px #60a5a5;
+  background: #285661;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+}
+
 @media screen and (max-width: 500px) {
   .singleTransaction {
     font-size: 0.8rem;

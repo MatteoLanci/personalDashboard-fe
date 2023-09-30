@@ -140,7 +140,7 @@ const Moneybox = () => {
       <Row className="d-flex justify-content-center align-items-center">
         <Col xs={12} md={6} className="text-center">
           <input
-            className="moneyboxInput"
+            className={`${theme === "light" ? "moneyboxInput" : "moneyboxInputDark"}`}
             type="text"
             placeholder="e.g. 500"
             value={transactionData.value}
@@ -150,7 +150,7 @@ const Moneybox = () => {
 
         <Col xs={12} md={6} className="text-center">
           <input
-            className="moneyboxInput"
+            className={`${theme === "light" ? "moneyboxInput" : "moneyboxInputDark"}`}
             type="text"
             placeholder="e.g. new personal income"
             value={transactionData.description}
@@ -164,7 +164,7 @@ const Moneybox = () => {
       <div className="text-center">
         <Button
           variant="success"
-          className="mt-2 w-100 mx-auto newTransactionBtn"
+          className="mt-4 w-100 mx-auto newTransactionBtn"
           disabled={transactionData.value === "" || transactionData.description === ""}
           onClick={handleAddTransaction}
         >
@@ -176,13 +176,9 @@ const Moneybox = () => {
       {displayedTransactions.map((transaction) => (
         <div
           key={nanoid}
-          className="d-flex justify-content-between align-items-center singleTransaction mb-2"
+          className={` mb-2 ${theme === "light" ? "singleTransaction" : "singleTransactionDark"}`}
         >
-          <div
-            className={`d-flex justify-content-center align-items-center gap-2 ${
-              theme === "light" ? null : "text-dark"
-            }`}
-          >
+          <div className={`d-flex justify-content-center align-items-center gap-2`}>
             <article>+ {parseFloat(transaction.value).toFixed(2)} €</article>
             <em className="transactionDesc">( {transaction.description} )</em>
           </div>

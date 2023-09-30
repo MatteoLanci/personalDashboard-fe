@@ -19,6 +19,7 @@ const Pharmacies = () => {
 
   const loading = useSelector((state) => state.pharmacies.loading);
   const userLocation = useSelector((state) => state.userLocation.userLocation);
+  const theme = useSelector((state) => state.theme);
 
   const pharmacies = useSelector(pharmaciesState);
   const locationName = `${userLocation?.latitude},${userLocation?.longitude}`;
@@ -29,10 +30,14 @@ const Pharmacies = () => {
 
   return (
     <>
-      <Container className="pharmaciesElementWrapper">
+      <Container
+        className={`${
+          theme === "light" ? "pharmaciesElementWrapper" : "pharmaciesElementWrapperDark"
+        }`}
+      >
         <Row key={nanoid()} className="d-flex justify-content-between align-items-center">
           <Col xs={8}>
-            <h2 className="m-0" key={nanoid()}>
+            <h2 className={`m-0 ${theme === "light" ? null : "text-light"}`} key={nanoid()}>
               Pharmacies
             </h2>
           </Col>
@@ -56,11 +61,14 @@ const Pharmacies = () => {
         ) : (
           <Row key={nanoid()} className="pharmaciesWrapper">
             {pharmacies.map((pharma) => {
-              const pharmaClosed = pharma.info === "Chiuso";
+              const pharmaClosed = pharma.info === "Chiuso" || pharma.info.includes("Apre alle");
               const pharmaClosing = pharma.info.includes("Chiude tra");
               return (
                 <>
-                  <div key={nanoid()} className="singlePharmaEl">
+                  <div
+                    key={nanoid()}
+                    className={`${theme === "light" ? "singlePharmaEl" : "singlePharmaElDark"}`}
+                  >
                     <h6 key={nanoid()} className="m-0">
                       {pharma.name}
                     </h6>
@@ -83,9 +91,10 @@ const Pharmacies = () => {
 
                     <div
                       key={nanoid()}
-                      className={`pharmaTimeWrapper d-flex gap-3 mb-2 ${
-                        pharmaClosed ? "bg-danger text-light" : null
-                      } ${pharmaClosing ? "bg-warning fw-bold" : null}`}
+                      className={`pharmaTimeWrapper d-flex gap-3 mb-2 
+                      ${pharmaClosed ? "bg-danger text-light" : null} 
+                      ${pharmaClosing ? "bg-warning fw-bold" : null}
+                      ${theme === "light" ? null : "text-dark"}`}
                     >
                       <p className="m-0" key={nanoid()}>
                         {pharma.info}

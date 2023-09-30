@@ -2,9 +2,13 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaGithub, FaGoogle } from "react-icons/fa";
+import { useSelector } from "react-redux";
+
+import "./Footer.css";
 
 const Footer = () => {
   const location = useLocation();
+  const theme = useSelector((state) => state.theme);
 
   const isHidden = location.pathname === "/" || location.pathname === "/register";
 
@@ -13,14 +17,13 @@ const Footer = () => {
   }
 
   return (
-    <footer
-      className="footerWrapper text-center text-white"
-      style={{ backgroundColor: "#a7e2e2", opacity: "90%" }}
-    >
+    <footer className={`${theme === "light" ? "footerWrapper" : "footerWrapperDark"}`}>
       <div className="container pt-4">
         <section className="mb-4">
           <a
-            className="btn btn-link btn-floating btn-lg text-dark"
+            className={`btn btn-link btn-floating btn-lg ${
+              theme === "light" ? "text-dark" : "text-light"
+            }`}
             href="#!"
             role="button"
             data-mdb-ripple-color="dark"
@@ -29,7 +32,9 @@ const Footer = () => {
           </a>
 
           <a
-            className="btn btn-link btn-floating btn-lg text-dark"
+            className={`btn btn-link btn-floating btn-lg ${
+              theme === "light" ? "text-dark" : "text-light"
+            }`}
             href="#!"
             role="button"
             data-mdb-ripple-color="dark"
@@ -38,7 +43,9 @@ const Footer = () => {
           </a>
 
           <a
-            className="btn btn-link btn-floating btn-lg text-dark"
+            className={`btn btn-link btn-floating btn-lg ${
+              theme === "light" ? "text-dark" : "text-light"
+            }`}
             href="#!"
             role="button"
             data-mdb-ripple-color="dark"
@@ -47,7 +54,9 @@ const Footer = () => {
           </a>
 
           <a
-            className="btn btn-link btn-floating btn-lg text-dark"
+            className={`btn btn-link btn-floating btn-lg ${
+              theme === "light" ? "text-dark" : "text-light"
+            }`}
             href="#!"
             role="button"
             data-mdb-ripple-color="dark"
@@ -56,7 +65,9 @@ const Footer = () => {
           </a>
 
           <a
-            className="btn btn-link btn-floating btn-lg text-dark"
+            className={`btn btn-link btn-floating btn-lg ${
+              theme === "light" ? "text-dark" : "text-light"
+            }`}
             href="#!"
             role="button"
             data-mdb-ripple-color="dark"
@@ -64,7 +75,9 @@ const Footer = () => {
             <FaLinkedin />
           </a>
           <a
-            className="btn btn-link btn-floating btn-lg text-dark"
+            className={`btn btn-link btn-floating btn-lg ${
+              theme === "light" ? "text-dark" : "text-light"
+            }`}
             href="#!"
             role="button"
             data-mdb-ripple-color="dark"
@@ -74,11 +87,20 @@ const Footer = () => {
         </section>
       </div>
 
-      <div className="text-center text-dark p-3" style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}>
+      <div
+        className={`footerCopyright p-3 ${theme === "light" ? "text-dark" : "text-light"}`}
+        style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
+      >
         © 2023 Copyright:
-        <a className="text-dark" href="#!">
+        <a
+          className={`footerCopyrightName ${theme === "light" ? "text-dark" : "text-light"}`}
+          href="https://www.linkedin.com/in/matteolanci/"
+          target="_blank"
+          rel="noreferrer"
+        >
           Matteo Lanci
         </a>
+        <span className="m-0">-&nbsp; all rights reserved</span>
       </div>
     </footer>
   );

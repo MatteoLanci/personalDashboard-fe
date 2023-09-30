@@ -12,7 +12,8 @@
 }
 
 @media screen and (max-width: 500px) {
-  .eventsListWrapper {
+  .eventsListWrapper,
+  .eventsListWrapperDark {
     margin-bottom: 1rem;
     height: 400px;
   }

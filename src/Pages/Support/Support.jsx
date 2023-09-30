@@ -30,9 +30,17 @@ const Support = () => {
         <Lottie animationData={bgAnimation} />
       </div>
 
-      <section className="supportPageAnimationWrapper">
+      <section
+        className={`${
+          theme === "light" ? "supportPageAnimationWrapper" : "supportPageAnimationWrapperDark"
+        }`}
+      >
         <Lottie animationData={supportAnimation} className="supportPageAnimation" loop="0" />
-        {showHeaderText && <h2 className="supportHeaderText">How can we help?</h2>}
+        {showHeaderText && (
+          <h2 className={`supportHeaderText ${theme === "light" ? null : "text-light"}`}>
+            How can we help?
+          </h2>
+        )}
       </section>
 
       <Container>

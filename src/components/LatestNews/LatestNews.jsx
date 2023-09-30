@@ -12,6 +12,8 @@ const LatestNews = () => {
   const dispatch = useDispatch();
   const newsData = useSelector(newsState);
 
+  const theme = useSelector((state) => state.theme);
+
   useEffect(() => {
     dispatch(fetchNews());
   }, [dispatch]);
@@ -38,8 +40,13 @@ const LatestNews = () => {
 
   return (
     <>
-      <h2>Latest News: </h2>
-      <Container className="newsWrapper">
+      <Container className={`${theme === "light" ? "newsWrapper" : "newsWrapperDark"}`}>
+        <h2
+          className={`${theme === "light" ? null : "text-light"}`}
+          style={{ alignSelf: "start", paddingInlineStart: "1rem" }}
+        >
+          Latest News
+        </h2>
         <Row className="galleryWrapper">
           <Carousel
             responsive={responsive}
@@ -50,7 +57,7 @@ const LatestNews = () => {
             removeArrowOnDeviceType={["desktop", "tablet", "mobile"]}
           >
             {articlesToShow.slice(0, 8).map((article, index) => (
-              <figure className="galleryItem me-3" key={nanoid()}>
+              <figure className="galleryItem me-4" key={nanoid()}>
                 <img src={article.img || noImage} alt={article.title} className="itemImage" />
                 <figcaption className="itemDescription">
                   <h2 className="articleTitle">{article.title}</h2>

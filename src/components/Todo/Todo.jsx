@@ -151,12 +151,13 @@ const Todo = () => {
                 </Alert>
                 <input
                   type="text"
+                  className="todoInput"
                   placeholder="Add a new task..."
                   value={newTodoData.content}
                   onChange={(e) => setNewTodoData({ ...newTodoData, content: e.target.value })}
                 />
                 <div>
-                  <Button variant="primary" size="sm" onClick={handleNewTodo}>
+                  <Button className="newTodoBtn" size="sm" onClick={handleNewTodo}>
                     Create
                   </Button>
                 </div>
@@ -167,25 +168,21 @@ const Todo = () => {
                   {sortedTodos.map((todo) => (
                     <>
                       <li
-                        key={nanoid()}
+                        key={todo._id}
                         className={` list-unstyled mb-2 ${
                           theme === "light" ? "singleTodoEl" : "singleTodoElDark"
                         }`}
                       >
-                        <div
-                          key={nanoid()}
-                          className="d-flex justify-content-between align-items-center"
-                        >
-                          <div key={nanoid()}>
+                        <div className="d-flex justify-content-between align-items-center">
+                          <div>
                             <input
-                              key={nanoid()}
                               type="checkbox"
                               className="me-3"
                               checked={todo.completed}
                               onChange={() => handleCompleteTodo(todo._id)}
+                              tabIndex="-1"
                             />
                             <span
-                              key={nanoid()}
                               style={
                                 todo.completed
                                   ? { textDecoration: "line-through", color: "#28C773" }
@@ -197,28 +194,25 @@ const Todo = () => {
                           </div>
 
                           <FaTrashAlt
-                            key={nanoid()}
                             className="mx-4 todoDelElBtn"
                             onClick={() => handleDeleteTodo(todo._id)}
                           />
                         </div>
 
                         <div
-                          key={nanoid()}
                           className="ms-4 d-flex align-items-center justify-content-start"
                           style={{ fontSize: ".7rem" }}
                         >
-                          <PiAlarm key={nanoid()} className="mx-1" />
-                          <span key={nanoid()}>{formatExpireDate(todo.expireDate)}</span>
+                          <PiAlarm className="mx-1" />
+                          <span>{formatExpireDate(todo.expireDate)}</span>
                         </div>
                       </li>
                     </>
                   ))}
                 </ul>
 
-                <section key={nanoid()} className="d-flex flex-column">
+                <section className="d-flex flex-column">
                   <input
-                    key={nanoid()}
                     className="todoInput"
                     type="text"
                     placeholder="Add a new task..."
@@ -226,17 +220,12 @@ const Todo = () => {
                     onChange={(e) => setNewTodoData({ ...newTodoData, content: e.target.value })}
                   />
 
-                  <div key={nanoid()} className="d-flex gap-4 mt-3">
-                    <Button key={nanoid()} className="newTodoBtn" size="sm" onClick={handleNewTodo}>
+                  <div className="d-flex gap-4 mt-3">
+                    <Button className="newTodoBtn" size="sm" onClick={handleNewTodo}>
                       Create
                     </Button>
 
-                    <Button
-                      key={nanoid()}
-                      className="todoClearListBtn"
-                      size="sm"
-                      onClick={handleClearTodos}
-                    >
+                    <Button className="todoClearListBtn" size="sm" onClick={handleClearTodos}>
                       Clear List
                     </Button>
                   </div>

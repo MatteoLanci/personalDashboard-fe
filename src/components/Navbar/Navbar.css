@@ -47,6 +47,7 @@
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 0 5px #0e0e0e;
+  cursor: pointer;
 }
 
 /*! OFFCANVASS MENU STYLE */

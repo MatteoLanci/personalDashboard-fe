@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { wishlistState } from "../../state/Reducers/wishlistSlice";
 import { usersState } from "../../state/Reducers/usersSlice";
-import { moneyboxState } from "../../state/Reducers/moneyboxSlice";
+import { moneyboxState, getMoneybox } from "../../state/Reducers/moneyboxSlice";
 import { getUserTransactions } from "../../state/Reducers/transactionsSlice";
 
 import { getUserWishlist } from "../../state/Reducers/wishlistSlice";
@@ -86,6 +86,7 @@ const Wishlist = () => {
       await dispatch(handlePurchase(purchaseParams));
       await dispatch(getUserTransactions(purchaseParams));
       await dispatch(getUserWishlist(user._id));
+      await dispatch(getMoneybox(user._id));
     } catch (error) {
       console.error("Error completing purchase through moneybox: ", error);
     }
@@ -168,6 +169,7 @@ const Wishlist = () => {
                     <Button
                       variant="outline-success"
                       className={`${wishItemStatus === "true" ? "d-none" : null}`}
+                      disabled={userWishEl.price > userMoneybox.totalAmount}
                       onClick={() => {
                         setPurchaseParams({
                           ...purchaseParams,

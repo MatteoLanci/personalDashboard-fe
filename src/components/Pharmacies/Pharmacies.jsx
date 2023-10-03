@@ -61,8 +61,8 @@ const Pharmacies = () => {
         ) : (
           <Row key={nanoid()} className="pharmaciesWrapper">
             {pharmacies.map((pharma) => {
-              const pharmaClosed = pharma.info === "Chiuso" || pharma.info.includes("Apre alle");
-              const pharmaClosing = pharma.info.includes("Chiude tra");
+              const pharmaClosed = pharma.info === "Chiuso";
+
               return (
                 <>
                   <div
@@ -92,8 +92,7 @@ const Pharmacies = () => {
                     <div
                       key={nanoid()}
                       className={`pharmaTimeWrapper d-flex gap-3 mb-2 
-                      ${pharmaClosed ? "bg-danger text-light" : null} 
-                      ${pharmaClosing ? "bg-warning fw-bold" : null}
+                      ${pharmaClosed ? "bg-danger text-light" : null}                
                       ${theme === "light" ? null : "text-dark"}`}
                     >
                       <p className="m-0" key={nanoid()}>
